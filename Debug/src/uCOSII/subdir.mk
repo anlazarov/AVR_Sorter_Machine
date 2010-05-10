@@ -50,7 +50,7 @@ C_DEPS += \
 src/uCOSII/%.o: ../src/uCOSII/%.c
 	@echo 'Building file: $<'
 	@echo 'Invoking: AVR Compiler'
-	avr-gcc -I"/home/alex/Dropbox/Workspace/Semester 04/RIEI1/Micro_OSII_ATMEGA256x/src/app" -I"/home/alex/Dropbox/Workspace/Semester 04/RIEI1/Micro_OSII_ATMEGA256x/src/app/BSP" -I"/home/alex/Dropbox/Workspace/Semester 04/RIEI1/Micro_OSII_ATMEGA256x/src/uCOSII" -I"/home/alex/Dropbox/Workspace/Semester 04/RIEI1/Micro_OSII_ATMEGA256x/src/uCOSII_port" -Wall -g2 -gdwarf-2 -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega2560 -DF_CPU=16000000UL -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -c -o"$@" "$<"
+	avr-gcc -I"/home/user/workspace/AVR_Sorter_Machine/src/app" -I"/home/user/workspace/AVR_Sorter_Machine/src/app/BSP" -I"/home/user/workspace/AVR_Sorter_Machine/src/uCOSII" -I"/home/user/workspace/AVR_Sorter_Machine/src/uCOSII_port" -Wall -g2 -gdwarf-2 -O0 -fpack-struct -fshort-enums -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega2560 -DF_CPU=16000000UL -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -c -o"$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

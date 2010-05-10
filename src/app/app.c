@@ -34,7 +34,7 @@ static void  Task1(void *p_arg);
 static void  AppTaskCreate(void);
 static void  AppTask1(void *p_arg);
 static void  AppTask2(void *p_arg);
-
+void LED_show(unsigned char n);
 
 /*
 **************************************************************************************************************
@@ -124,8 +124,8 @@ static void  Task1 (void *p_arg)
 
     	INT16S light;
     	light = light_sensor(0);
-    	 LED_Toggle(5);
-    	        OSTimeDly(OS_TICKS_PER_SEC / 5);
+    	LED_Toggle(5);
+    	OSTimeDly(OS_TICKS_PER_SEC / 5);
     }
 }
 
@@ -193,9 +193,12 @@ static void  AppTask1(void *p_arg)
 {
     (void)p_arg;
 
+    int i = 0;
     while (1) {
         LED_Toggle(7);
+    	//LED_show(++i);
         OSTimeDly(OS_TICKS_PER_SEC / 5);
+        //i = (i > 254) ? 0 : i;
     }
 }
 
@@ -241,3 +244,20 @@ void App_TaskIdleHook(void){}
 void App_TaskStatHook(void){}
 void App_TCBInitHook(OS_TCB *ptcb){}
 void App_TimeTickHook(void){}
+
+/*
+ * Custom functions
+*/
+
+void LED_show(unsigned char n){
+	/* Turn off all LEDs before switching them */
+	for(int i = 0; i < 8; i++){
+		printf("%s%d\n", "Switching off LED #", i);
+	}
+
+	/* For all bits in datatype */
+	for(int i = 0; i < sizeof(unsigned char)*8; i++){
+		if(n & (1 << i))						/* Test if i^th bit is set in "n" */
+			printf("%s%d\n", "Switching on LED #", i); /* if yes, turn on the i^th LED */
+	}
+}

@@ -28,7 +28,7 @@
 <tool id="de.innot.avreclipse.tool.assembler.winavr.app.debug.1736380586" name="AVR Assembler" superClass="de.innot.avreclipse.tool.assembler.winavr.app.debug">
 <option id="de.innot.avreclipse.assembler.option.debug.level.180700485" name="Generate Debugging Info" superClass="de.innot.avreclipse.assembler.option.debug.level"/>
 <option id="de.innot.avreclipse.asm.option.include.paths.162659436" name="Include paths (-I)" superClass="de.innot.avreclipse.asm.option.include.paths" valueType="includePath">
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Micro_OSII_ATMEGA256x/src/uCOSII_port}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/AVR_Sorter_Machine/src/uCOSII_port}&quot;"/>
 </option>
 <inputType id="de.innot.avreclipse.tool.assembler.input.1611342687" superClass="de.innot.avreclipse.tool.assembler.input"/>
 </tool>
@@ -37,10 +37,10 @@
 <option id="de.innot.avreclipse.compiler.option.optimize.192264686" name="Optimization Level" superClass="de.innot.avreclipse.compiler.option.optimize"/>
 <option id="de.innot.avreclipse.compiler.option.debug.type.825683913" name="Debug Info Format" superClass="de.innot.avreclipse.compiler.option.debug.type" value="de.innot.avreclipse.compiler.option.debug.level.dwarf-2" valueType="enumerated"/>
 <option id="de.innot.avreclipse.compiler.option.incpath.132111753" name="Include Paths (-I)" superClass="de.innot.avreclipse.compiler.option.incpath" valueType="includePath">
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Micro_OSII_ATMEGA256x/src/app}&quot;"/>
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Micro_OSII_ATMEGA256x/src/app/BSP}&quot;"/>
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Micro_OSII_ATMEGA256x/src/uCOSII}&quot;"/>
-<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Micro_OSII_ATMEGA256x/src/uCOSII_port}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/AVR_Sorter_Machine/src/app}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/AVR_Sorter_Machine/src/app/BSP}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/AVR_Sorter_Machine/src/uCOSII}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/AVR_Sorter_Machine/src/uCOSII_port}&quot;"/>
 </option>
 <option id="de.innot.avreclipse.compiler.option.std.222470042" name="Language Standard" superClass="de.innot.avreclipse.compiler.option.std" value="de.innot.avreclipse.compiler.option.std.gnu99" valueType="enumerated"/>
 <inputType id="de.innot.avreclipse.compiler.winavr.input.856163088" name="C Source Files" superClass="de.innot.avreclipse.compiler.winavr.input"/>

@@ -1,17 +1,31 @@
 Archive member included because of file (symbol)
 
-/usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_mulsi3.o)
+/usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_mulsi3.o)
                               ./src/uCOSII/os_time.o (__mulsi3)
-/usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_divmodhi4.o)
+/usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_divmodhi4.o)
                               ./src/app/lego_interface/lego_interface.o (__divmodhi4)
-/usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_udivmodsi4.o)
+/usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_udivmodsi4.o)
                               ./src/uCOSII/os_time.o (__udivmodsi4)
-/usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_exit.o)
-                              /usr/lib/gcc/avr/4.3.4/../../../avr/lib/avr6/crtm2560.o (exit)
-/usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_clear_bss.o)
+/usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_exit.o)
+                              /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/crtm2560.o (exit)
+/usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_clear_bss.o)
                               ./src/uCOSII_port/os_cpu_c.o (__do_clear_bss)
-/usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_udivmodhi4.o)
-                              /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_divmodhi4.o) (__udivmodhi4)
+/usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_udivmodhi4.o)
+                              /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_divmodhi4.o) (__udivmodhi4)
+/usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(printf.o)
+                              ./src/app/app.o (printf)
+/usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(vfprintf_std.o)
+                              /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(printf.o) (vfprintf)
+/usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(strnlen_P.o)
+                              /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(vfprintf_std.o) (strnlen_P)
+/usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(strnlen.o)
+                              /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(vfprintf_std.o) (strnlen)
+/usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(fputc.o)
+                              /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(vfprintf_std.o) (fputc)
+/usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(iob.o)
+                              /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(printf.o) (__iob)
+/usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(ultoa_invert.o)
+                              /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(vfprintf_std.o) (__ultoa_invert)
 
 Allocating common symbols
 Common symbol       size              file
@@ -49,6 +63,7 @@ OSTmrSem            0x2               ./src/uCOSII/os_core.o
 OSTaskIdleStk       0xaf              ./src/uCOSII/os_core.o
 OSEventTbl          0xf0              ./src/uCOSII/os_core.o
 OSTCBTbl            0x1f8             ./src/uCOSII/os_core.o
+__iob               0x6               /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(iob.o)
 OSTCBPrioTbl        0x16              ./src/uCOSII/os_core.o
 
 Memory Configuration
@@ -57,15 +72,12 @@ Name             Origin             Length             Attributes
 text             0x00000000         0x00100000         xr
 data             0x00800200         0x0000fe00         rw !x
 eeprom           0x00810000         0x00010000         rw !x
-fuse             0x00820000         0x00000400         rw !x
-lock             0x00830000         0x00000400         rw !x
-signature        0x00840000         0x00000400         rw !x
 *default*        0x00000000         0xffffffff
 
 Linker script and memory map
 
 Address of section .data set to 0x800200
-LOAD /usr/lib/gcc/avr/4.3.4/../../../avr/lib/avr6/crtm2560.o
+LOAD /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/crtm2560.o
 LOAD ./src/uCOSII_port/os_cpu_a.o
 LOAD ./src/uCOSII_port/os_cpu_c.o
 LOAD ./src/uCOSII_port/os_cpu_i.o
@@ -86,9 +98,9 @@ LOAD ./src/app/lego_interface/lego_interface.o
 LOAD ./src/app/app.o
 LOAD ./src/app/app_isr.o
 LOAD ./src/app/BSP/bsp.o
-LOAD /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a
-LOAD /usr/lib/gcc/avr/4.3.4/../../../avr/lib/avr6/libc.a
-LOAD /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a
+LOAD /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a
+LOAD /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a
+LOAD /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a
 
 .hash
  *(.hash)
@@ -180,9 +192,9 @@ LOAD /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x7cc6
+.text           0x00000000     0x8740
  *(.vectors)
- .vectors       0x00000000       0xe4 /usr/lib/gcc/avr/4.3.4/../../../avr/lib/avr6/crtm2560.o
+ .vectors       0x00000000       0xe4 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/crtm2560.o
                 0x00000000                __vectors
                 0x00000000                __vector_default
  *(.vectors)
@@ -253,20 +265,20 @@ LOAD /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a
  SORT(*)(.ctors)
  SORT(*)(.dtors)
  *(.init0)
- .init0         0x00000140        0x0 /usr/lib/gcc/avr/4.3.4/../../../avr/lib/avr6/crtm2560.o
+ .init0         0x00000140        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/crtm2560.o
                 0x00000140                __init
  *(.init0)
  *(.init1)
  *(.init1)
  *(.init2)
- .init2         0x00000140       0x10 /usr/lib/gcc/avr/4.3.4/../../../avr/lib/avr6/crtm2560.o
+ .init2         0x00000140       0x10 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/crtm2560.o
  *(.init2)
  *(.init3)
  *(.init3)
  *(.init4)
- .init4         0x00000150       0x1a /usr/lib/gcc/avr/4.3.4/../../../avr/lib/avr6/crtm2560.o
+ .init4         0x00000150       0x1a /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/crtm2560.o
                 0x00000150                __do_copy_data
- .init4         0x0000016a       0x10 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_clear_bss.o)
+ .init4         0x0000016a       0x10 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_clear_bss.o)
                 0x0000016a                __do_clear_bss
  *(.init4)
  *(.init5)
@@ -278,10 +290,10 @@ LOAD /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a
  *(.init8)
  *(.init8)
  *(.init9)
- .init9         0x0000017a        0x8 /usr/lib/gcc/avr/4.3.4/../../../avr/lib/avr6/crtm2560.o
+ .init9         0x0000017a        0x8 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/crtm2560.o
  *(.init9)
  *(.text)
- .text          0x00000182        0x4 /usr/lib/gcc/avr/4.3.4/../../../avr/lib/avr6/crtm2560.o
+ .text          0x00000182        0x4 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/crtm2560.o
                 0x00000182                __vector_38
                 0x00000182                __vector_22
                 0x00000182                __vector_28
@@ -341,7 +353,7 @@ LOAD /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a
                 0x00000190                OSStartHighRdy
                 0x000001fa                OSCtxSw
                 0x0000030e                OSIntCtxSw
- .text          0x000003ca      0x3c2 ./src/uCOSII_port/os_cpu_c.o
+ .text          0x000003ca      0x40e ./src/uCOSII_port/os_cpu_c.o
                 0x000003ca                OSInitHookBegin
                 0x000003e0                OSInitHookEnd
                 0x000003ee                OSTaskCreateHook
@@ -349,129 +361,155 @@ LOAD /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a
                 0x00000432                OSTaskIdleHook
                 0x00000444                OSTaskStatHook
                 0x00000456                OSTaskStkInit
-                0x0000071a                OSTaskSwHook
-                0x0000072c                OSTCBInitHook
-                0x0000074e                OSTimeTickHook
- .text          0x0000078c        0x0 ./src/uCOSII_port/os_cpu_i.o
- .text          0x0000078c      0x17e ./src/uCOSII_port/os_dbg.o
-                0x0000078c                OSDebugInit
- .text          0x0000090a      0xf04 ./src/uCOSII/os_core.o
-                0x0000090a                OSEventNameGet
-                0x0000099e                OSEventNameSet
-                0x00000a44                OSInit
-                0x00000a76                OSIntEnter
-                0x00000a9e                OSIntExit
-                0x00000b62                OSSchedLock
-                0x00000ba4                OSSchedUnlock
-                0x00000c0a                OSStart
-                0x00000c5e                OSTimeTick
-                0x00000d94                OSVersion
-                0x00000da6                OS_EventTaskRdy
-                0x00000eb0                OS_EventTaskWait
-                0x00000f9a                OS_EventTaskRemove
-                0x0000102e                OS_EventWaitListInit
-                0x00001320                OS_MemClr
-                0x00001366                OS_MemCopy
-                0x000013c4                OS_Sched
-                0x000014ba                OS_StrCopy
-                0x0000151c                OS_StrLen
-                0x00001556                OS_TaskIdle
-                0x0000159e                OS_TCBInit
- .text          0x0000180e      0x1de ./src/uCOSII/os_dbg_r.o
- .text          0x000019ec        0x0 ./src/uCOSII/os_flag.o
- .text          0x000019ec        0x0 ./src/uCOSII/os_mbox.o
- .text          0x000019ec        0x0 ./src/uCOSII/os_mem.o
- .text          0x000019ec        0x0 ./src/uCOSII/os_mutex.o
- .text          0x000019ec        0x0 ./src/uCOSII/os_q.o
- .text          0x000019ec      0x6ca ./src/uCOSII/os_sem.o
-                0x000019ec                OSSemAccept
-                0x00001a66                OSSemCreate
-                0x00001b1e                OSSemDel
-                0x00001cb4                OSSemPend
-                0x00001e14                OSSemPendAbort
-                0x00001edc                OSSemPost
-                0x00001f72                OSSemQuery
-                0x00002022                OSSemSet
- .text          0x000020b6      0x700 ./src/uCOSII/os_task.o
-                0x000020b6                OSTaskCreate
-                0x000021e2                OSTaskCreateExt
-                0x00002332                OSTaskNameGet
-                0x00002406                OSTaskNameSet
-                0x000024e8                OSTaskResume
-                0x000025f8                OSTaskSuspend
-                0x00002712                OSTaskQuery
- .text          0x000027b6      0x3d8 ./src/uCOSII/os_time.o
-                0x000027b6                OSTimeDly
-                0x0000286c                OSTimeDlyHMSM
-                0x000029c8                OSTimeDlyResume
-                0x00002af2                OSTimeGet
-                0x00002b42                OSTimeSet
- .text          0x00002b8e      0xefc ./src/uCOSII/os_tmr.o
-                0x00002b8e                OSTmrCreate
-                0x00002cea                OSTmrDel
-                0x00002dd4                OSTmrNameGet
-                0x00002ea2                OSTmrRemainGet
-                0x00003086                OSTmrStateGet
-                0x0000310a                OSTmrStart
-                0x000031f8                OSTmrStop
-                0x00003374                OSTmrSignal
-                0x000034c2                OSTmr_Init
- .text          0x00003a8a     0x2fa2 ./src/uCOSII/ucos_ii.o
- .text          0x00006a2c      0x844 ./src/app/lego_interface/lego_interface.o
-                0x00006a2c                init_lego_interface
-                0x00006c1e                touch_sensor
-                0x00006c62                rotation_sensor
-                0x00006ca6                light_sensor
-                0x00006cea                motor_speed
-                0x00007054                brake_motor
-                0x00007146                __vector_32
-                0x000071ba                __vector_29
- .text          0x00007270      0x2bc ./src/app/app.o
-                0x00007270                main
-                0x00007494                App_TaskSwHook
-                0x000074b4                App_TaskCreateHook
-                0x000074ce                App_TaskDelHook
-                0x000074e8                App_TaskIdleHook
-                0x000074f6                App_TaskStatHook
-                0x00007504                App_TCBInitHook
-                0x0000751e                App_TimeTickHook
- .text          0x0000752c      0x198 ./src/app/app_isr.o
-                0x0000752c                __vector_21
-                0x000075f8                __vector_1
- .text          0x000076c4      0x52e ./src/app/BSP/bsp.o
-                0x000076c4                BSP_Init
-                0x0000775c                BSP_Int0_Disable
-                0x00007778                BSP_Int0_Enable
-                0x000077ae                SW_in
-                0x000077fa                BSP_TickISR_Handler
-                0x0000780c                BSP_Int0ISR_Handler
-                0x00007842                LED_On
-                0x00007972                LED_Off
-                0x00007aa6                LED_Toggle
- .text          0x00007bf2        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_mulsi3.o)
- .text          0x00007bf2        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_divmodhi4.o)
- .text          0x00007bf2        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_udivmodsi4.o)
- .text          0x00007bf2        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_exit.o)
- .text          0x00007bf2        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_clear_bss.o)
- .text          0x00007bf2        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_udivmodhi4.o)
-                0x00007bf2                . = ALIGN (0x2)
+                0x00000766                OSTaskSwHook
+                0x00000778                OSTCBInitHook
+                0x0000079a                OSTimeTickHook
+ .text          0x000007d8        0x0 ./src/uCOSII_port/os_cpu_i.o
+ .text          0x000007d8      0x17e ./src/uCOSII_port/os_dbg.o
+                0x000007d8                OSDebugInit
+ .text          0x00000956      0xfee ./src/uCOSII/os_core.o
+                0x00000956                OSEventNameGet
+                0x000009ee                OSEventNameSet
+                0x00000a9e                OSInit
+                0x00000ad0                OSIntEnter
+                0x00000af8                OSIntExit
+                0x00000bc0                OSSchedLock
+                0x00000c02                OSSchedUnlock
+                0x00000c68                OSStart
+                0x00000cbc                OSTimeTick
+                0x00000e18                OSVersion
+                0x00000e2a                OS_EventTaskRdy
+                0x00000f46                OS_EventTaskWait
+                0x00001044                OS_EventTaskRemove
+                0x000010e6                OS_EventWaitListInit
+                0x000013fe                OS_MemClr
+                0x00001446                OS_MemCopy
+                0x000014a8                OS_Sched
+                0x000015a2                OS_StrCopy
+                0x0000160c                OS_StrLen
+                0x00001648                OS_TaskIdle
+                0x00001690                OS_TCBInit
+ .text          0x00001944      0x1de ./src/uCOSII/os_dbg_r.o
+ .text          0x00001b22        0x0 ./src/uCOSII/os_flag.o
+ .text          0x00001b22        0x0 ./src/uCOSII/os_mbox.o
+ .text          0x00001b22        0x0 ./src/uCOSII/os_mem.o
+ .text          0x00001b22        0x0 ./src/uCOSII/os_mutex.o
+ .text          0x00001b22        0x0 ./src/uCOSII/os_q.o
+ .text          0x00001b22      0x718 ./src/uCOSII/os_sem.o
+                0x00001b22                OSSemAccept
+                0x00001b98                OSSemCreate
+                0x00001c4c                OSSemDel
+                0x00001df2                OSSemPend
+                0x00001f6e                OSSemPendAbort
+                0x00002042                OSSemPost
+                0x000020dc                OSSemQuery
+                0x00002196                OSSemSet
+ .text          0x0000223a      0x708 ./src/uCOSII/os_task.o
+                0x0000223a                OSTaskCreate
+                0x00002364                OSTaskCreateExt
+                0x000024aa                OSTaskNameGet
+                0x00002584                OSTaskNameSet
+                0x00002672                OSTaskResume
+                0x0000278e                OSTaskSuspend
+                0x000028aa                OSTaskQuery
+ .text          0x00002942      0x3ec ./src/uCOSII/os_time.o
+                0x00002942                OSTimeDly
+                0x00002a04                OSTimeDlyHMSM
+                0x00002b5c                OSTimeDlyResume
+                0x00002c92                OSTimeGet
+                0x00002ce2                OSTimeSet
+ .text          0x00002d2e      0xf52 ./src/uCOSII/os_tmr.o
+                0x00002d2e                OSTmrCreate
+                0x00002e96                OSTmrDel
+                0x00002f6a                OSTmrNameGet
+                0x00003032                OSTmrRemainGet
+                0x00003204                OSTmrStateGet
+                0x00003290                OSTmrStart
+                0x00003368                OSTmrStop
+                0x000034e0                OSTmrSignal
+                0x0000363c                OSTmr_Init
+ .text          0x00003c80     0x314c ./src/uCOSII/ucos_ii.o
+ .text          0x00006dcc      0x8ca ./src/app/lego_interface/lego_interface.o
+                0x00006dcc                init_lego_interface
+                0x00007038                touch_sensor
+                0x0000706c                rotation_sensor
+                0x000070a0                light_sensor
+                0x000070d4                motor_speed
+                0x00007470                brake_motor
+                0x0000755a                __vector_32
+                0x000075da                __vector_29
+ .text          0x00007696      0x3b6 ./src/app/app.o
+                0x00007696                main
+                0x000078ca                App_TaskSwHook
+                0x000078ee                App_TaskCreateHook
+                0x00007908                App_TaskDelHook
+                0x00007922                App_TaskIdleHook
+                0x00007930                App_TaskStatHook
+                0x0000793e                App_TCBInitHook
+                0x00007958                App_TimeTickHook
+                0x00007966                LED_show
+ .text          0x00007a4c      0x198 ./src/app/app_isr.o
+                0x00007a4c                __vector_21
+                0x00007b18                __vector_1
+ .text          0x00007be4      0x524 ./src/app/BSP/bsp.o
+                0x00007be4                BSP_Init
+                0x00007c98                BSP_Int0_Disable
+                0x00007cb8                BSP_Int0_Enable
+                0x00007cf6                SW_in
+                0x00007d3a                BSP_TickISR_Handler
+                0x00007d4c                BSP_Int0ISR_Handler
+                0x00007d84                LED_On
+                0x00007ea6                LED_Off
+                0x00007fca                LED_Toggle
+ .text          0x00008108        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_mulsi3.o)
+ .text          0x00008108        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_divmodhi4.o)
+ .text          0x00008108        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_udivmodsi4.o)
+ .text          0x00008108        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_exit.o)
+ .text          0x00008108        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_clear_bss.o)
+ .text          0x00008108        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_udivmodhi4.o)
+ .text          0x00008108        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(printf.o)
+ .text          0x00008108        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(vfprintf_std.o)
+ .text          0x00008108        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(strnlen_P.o)
+ .text          0x00008108        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(strnlen.o)
+ .text          0x00008108        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(fputc.o)
+ .text          0x00008108        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(iob.o)
+ .text          0x00008108        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(ultoa_invert.o)
+                0x00008108                . = ALIGN (0x2)
  *(.text.*)
- .text.libgcc   0x00007bf2       0x3e /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_mulsi3.o)
-                0x00007bf2                __mulsi3
- .text.libgcc   0x00007c30       0x26 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_divmodhi4.o)
-                0x00007c30                __divmodhi4
-                0x00007c30                _div
- .text.libgcc   0x00007c56       0x44 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_udivmodsi4.o)
-                0x00007c56                __udivmodsi4
- .text.libgcc   0x00007c9a        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_exit.o)
- .text.libgcc   0x00007c9a        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_clear_bss.o)
- .text.libgcc   0x00007c9a       0x28 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_udivmodhi4.o)
-                0x00007c9a                __udivmodhi4
-                0x00007cc2                . = ALIGN (0x2)
+ .text.libgcc   0x00008108       0x3e /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_mulsi3.o)
+                0x00008108                __mulsi3
+ .text.libgcc   0x00008146       0x26 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_divmodhi4.o)
+                0x00008146                __divmodhi4
+                0x00008146                _div
+ .text.libgcc   0x0000816c       0x44 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_udivmodsi4.o)
+                0x0000816c                __udivmodsi4
+ .text.libgcc   0x000081b0        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_exit.o)
+ .text.libgcc   0x000081b0        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_clear_bss.o)
+ .text.libgcc   0x000081b0       0x28 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_udivmodhi4.o)
+                0x000081b0                __udivmodhi4
+ .text.avr-libc
+                0x000081d8       0x24 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(printf.o)
+                0x000081d8                printf
+ .text.avr-libc
+                0x000081fc      0x400 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(vfprintf_std.o)
+                0x000081fc                vfprintf
+ .text.avr-libc
+                0x000085fc       0x16 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(strnlen_P.o)
+                0x000085fc                strnlen_P
+ .text.avr-libc
+                0x00008612       0x16 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(strnlen.o)
+                0x00008612                strnlen
+ .text.avr-libc
+                0x00008628       0x58 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(fputc.o)
+                0x00008628                fputc
+ .text.avr-libc
+                0x00008680       0xbc /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(ultoa_invert.o)
+                0x00008680                __ultoa_invert
+                0x0000873c                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00007cc2        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_exit.o)
-                0x00007cc2                exit
-                0x00007cc2                _exit
+ .fini9         0x0000873c        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_exit.o)
+                0x0000873c                exit
+                0x0000873c                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -490,14 +528,14 @@ LOAD /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00007cc2        0x4 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_exit.o)
+ .fini0         0x0000873c        0x4 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_exit.o)
  *(.fini0)
-                0x00007cc6                _etext = .
+                0x00008740                _etext = .
 
-.data           0x00800200      0x2d0 load address 0x00007cc6
+.data           0x00800200      0x2fe load address 0x00008740
                 0x00800200                PROVIDE (__data_start, .)
  *(.data)
- .data          0x00800200        0x0 /usr/lib/gcc/avr/4.3.4/../../../avr/lib/avr6/crtm2560.o
+ .data          0x00800200        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/crtm2560.o
  .data          0x00800200        0x0 ./src/uCOSII_port/os_cpu_a.o
  .data          0x00800200        0x0 ./src/uCOSII_port/os_cpu_c.o
  .data          0x00800200        0x0 ./src/uCOSII_port/os_cpu_i.o
@@ -526,126 +564,145 @@ LOAD /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a
  .data          0x0080037e       0x22 ./src/uCOSII/os_tmr.o
  .data          0x008003a0      0x130 ./src/uCOSII/ucos_ii.o
  .data          0x008004d0        0x0 ./src/app/lego_interface/lego_interface.o
- .data          0x008004d0        0x0 ./src/app/app.o
- .data          0x008004d0        0x0 ./src/app/app_isr.o
- .data          0x008004d0        0x0 ./src/app/BSP/bsp.o
- .data          0x008004d0        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_mulsi3.o)
- .data          0x008004d0        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_divmodhi4.o)
- .data          0x008004d0        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_udivmodsi4.o)
- .data          0x008004d0        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_exit.o)
- .data          0x008004d0        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_clear_bss.o)
- .data          0x008004d0        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_udivmodhi4.o)
+ .data          0x008004d0       0x2d ./src/app/app.o
+ .data          0x008004fd        0x0 ./src/app/app_isr.o
+ .data          0x008004fd        0x0 ./src/app/BSP/bsp.o
+ .data          0x008004fd        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_mulsi3.o)
+ .data          0x008004fd        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_divmodhi4.o)
+ .data          0x008004fd        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_udivmodsi4.o)
+ .data          0x008004fd        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_exit.o)
+ .data          0x008004fd        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_clear_bss.o)
+ .data          0x008004fd        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_udivmodhi4.o)
+ .data          0x008004fd        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(printf.o)
+ .data          0x008004fd        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(vfprintf_std.o)
+ .data          0x008004fd        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(strnlen_P.o)
+ .data          0x008004fd        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(strnlen.o)
+ .data          0x008004fd        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(fputc.o)
+ .data          0x008004fd        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(iob.o)
+ .data          0x008004fd        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(ultoa_invert.o)
  *(.data*)
  *(.rodata)
  *(.rodata*)
  *(.gnu.linkonce.d*)
-                0x008004d0                . = ALIGN (0x2)
-                0x008004d0                _edata = .
-                0x008004d0                PROVIDE (__data_end, .)
+                0x008004fe                . = ALIGN (0x2)
+ *fill*         0x008004fd        0x1 00
+                0x008004fe                _edata = .
+                0x008004fe                PROVIDE (__data_end, .)
 
-.bss            0x008004d0      0xa08
-                0x008004d0                PROVIDE (__bss_start, .)
+.bss            0x008004fe      0xa0e
+                0x008004fe                PROVIDE (__bss_start, .)
  *(.bss)
- .bss           0x008004d0        0x0 /usr/lib/gcc/avr/4.3.4/../../../avr/lib/avr6/crtm2560.o
- .bss           0x008004d0        0x0 ./src/uCOSII_port/os_cpu_a.o
- .bss           0x008004d0        0x2 ./src/uCOSII_port/os_cpu_c.o
- .bss           0x008004d2        0x0 ./src/uCOSII_port/os_cpu_i.o
- .bss           0x008004d2        0x0 ./src/uCOSII_port/os_dbg.o
- .bss           0x008004d2        0x0 ./src/uCOSII/os_core.o
- .bss           0x008004d2        0x0 ./src/uCOSII/os_dbg_r.o
- .bss           0x008004d2        0x0 ./src/uCOSII/os_flag.o
- .bss           0x008004d2        0x0 ./src/uCOSII/os_mbox.o
- .bss           0x008004d2        0x0 ./src/uCOSII/os_mem.o
- .bss           0x008004d2        0x0 ./src/uCOSII/os_mutex.o
- .bss           0x008004d2        0x0 ./src/uCOSII/os_q.o
- .bss           0x008004d2        0x0 ./src/uCOSII/os_sem.o
- .bss           0x008004d2        0x0 ./src/uCOSII/os_task.o
- .bss           0x008004d2        0x0 ./src/uCOSII/os_time.o
- .bss           0x008004d2        0x0 ./src/uCOSII/os_tmr.o
- .bss           0x008004d2        0x0 ./src/uCOSII/ucos_ii.o
- .bss           0x008004d2       0x19 ./src/app/lego_interface/lego_interface.o
- .bss           0x008004eb        0x0 ./src/app/app.o
- .bss           0x008004eb        0x0 ./src/app/app_isr.o
- .bss           0x008004eb        0x0 ./src/app/BSP/bsp.o
- .bss           0x008004eb        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_mulsi3.o)
- .bss           0x008004eb        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_divmodhi4.o)
- .bss           0x008004eb        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_udivmodsi4.o)
- .bss           0x008004eb        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_exit.o)
- .bss           0x008004eb        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_clear_bss.o)
- .bss           0x008004eb        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_udivmodhi4.o)
+ .bss           0x008004fe        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/crtm2560.o
+ .bss           0x008004fe        0x0 ./src/uCOSII_port/os_cpu_a.o
+ .bss           0x008004fe        0x2 ./src/uCOSII_port/os_cpu_c.o
+ .bss           0x00800500        0x0 ./src/uCOSII_port/os_cpu_i.o
+ .bss           0x00800500        0x0 ./src/uCOSII_port/os_dbg.o
+ .bss           0x00800500        0x0 ./src/uCOSII/os_core.o
+ .bss           0x00800500        0x0 ./src/uCOSII/os_dbg_r.o
+ .bss           0x00800500        0x0 ./src/uCOSII/os_flag.o
+ .bss           0x00800500        0x0 ./src/uCOSII/os_mbox.o
+ .bss           0x00800500        0x0 ./src/uCOSII/os_mem.o
+ .bss           0x00800500        0x0 ./src/uCOSII/os_mutex.o
+ .bss           0x00800500        0x0 ./src/uCOSII/os_q.o
+ .bss           0x00800500        0x0 ./src/uCOSII/os_sem.o
+ .bss           0x00800500        0x0 ./src/uCOSII/os_task.o
+ .bss           0x00800500        0x0 ./src/uCOSII/os_time.o
+ .bss           0x00800500        0x0 ./src/uCOSII/os_tmr.o
+ .bss           0x00800500        0x0 ./src/uCOSII/ucos_ii.o
+ .bss           0x00800500       0x19 ./src/app/lego_interface/lego_interface.o
+ .bss           0x00800519        0x0 ./src/app/app.o
+ .bss           0x00800519        0x0 ./src/app/app_isr.o
+ .bss           0x00800519        0x0 ./src/app/BSP/bsp.o
+ .bss           0x00800519        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_mulsi3.o)
+ .bss           0x00800519        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_divmodhi4.o)
+ .bss           0x00800519        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_udivmodsi4.o)
+ .bss           0x00800519        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_exit.o)
+ .bss           0x00800519        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_clear_bss.o)
+ .bss           0x00800519        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_udivmodhi4.o)
+ .bss           0x00800519        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(printf.o)
+ .bss           0x00800519        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(vfprintf_std.o)
+ .bss           0x00800519        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(strnlen_P.o)
+ .bss           0x00800519        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(strnlen.o)
+ .bss           0x00800519        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(fputc.o)
+ .bss           0x00800519        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(iob.o)
+ .bss           0x00800519        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(ultoa_invert.o)
  *(.bss*)
  *(COMMON)
- COMMON         0x008004eb        0x2 ./src/uCOSII_port/os_cpu_c.o
-                0x008004eb                OSTaskStkSize
- COMMON         0x008004ed      0x719 ./src/uCOSII/os_core.o
-                0x008004ed                OSTmrFreeList
-                0x008004ef                OSTmrWheelTbl
-                0x0080050f                OSLockNesting
-                0x00800510                OSTmrSemSignal
-                0x00800512                OSRunning
-                0x00800513                OSIdleCtr
-                0x00800517                OSTmrUsed
-                0x00800519                OSPrioHighRdy
-                0x0080051a                OSTmrTbl
-                0x0080078a                OSPrioCur
-                0x0080078b                OSTCBList
-                0x0080078d                OSCtxSwCtr
-                0x00800791                OSTmrFree
-                0x00800793                OSTCBFreeList
-                0x00800795                OSTaskCtr
-                0x00800796                OSTCBHighRdy
-                0x00800798                OSRdyGrp
-                0x00800799                OSRdyTbl
-                0x0080079b                OSTmrTaskStk
-                0x0080084a                OSEventFreeList
-                0x0080084c                OSIntNesting
-                0x0080084d                OSTCBCur
-                0x0080084f                OSTmrTime
-                0x00800853                OSTime
-                0x00800857                OSTmrSem
-                0x00800859                OSTaskIdleStk
-                0x00800908                OSEventTbl
-                0x008009f8                OSTCBTbl
-                0x00800bf0                OSTCBPrioTbl
- COMMON         0x00800c06      0x2d2 ./src/app/app.o
-                0x00800c06                AppTask1Stk
-                0x00800cf6                AppTaskStartStk
-                0x00800de6                a_sem
-                0x00800de8                AppTask2Stk
-                0x00800ed8                PROVIDE (__bss_end, .)
-                0x00007cc6                __data_load_start = LOADADDR (.data)
-                0x00007f96                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x00800519        0x2 ./src/uCOSII_port/os_cpu_c.o
+                0x00800519                OSTaskStkSize
+ COMMON         0x0080051b      0x719 ./src/uCOSII/os_core.o
+                0x0080051b                OSTmrFreeList
+                0x0080051d                OSTmrWheelTbl
+                0x0080053d                OSLockNesting
+                0x0080053e                OSTmrSemSignal
+                0x00800540                OSRunning
+                0x00800541                OSIdleCtr
+                0x00800545                OSTmrUsed
+                0x00800547                OSPrioHighRdy
+                0x00800548                OSTmrTbl
+                0x008007b8                OSPrioCur
+                0x008007b9                OSTCBList
+                0x008007bb                OSCtxSwCtr
+                0x008007bf                OSTmrFree
+                0x008007c1                OSTCBFreeList
+                0x008007c3                OSTaskCtr
+                0x008007c4                OSTCBHighRdy
+                0x008007c6                OSRdyGrp
+                0x008007c7                OSRdyTbl
+                0x008007c9                OSTmrTaskStk
+                0x00800878                OSEventFreeList
+                0x0080087a                OSIntNesting
+                0x0080087b                OSTCBCur
+                0x0080087d                OSTmrTime
+                0x00800881                OSTime
+                0x00800885                OSTmrSem
+                0x00800887                OSTaskIdleStk
+                0x00800936                OSEventTbl
+                0x00800a26                OSTCBTbl
+                0x00800c1e                OSTCBPrioTbl
+ COMMON         0x00800c34      0x2d2 ./src/app/app.o
+                0x00800c34                AppTask1Stk
+                0x00800d24                AppTaskStartStk
+                0x00800e14                a_sem
+                0x00800e16                AppTask2Stk
+ COMMON         0x00800f06        0x6 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(iob.o)
+                0x00800f06                __iob
+                0x00800f0c                PROVIDE (__bss_end, .)
+                0x00008740                __data_load_start = LOADADDR (.data)
+                0x00008a3e                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800ed8        0x0
-                0x00800ed8                PROVIDE (__noinit_start, .)
+.noinit         0x00800f0c        0x0
+                0x00800f0c                PROVIDE (__noinit_start, .)
  *(.noinit*)
-                0x00800ed8                PROVIDE (__noinit_end, .)
-                0x00800ed8                _end = .
-                0x00800ed8                PROVIDE (__heap_start, .)
+                0x00800f0c                PROVIDE (__noinit_end, .)
+                0x00800f0c                _end = .
+                0x00800f0c                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
  *(.eeprom*)
                 0x00810000                __eeprom_end = .
 
-.fuse
- *(.fuse)
- *(.lfuse)
- *(.hfuse)
- *(.efuse)
-
-.lock
- *(.lock*)
-
-.signature
- *(.signature*)
-
-.stab           0x00000000      0x768
+.stab           0x00000000     0x1d94
  *(.stab)
- .stab          0x00000000      0x768 /usr/lib/gcc/avr/4.3.4/../../../avr/lib/avr6/crtm2560.o
+ .stab          0x00000000      0x768 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/crtm2560.o
+ .stab          0x00000768      0x360 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(printf.o)
+                                0x36c (size before relaxing)
+ .stab          0x00000ac8      0xa14 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(vfprintf_std.o)
+                                0xbf4 (size before relaxing)
+ .stab          0x000014dc       0x9c /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(strnlen_P.o)
+                                 0xa8 (size before relaxing)
+ .stab          0x00001578       0x9c /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(strnlen.o)
+                                 0xa8 (size before relaxing)
+ .stab          0x00001614      0x1d4 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(fputc.o)
+                                0x3b4 (size before relaxing)
+ .stab          0x000017e8      0x12c /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(iob.o)
+                                0x30c (size before relaxing)
+ .stab          0x00001914      0x480 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(ultoa_invert.o)
+                                0x48c (size before relaxing)
 
-.stabstr        0x00000000       0x54
+.stabstr        0x00000000      0xceb
  *(.stabstr)
- .stabstr       0x00000000       0x54 /usr/lib/gcc/avr/4.3.4/../../../avr/lib/avr6/crtm2560.o
+ .stabstr       0x00000000      0xceb /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/crtm2560.o
 
 .stab.excl
  *(.stab.excl)
@@ -702,7 +759,7 @@ LOAD /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a
                 0x00000160       0x20 ./src/app/BSP/bsp.o
 
 .debug_pubnames
-                0x00000000     0x143d
+                0x00000000     0x144a
  *(.debug_pubnames)
  .debug_pubnames
                 0x00000000       0xdf ./src/uCOSII_port/os_cpu_c.o
@@ -725,32 +782,32 @@ LOAD /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a
  .debug_pubnames
                 0x0000120b       0xa0 ./src/app/lego_interface/lego_interface.o
  .debug_pubnames
-                0x000012ab       0xea ./src/app/app.o
+                0x000012ab       0xf7 ./src/app/app.o
  .debug_pubnames
-                0x00001395       0xa8 ./src/app/BSP/bsp.o
+                0x000013a2       0xa8 ./src/app/BSP/bsp.o
 
-.debug_info     0x00000000     0x62cd
+.debug_info     0x00000000     0x6332
  *(.debug_info)
  .debug_info    0x00000000      0x452 ./src/uCOSII_port/os_cpu_c.o
- .debug_info    0x00000452      0x77b ./src/uCOSII_port/os_dbg.o
- .debug_info    0x00000bcd      0xced ./src/uCOSII/os_core.o
- .debug_info    0x000018ba      0x9ea ./src/uCOSII/os_dbg_r.o
- .debug_info    0x000022a4       0x68 ./src/uCOSII/os_flag.o
- .debug_info    0x0000230c       0x68 ./src/uCOSII/os_mbox.o
- .debug_info    0x00002374       0x68 ./src/uCOSII/os_mem.o
- .debug_info    0x000023dc       0x68 ./src/uCOSII/os_mutex.o
- .debug_info    0x00002444       0x68 ./src/uCOSII/os_q.o
- .debug_info    0x000024ac      0x61c ./src/uCOSII/os_sem.o
- .debug_info    0x00002ac8      0x68f ./src/uCOSII/os_task.o
- .debug_info    0x00003157      0x492 ./src/uCOSII/os_time.o
- .debug_info    0x000035e9      0x982 ./src/uCOSII/os_tmr.o
- .debug_info    0x00003f6b     0x19b5 ./src/uCOSII/ucos_ii.o
- .debug_info    0x00005920      0x244 ./src/app/lego_interface/lego_interface.o
- .debug_info    0x00005b64      0x4ad ./src/app/app.o
- .debug_info    0x00006011      0x2bc ./src/app/BSP/bsp.o
+ .debug_info    0x00000452      0x77e ./src/uCOSII_port/os_dbg.o
+ .debug_info    0x00000bd0      0xced ./src/uCOSII/os_core.o
+ .debug_info    0x000018bd      0x9ea ./src/uCOSII/os_dbg_r.o
+ .debug_info    0x000022a7       0x68 ./src/uCOSII/os_flag.o
+ .debug_info    0x0000230f       0x68 ./src/uCOSII/os_mbox.o
+ .debug_info    0x00002377       0x68 ./src/uCOSII/os_mem.o
+ .debug_info    0x000023df       0x68 ./src/uCOSII/os_mutex.o
+ .debug_info    0x00002447       0x68 ./src/uCOSII/os_q.o
+ .debug_info    0x000024af      0x61c ./src/uCOSII/os_sem.o
+ .debug_info    0x00002acb      0x68f ./src/uCOSII/os_task.o
+ .debug_info    0x0000315a      0x492 ./src/uCOSII/os_time.o
+ .debug_info    0x000035ec      0x982 ./src/uCOSII/os_tmr.o
+ .debug_info    0x00003f6e     0x19b5 ./src/uCOSII/ucos_ii.o
+ .debug_info    0x00005923      0x244 ./src/app/lego_interface/lego_interface.o
+ .debug_info    0x00005b67      0x50f ./src/app/app.o
+ .debug_info    0x00006076      0x2bc ./src/app/BSP/bsp.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev   0x00000000     0x119e
+.debug_abbrev   0x00000000     0x11d6
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x16a ./src/uCOSII_port/os_cpu_c.o
  .debug_abbrev  0x0000016a       0xe3 ./src/uCOSII_port/os_dbg.o
@@ -767,30 +824,30 @@ LOAD /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a
  .debug_abbrev  0x00000a2e      0x1ae ./src/uCOSII/os_tmr.o
  .debug_abbrev  0x00000bdc      0x210 ./src/uCOSII/ucos_ii.o
  .debug_abbrev  0x00000dec      0x108 ./src/app/lego_interface/lego_interface.o
- .debug_abbrev  0x00000ef4      0x152 ./src/app/app.o
- .debug_abbrev  0x00001046      0x158 ./src/app/BSP/bsp.o
+ .debug_abbrev  0x00000ef4      0x18a ./src/app/app.o
+ .debug_abbrev  0x0000107e      0x158 ./src/app/BSP/bsp.o
 
-.debug_line     0x00000000     0x5ba0
+.debug_line     0x00000000     0x5cf7
  *(.debug_line)
- .debug_line    0x00000000      0x378 ./src/uCOSII_port/os_cpu_c.o
- .debug_line    0x00000378      0x296 ./src/uCOSII_port/os_dbg.o
- .debug_line    0x0000060e      0xab7 ./src/uCOSII/os_core.o
- .debug_line    0x000010c5      0x2f3 ./src/uCOSII/os_dbg_r.o
- .debug_line    0x000013b8       0x41 ./src/uCOSII/os_flag.o
- .debug_line    0x000013f9       0x41 ./src/uCOSII/os_mbox.o
- .debug_line    0x0000143a       0x41 ./src/uCOSII/os_mem.o
- .debug_line    0x0000147b       0x41 ./src/uCOSII/os_mutex.o
- .debug_line    0x000014bc       0x41 ./src/uCOSII/os_q.o
- .debug_line    0x000014fd      0x669 ./src/uCOSII/os_sem.o
- .debug_line    0x00001b66      0x5e5 ./src/uCOSII/os_task.o
- .debug_line    0x0000214b      0x332 ./src/uCOSII/os_time.o
- .debug_line    0x0000247d      0xaab ./src/uCOSII/os_tmr.o
- .debug_line    0x00002f28     0x20b4 ./src/uCOSII/ucos_ii.o
- .debug_line    0x00004fdc      0x518 ./src/app/lego_interface/lego_interface.o
- .debug_line    0x000054f4      0x26b ./src/app/app.o
- .debug_line    0x0000575f      0x441 ./src/app/BSP/bsp.o
+ .debug_line    0x00000000      0x33e ./src/uCOSII_port/os_cpu_c.o
+ .debug_line    0x0000033e      0x25c ./src/uCOSII_port/os_dbg.o
+ .debug_line    0x0000059a      0xacd ./src/uCOSII/os_core.o
+ .debug_line    0x00001067      0x2b9 ./src/uCOSII/os_dbg_r.o
+ .debug_line    0x00001320       0x41 ./src/uCOSII/os_flag.o
+ .debug_line    0x00001361       0x41 ./src/uCOSII/os_mbox.o
+ .debug_line    0x000013a2       0x41 ./src/uCOSII/os_mem.o
+ .debug_line    0x000013e3       0x41 ./src/uCOSII/os_mutex.o
+ .debug_line    0x00001424       0x41 ./src/uCOSII/os_q.o
+ .debug_line    0x00001465      0x687 ./src/uCOSII/os_sem.o
+ .debug_line    0x00001aec      0x5e3 ./src/uCOSII/os_task.o
+ .debug_line    0x000020cf      0x31a ./src/uCOSII/os_time.o
+ .debug_line    0x000023e9      0xac1 ./src/uCOSII/os_tmr.o
+ .debug_line    0x00002eaa     0x21cc ./src/uCOSII/ucos_ii.o
+ .debug_line    0x00005076      0x53b ./src/app/lego_interface/lego_interface.o
+ .debug_line    0x000055b1      0x299 ./src/app/app.o
+ .debug_line    0x0000584a      0x4ad ./src/app/BSP/bsp.o
 
-.debug_frame    0x00000000      0xb80
+.debug_frame    0x00000000      0xb90
  *(.debug_frame)
  .debug_frame   0x00000000       0xb0 ./src/uCOSII_port/os_cpu_c.o
  .debug_frame   0x000000b0       0x20 ./src/uCOSII_port/os_dbg.o
@@ -802,45 +859,45 @@ LOAD /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a
  .debug_frame   0x00000420      0x120 ./src/uCOSII/os_tmr.o
  .debug_frame   0x00000540      0x410 ./src/uCOSII/ucos_ii.o
  .debug_frame   0x00000950       0x90 ./src/app/lego_interface/lego_interface.o
- .debug_frame   0x000009e0       0xd0 ./src/app/app.o
- .debug_frame   0x00000ab0       0xd0 ./src/app/BSP/bsp.o
+ .debug_frame   0x000009e0       0xe0 ./src/app/app.o
+ .debug_frame   0x00000ac0       0xd0 ./src/app/BSP/bsp.o
 
-.debug_str      0x00000000     0x102c
+.debug_str      0x00000000     0x1018
  *(.debug_str)
- .debug_str     0x00000000      0x2f6 ./src/uCOSII_port/os_cpu_c.o
-                                0x32a (size before relaxing)
- .debug_str     0x000002f6      0x342 ./src/uCOSII_port/os_dbg.o
-                                0x58f (size before relaxing)
- .debug_str     0x00000638      0x32f ./src/uCOSII/os_core.o
-                                0x670 (size before relaxing)
- .debug_str     0x00000967       0xab ./src/uCOSII/os_dbg_r.o
-                                0x751 (size before relaxing)
- .debug_str     0x00000a12       0x18 ./src/uCOSII/os_flag.o
-                                 0xdc (size before relaxing)
- .debug_str     0x00000a2a       0x18 ./src/uCOSII/os_mbox.o
-                                 0xdc (size before relaxing)
- .debug_str     0x00000a42       0x17 ./src/uCOSII/os_mem.o
-                                 0xdb (size before relaxing)
- .debug_str     0x00000a59       0x19 ./src/uCOSII/os_mutex.o
-                                 0xdd (size before relaxing)
- .debug_str     0x00000a72       0x15 ./src/uCOSII/os_q.o
-                                 0xd9 (size before relaxing)
- .debug_str     0x00000a87       0xc6 ./src/uCOSII/os_sem.o
-                                0x377 (size before relaxing)
- .debug_str     0x00000b4d       0x89 ./src/uCOSII/os_task.o
-                                0x366 (size before relaxing)
- .debug_str     0x00000bd6       0x76 ./src/uCOSII/os_time.o
-                                0x31a (size before relaxing)
- .debug_str     0x00000c4c      0x13a ./src/uCOSII/os_tmr.o
-                                0x4e5 (size before relaxing)
- .debug_str     0x00000d86       0x18 ./src/uCOSII/ucos_ii.o
-                                0x91c (size before relaxing)
- .debug_str     0x00000d9e       0xee ./src/app/lego_interface/lego_interface.o
-                                0x1d6 (size before relaxing)
- .debug_str     0x00000e8c       0xda ./src/app/app.o
-                                0x35f (size before relaxing)
- .debug_str     0x00000f66       0xc6 ./src/app/BSP/bsp.o
-                                0x204 (size before relaxing)
+ .debug_str     0x00000000      0x2d9 ./src/uCOSII_port/os_cpu_c.o
+                                0x30d (size before relaxing)
+ .debug_str     0x000002d9      0x342 ./src/uCOSII_port/os_dbg.o
+                                0x572 (size before relaxing)
+ .debug_str     0x0000061b      0x32f ./src/uCOSII/os_core.o
+                                0x653 (size before relaxing)
+ .debug_str     0x0000094a       0xab ./src/uCOSII/os_dbg_r.o
+                                0x734 (size before relaxing)
+ .debug_str     0x000009f5       0x18 ./src/uCOSII/os_flag.o
+                                 0xbf (size before relaxing)
+ .debug_str     0x00000a0d       0x18 ./src/uCOSII/os_mbox.o
+                                 0xbf (size before relaxing)
+ .debug_str     0x00000a25       0x17 ./src/uCOSII/os_mem.o
+                                 0xbe (size before relaxing)
+ .debug_str     0x00000a3c       0x19 ./src/uCOSII/os_mutex.o
+                                 0xc0 (size before relaxing)
+ .debug_str     0x00000a55       0x15 ./src/uCOSII/os_q.o
+                                 0xbc (size before relaxing)
+ .debug_str     0x00000a6a       0xc6 ./src/uCOSII/os_sem.o
+                                0x35a (size before relaxing)
+ .debug_str     0x00000b30       0x89 ./src/uCOSII/os_task.o
+                                0x349 (size before relaxing)
+ .debug_str     0x00000bb9       0x76 ./src/uCOSII/os_time.o
+                                0x2fd (size before relaxing)
+ .debug_str     0x00000c2f      0x13a ./src/uCOSII/os_tmr.o
+                                0x4c8 (size before relaxing)
+ .debug_str     0x00000d69       0x18 ./src/uCOSII/ucos_ii.o
+                                0x8ff (size before relaxing)
+ .debug_str     0x00000d81       0xee ./src/app/lego_interface/lego_interface.o
+                                0x1b9 (size before relaxing)
+ .debug_str     0x00000e6f       0xe3 ./src/app/app.o
+                                0x34b (size before relaxing)
+ .debug_str     0x00000f52       0xc6 ./src/app/BSP/bsp.o
+                                0x1e7 (size before relaxing)
 
 .debug_loc
  *(.debug_loc)
