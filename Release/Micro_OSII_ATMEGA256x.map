@@ -1,0 +1,705 @@
+Archive member included because of file (symbol)
+
+/usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_mulsi3.o)
+                              ./src/uCOSII/os_time.o (__mulsi3)
+/usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_divmodhi4.o)
+                              ./src/app/lego_interface/lego_interface.o (__divmodhi4)
+/usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_udivmodsi4.o)
+                              ./src/uCOSII/os_time.o (__udivmodsi4)
+/usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_exit.o)
+                              /usr/lib/gcc/avr/4.3.4/../../../avr/lib/avr6/crtm2560.o (exit)
+/usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_clear_bss.o)
+                              ./src/uCOSII_port/os_cpu_c.o (__do_clear_bss)
+/usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_udivmodhi4.o)
+                              /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_divmodhi4.o) (__udivmodhi4)
+
+Allocating common symbols
+Common symbol       size              file
+
+OSTmrFreeList       0x2               ./src/uCOSII/os_core.o
+OSTmrWheelTbl       0x20              ./src/uCOSII/os_core.o
+OSLockNesting       0x1               ./src/uCOSII/os_core.o
+OSTmrSemSignal      0x2               ./src/uCOSII/os_core.o
+OSRunning           0x1               ./src/uCOSII/os_core.o
+OSTaskStkSize       0x2               ./src/uCOSII_port/os_cpu_c.o
+OSIdleCtr           0x4               ./src/uCOSII/os_core.o
+OSTmrUsed           0x2               ./src/uCOSII/os_core.o
+OSPrioHighRdy       0x1               ./src/uCOSII/os_core.o
+OSTmrTbl            0x270             ./src/uCOSII/os_core.o
+OSPrioCur           0x1               ./src/uCOSII/os_core.o
+OSTCBList           0x2               ./src/uCOSII/os_core.o
+OSCtxSwCtr          0x4               ./src/uCOSII/os_core.o
+OSTmrFree           0x2               ./src/uCOSII/os_core.o
+OSTCBFreeList       0x2               ./src/uCOSII/os_core.o
+AppTask1Stk         0xf0              ./src/app/app.o
+OSTaskCtr           0x1               ./src/uCOSII/os_core.o
+OSTCBHighRdy        0x2               ./src/uCOSII/os_core.o
+OSRdyGrp            0x1               ./src/uCOSII/os_core.o
+OSRdyTbl            0x2               ./src/uCOSII/os_core.o
+OSTmrTaskStk        0xaf              ./src/uCOSII/os_core.o
+AppTaskStartStk     0xf0              ./src/app/app.o
+OSEventFreeList     0x2               ./src/uCOSII/os_core.o
+OSIntNesting        0x1               ./src/uCOSII/os_core.o
+OSTCBCur            0x2               ./src/uCOSII/os_core.o
+a_sem               0x2               ./src/app/app.o
+OSTmrTime           0x4               ./src/uCOSII/os_core.o
+OSTime              0x4               ./src/uCOSII/os_core.o
+AppTask2Stk         0xf0              ./src/app/app.o
+OSTmrSem            0x2               ./src/uCOSII/os_core.o
+OSTaskIdleStk       0xaf              ./src/uCOSII/os_core.o
+OSEventTbl          0xf0              ./src/uCOSII/os_core.o
+OSTCBTbl            0x1f8             ./src/uCOSII/os_core.o
+OSTCBPrioTbl        0x16              ./src/uCOSII/os_core.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+text             0x00000000         0x00100000         xr
+data             0x00800200         0x0000fe00         rw !x
+eeprom           0x00810000         0x00010000         rw !x
+fuse             0x00820000         0x00000400         rw !x
+lock             0x00830000         0x00000400         rw !x
+signature        0x00840000         0x00000400         rw !x
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+Address of section .data set to 0x800200
+LOAD /usr/lib/gcc/avr/4.3.4/../../../avr/lib/avr6/crtm2560.o
+LOAD ./src/uCOSII_port/os_cpu_a.o
+LOAD ./src/uCOSII_port/os_cpu_c.o
+LOAD ./src/uCOSII_port/os_cpu_i.o
+LOAD ./src/uCOSII_port/os_dbg.o
+LOAD ./src/uCOSII/os_core.o
+LOAD ./src/uCOSII/os_dbg_r.o
+LOAD ./src/uCOSII/os_flag.o
+LOAD ./src/uCOSII/os_mbox.o
+LOAD ./src/uCOSII/os_mem.o
+LOAD ./src/uCOSII/os_mutex.o
+LOAD ./src/uCOSII/os_q.o
+LOAD ./src/uCOSII/os_sem.o
+LOAD ./src/uCOSII/os_task.o
+LOAD ./src/uCOSII/os_time.o
+LOAD ./src/uCOSII/os_tmr.o
+LOAD ./src/uCOSII/ucos_ii.o
+LOAD ./src/app/lego_interface/lego_interface.o
+LOAD ./src/app/app.o
+LOAD ./src/app/app_isr.o
+LOAD ./src/app/BSP/bsp.o
+LOAD /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a
+LOAD /usr/lib/gcc/avr/4.3.4/../../../avr/lib/avr6/libc.a
+LOAD /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a
+
+.hash
+ *(.hash)
+
+.dynsym
+ *(.dynsym)
+
+.dynstr
+ *(.dynstr)
+
+.gnu.version
+ *(.gnu.version)
+
+.gnu.version_d
+ *(.gnu.version_d)
+
+.gnu.version_r
+ *(.gnu.version_r)
+
+.rel.init
+ *(.rel.init)
+
+.rela.init
+ *(.rela.init)
+
+.rel.text
+ *(.rel.text)
+ *(.rel.text.*)
+ *(.rel.gnu.linkonce.t*)
+
+.rela.text
+ *(.rela.text)
+ *(.rela.text.*)
+ *(.rela.gnu.linkonce.t*)
+
+.rel.fini
+ *(.rel.fini)
+
+.rela.fini
+ *(.rela.fini)
+
+.rel.rodata
+ *(.rel.rodata)
+ *(.rel.rodata.*)
+ *(.rel.gnu.linkonce.r*)
+
+.rela.rodata
+ *(.rela.rodata)
+ *(.rela.rodata.*)
+ *(.rela.gnu.linkonce.r*)
+
+.rel.data
+ *(.rel.data)
+ *(.rel.data.*)
+ *(.rel.gnu.linkonce.d*)
+
+.rela.data
+ *(.rela.data)
+ *(.rela.data.*)
+ *(.rela.gnu.linkonce.d*)
+
+.rel.ctors
+ *(.rel.ctors)
+
+.rela.ctors
+ *(.rela.ctors)
+
+.rel.dtors
+ *(.rel.dtors)
+
+.rela.dtors
+ *(.rela.dtors)
+
+.rel.got
+ *(.rel.got)
+
+.rela.got
+ *(.rela.got)
+
+.rel.bss
+ *(.rel.bss)
+
+.rela.bss
+ *(.rela.bss)
+
+.rel.plt
+ *(.rel.plt)
+
+.rela.plt
+ *(.rela.plt)
+
+.text           0x00000000     0x4a2a
+ *(.vectors)
+ .vectors       0x00000000       0xe4 /usr/lib/gcc/avr/4.3.4/../../../avr/lib/avr6/crtm2560.o
+                0x00000000                __vectors
+                0x00000000                __vector_default
+ *(.vectors)
+ *(.progmem.gcc*)
+ *(.progmem*)
+ .progmem.data  0x000000e4       0x5c ./src/uCOSII_port/os_dbg.o
+                0x000000e4                OSDebugEn
+                0x000000e6                OSEndiannessTest
+                0x000000ea                OSEventMax
+                0x000000ec                OSEventNameSize
+                0x000000ee                OSEventEn
+                0x000000f0                OSEventSize
+                0x000000f2                OSEventTblSize
+                0x000000f4                OSFlagEn
+                0x000000f6                OSFlagGrpSize
+                0x000000f8                OSFlagNodeSize
+                0x000000fa                OSFlagWidth
+                0x000000fc                OSFlagMax
+                0x000000fe                OSFlagNameSize
+                0x00000100                OSLowestPrio
+                0x00000102                OSMboxEn
+                0x00000104                OSMemEn
+                0x00000106                OSMemMax
+                0x00000108                OSMemNameSize
+                0x0000010a                OSMemSize
+                0x0000010c                OSMemTblSize
+                0x0000010e                OSMutexEn
+                0x00000110                OSPtrSize
+                0x00000112                OSQEn
+                0x00000114                OSQMax
+                0x00000116                OSQSize
+                0x00000118                OSRdyTblSize
+                0x0000011a                OSSemEn
+                0x0000011c                OSStkWidth
+                0x0000011e                OSTaskCreateEn
+                0x00000120                OSTaskCreateExtEn
+                0x00000122                OSTaskDelEn
+                0x00000124                OSTaskIdleStkSize
+                0x00000126                OSTaskProfileEn
+                0x00000128                OSTaskMax
+                0x0000012a                OSTaskNameSize
+                0x0000012c                OSTaskStatEn
+                0x0000012e                OSTaskStatStkSize
+                0x00000130                OSTaskStatStkChkEn
+                0x00000132                OSTaskSwHookEn
+                0x00000134                OSTCBPrioTblMax
+                0x00000136                OSTCBSize
+                0x00000138                OSTicksPerSec
+                0x0000013a                OSTimeTickHookEn
+                0x0000013c                OSVersionNbr
+                0x0000013e                OSDataSize
+                0x00000140                . = ALIGN (0x2)
+                0x00000140                __trampolines_start = .
+ *(.trampolines)
+ .trampolines   0x00000140        0x0 linker stubs
+ *(.trampolines*)
+                0x00000140                __trampolines_end = .
+ *(.jumptables)
+ *(.jumptables*)
+ *(.lowtext)
+ *(.lowtext*)
+                0x00000140                __ctors_start = .
+ *(.ctors)
+                0x00000140                __ctors_end = .
+                0x00000140                __dtors_start = .
+ *(.dtors)
+                0x00000140                __dtors_end = .
+ SORT(*)(.ctors)
+ SORT(*)(.dtors)
+ *(.init0)
+ .init0         0x00000140        0x0 /usr/lib/gcc/avr/4.3.4/../../../avr/lib/avr6/crtm2560.o
+                0x00000140                __init
+ *(.init0)
+ *(.init1)
+ *(.init1)
+ *(.init2)
+ .init2         0x00000140       0x10 /usr/lib/gcc/avr/4.3.4/../../../avr/lib/avr6/crtm2560.o
+ *(.init2)
+ *(.init3)
+ *(.init3)
+ *(.init4)
+ .init4         0x00000150       0x1a /usr/lib/gcc/avr/4.3.4/../../../avr/lib/avr6/crtm2560.o
+                0x00000150                __do_copy_data
+ .init4         0x0000016a       0x10 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_clear_bss.o)
+                0x0000016a                __do_clear_bss
+ *(.init4)
+ *(.init5)
+ *(.init5)
+ *(.init6)
+ *(.init6)
+ *(.init7)
+ *(.init7)
+ *(.init8)
+ *(.init8)
+ *(.init9)
+ .init9         0x0000017a        0x8 /usr/lib/gcc/avr/4.3.4/../../../avr/lib/avr6/crtm2560.o
+ *(.init9)
+ *(.text)
+ .text          0x00000182        0x4 /usr/lib/gcc/avr/4.3.4/../../../avr/lib/avr6/crtm2560.o
+                0x00000182                __vector_38
+                0x00000182                __vector_22
+                0x00000182                __vector_28
+                0x00000182                __vector_34
+                0x00000182                __vector_24
+                0x00000182                __vector_12
+                0x00000182                __vector_55
+                0x00000182                __vector_46
+                0x00000182                __bad_interrupt
+                0x00000182                __vector_6
+                0x00000182                __vector_31
+                0x00000182                __vector_35
+                0x00000182                __vector_39
+                0x00000182                __vector_3
+                0x00000182                __vector_23
+                0x00000182                __vector_30
+                0x00000182                __vector_45
+                0x00000182                __vector_25
+                0x00000182                __vector_11
+                0x00000182                __vector_54
+                0x00000182                __vector_13
+                0x00000182                __vector_17
+                0x00000182                __vector_19
+                0x00000182                __vector_56
+                0x00000182                __vector_7
+                0x00000182                __vector_49
+                0x00000182                __vector_41
+                0x00000182                __vector_43
+                0x00000182                __vector_27
+                0x00000182                __vector_5
+                0x00000182                __vector_33
+                0x00000182                __vector_47
+                0x00000182                __vector_52
+                0x00000182                __vector_37
+                0x00000182                __vector_4
+                0x00000182                __vector_44
+                0x00000182                __vector_51
+                0x00000182                __vector_9
+                0x00000182                __vector_2
+                0x00000182                __vector_15
+                0x00000182                __vector_36
+                0x00000182                __vector_40
+                0x00000182                __vector_8
+                0x00000182                __vector_26
+                0x00000182                __vector_48
+                0x00000182                __vector_14
+                0x00000182                __vector_53
+                0x00000182                __vector_10
+                0x00000182                __vector_50
+                0x00000182                __vector_16
+                0x00000182                __vector_18
+                0x00000182                __vector_20
+                0x00000182                __vector_42
+ .text          0x00000186      0x244 ./src/uCOSII_port/os_cpu_a.o
+                0x00000186                OS_CPU_SR_Save
+                0x0000018c                OS_CPU_SR_Restore
+                0x00000190                OSStartHighRdy
+                0x000001fa                OSCtxSw
+                0x0000030e                OSIntCtxSw
+ .text          0x000003ca       0xac ./src/uCOSII_port/os_cpu_c.o
+                0x000003ca                OSInitHookBegin
+                0x000003d4                OSInitHookEnd
+                0x000003d6                OSTaskStkInit
+                0x0000042a                OSTimeTickHook
+                0x00000452                OSTCBInitHook
+                0x00000458                OSTaskSwHook
+                0x0000045e                OSTaskStatHook
+                0x00000464                OSTaskIdleHook
+                0x0000046a                OSTaskDelHook
+                0x00000470                OSTaskCreateHook
+ .text          0x00000476        0x0 ./src/uCOSII_port/os_cpu_i.o
+ .text          0x00000476        0x2 ./src/uCOSII_port/os_dbg.o
+                0x00000476                OSDebugInit
+ .text          0x00000478      0x908 ./src/uCOSII/os_core.o
+                0x00000478                OSIntEnter
+                0x00000490                OSVersion
+                0x00000496                OS_EventTaskRdy
+                0x0000054a                OS_EventTaskWait
+                0x000005b0                OS_EventTaskRemove
+                0x000005e8                OS_EventWaitListInit
+                0x000005f2                OS_MemClr
+                0x00000604                OS_MemCopy
+                0x0000061a                OS_StrCopy
+                0x00000638                OS_StrLen
+                0x00000652                OSSchedLock
+                0x0000067e                OSEventNameSet
+                0x000006fc                OSEventNameGet
+                0x00000766                OS_TCBInit
+                0x000008d4                OS_TaskIdle
+                0x0000090a                OS_Sched
+                0x000009be                OSSchedUnlock
+                0x00000a02                OSTimeTick
+                0x00000ab6                OSStart
+                0x00000b10                OSIntExit
+                0x00000bdc                OSInit
+ .text          0x00000d80        0x2 ./src/uCOSII/os_dbg_r.o
+ .text          0x00000d82        0x0 ./src/uCOSII/os_flag.o
+ .text          0x00000d82        0x0 ./src/uCOSII/os_mbox.o
+ .text          0x00000d82        0x0 ./src/uCOSII/os_mem.o
+ .text          0x00000d82        0x0 ./src/uCOSII/os_mutex.o
+ .text          0x00000d82        0x0 ./src/uCOSII/os_q.o
+ .text          0x00000d82      0x3e4 ./src/uCOSII/os_sem.o
+                0x00000d82                OSSemSet
+                0x00000dda                OSSemQuery
+                0x00000e1a                OSSemAccept
+                0x00000e58                OSSemPost
+                0x00000ebc                OSSemPendAbort
+                0x00000f46                OSSemDel
+                0x00001030                OSSemPend
+                0x00001102                OSSemCreate
+ .text          0x00001166      0x48e ./src/uCOSII/os_task.o
+                0x00001166                OSTaskQuery
+                0x000011d2                OSTaskSuspend
+                0x0000127a                OSTaskResume
+                0x00001320                OSTaskNameSet
+                0x000013b8                OSTaskNameGet
+                0x00001438                OSTaskCreateExt
+                0x00001530                OSTaskCreate
+ .text          0x000015f4      0x27e ./src/uCOSII/os_time.o
+                0x000015f4                OSTimeSet
+                0x00001622                OSTimeGet
+                0x00001650                OSTimeDlyResume
+                0x00001710                OSTimeDly
+                0x00001778                OSTimeDlyHMSM
+ .text          0x00001872      0xa2a ./src/uCOSII/os_tmr.o
+                0x000019a8                OSTmr_Init
+                0x00001c06                OSTmrStop
+                0x00001d1c                OSTmrStart
+                0x00001dc8                OSTmrStateGet
+                0x00001e46                OSTmrRemainGet
+                0x00001f70                OSTmrDel
+                0x00002076                OSTmrSignal
+                0x00002084                OSTmrNameGet
+                0x00002134                OSTmrCreate
+ .text          0x0000229c     0x1d2a ./src/uCOSII/ucos_ii.o
+ .text          0x00003fc6      0x4cc ./src/app/lego_interface/lego_interface.o
+                0x00003fc6                init_lego_interface
+                0x00004108                touch_sensor
+                0x00004128                rotation_sensor
+                0x00004148                light_sensor
+                0x00004168                __vector_32
+                0x000041b2                __vector_29
+                0x0000422c                brake_motor
+                0x00004298                motor_speed
+ .text          0x00004492      0x18a ./src/app/app.o
+                0x00004492                App_TaskSwHook
+                0x000044a2                App_TaskCreateHook
+                0x000044a4                App_TaskDelHook
+                0x000044a6                App_TaskIdleHook
+                0x000044a8                App_TaskStatHook
+                0x000044aa                App_TCBInitHook
+                0x000044ac                App_TimeTickHook
+                0x000044ae                main
+ .text          0x0000461c      0x198 ./src/app/app_isr.o
+                0x0000461c                __vector_21
+                0x000046e8                __vector_1
+ .text          0x000047b4      0x1a2 ./src/app/BSP/bsp.o
+                0x000047b4                BSP_Int0_Disable
+                0x000047b8                BSP_Int0_Enable
+                0x000047c0                SW_in
+                0x000047d8                LED_Toggle
+                0x0000484a                LED_Off
+                0x000048ae                BSP_Init
+                0x000048e4                LED_On
+                0x00004942                BSP_Int0ISR_Handler
+                0x00004950                BSP_TickISR_Handler
+ .text          0x00004956        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_mulsi3.o)
+ .text          0x00004956        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_divmodhi4.o)
+ .text          0x00004956        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_udivmodsi4.o)
+ .text          0x00004956        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_exit.o)
+ .text          0x00004956        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_clear_bss.o)
+ .text          0x00004956        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_udivmodhi4.o)
+                0x00004956                . = ALIGN (0x2)
+ *(.text.*)
+ .text.libgcc   0x00004956       0x3e /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_mulsi3.o)
+                0x00004956                __mulsi3
+ .text.libgcc   0x00004994       0x26 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_divmodhi4.o)
+                0x00004994                __divmodhi4
+                0x00004994                _div
+ .text.libgcc   0x000049ba       0x44 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_udivmodsi4.o)
+                0x000049ba                __udivmodsi4
+ .text.libgcc   0x000049fe        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_exit.o)
+ .text.libgcc   0x000049fe        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_clear_bss.o)
+ .text.libgcc   0x000049fe       0x28 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_udivmodhi4.o)
+                0x000049fe                __udivmodhi4
+                0x00004a26                . = ALIGN (0x2)
+ *(.fini9)
+ .fini9         0x00004a26        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_exit.o)
+                0x00004a26                exit
+                0x00004a26                _exit
+ *(.fini9)
+ *(.fini8)
+ *(.fini8)
+ *(.fini7)
+ *(.fini7)
+ *(.fini6)
+ *(.fini6)
+ *(.fini5)
+ *(.fini5)
+ *(.fini4)
+ *(.fini4)
+ *(.fini3)
+ *(.fini3)
+ *(.fini2)
+ *(.fini2)
+ *(.fini1)
+ *(.fini1)
+ *(.fini0)
+ .fini0         0x00004a26        0x4 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_exit.o)
+ *(.fini0)
+                0x00004a2a                _etext = .
+
+.data           0x00800200      0x2d0 load address 0x00004a2a
+                0x00800200                PROVIDE (__data_start, .)
+ *(.data)
+ .data          0x00800200        0x0 /usr/lib/gcc/avr/4.3.4/../../../avr/lib/avr6/crtm2560.o
+ .data          0x00800200        0x0 ./src/uCOSII_port/os_cpu_a.o
+ .data          0x00800200        0x0 ./src/uCOSII_port/os_cpu_c.o
+ .data          0x00800200        0x0 ./src/uCOSII_port/os_cpu_i.o
+ .data          0x00800200        0x0 ./src/uCOSII_port/os_dbg.o
+ .data          0x00800200      0x10e ./src/uCOSII/os_core.o
+                0x0080020e                OSUnMapTbl
+ .data          0x0080030e       0x70 ./src/uCOSII/os_dbg_r.o
+                0x0080031e                OSEventMultiEn
+                0x0080036a                OSTmrEn
+                0x0080036c                OSTmrCfgMax
+                0x0080036e                OSTmrCfgNameSize
+                0x00800370                OSTmrCfgWheelSize
+                0x00800372                OSTmrCfgTicksPerSec
+                0x00800374                OSTmrSize
+                0x00800376                OSTmrTblSize
+                0x00800378                OSTmrWheelSize
+                0x0080037a                OSTmrWheelTblSize
+ .data          0x0080037e        0x0 ./src/uCOSII/os_flag.o
+ .data          0x0080037e        0x0 ./src/uCOSII/os_mbox.o
+ .data          0x0080037e        0x0 ./src/uCOSII/os_mem.o
+ .data          0x0080037e        0x0 ./src/uCOSII/os_mutex.o
+ .data          0x0080037e        0x0 ./src/uCOSII/os_q.o
+ .data          0x0080037e        0x0 ./src/uCOSII/os_sem.o
+ .data          0x0080037e        0x0 ./src/uCOSII/os_task.o
+ .data          0x0080037e        0x0 ./src/uCOSII/os_time.o
+ .data          0x0080037e       0x22 ./src/uCOSII/os_tmr.o
+ .data          0x008003a0      0x130 ./src/uCOSII/ucos_ii.o
+ .data          0x008004d0        0x0 ./src/app/lego_interface/lego_interface.o
+ .data          0x008004d0        0x0 ./src/app/app.o
+ .data          0x008004d0        0x0 ./src/app/app_isr.o
+ .data          0x008004d0        0x0 ./src/app/BSP/bsp.o
+ .data          0x008004d0        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_mulsi3.o)
+ .data          0x008004d0        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_divmodhi4.o)
+ .data          0x008004d0        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_udivmodsi4.o)
+ .data          0x008004d0        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_exit.o)
+ .data          0x008004d0        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_clear_bss.o)
+ .data          0x008004d0        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_udivmodhi4.o)
+ *(.data*)
+ *(.rodata)
+ *(.rodata*)
+ *(.gnu.linkonce.d*)
+                0x008004d0                . = ALIGN (0x2)
+                0x008004d0                _edata = .
+                0x008004d0                PROVIDE (__data_end, .)
+
+.bss            0x008004d0      0xa08
+                0x008004d0                PROVIDE (__bss_start, .)
+ *(.bss)
+ .bss           0x008004d0        0x0 /usr/lib/gcc/avr/4.3.4/../../../avr/lib/avr6/crtm2560.o
+ .bss           0x008004d0        0x0 ./src/uCOSII_port/os_cpu_a.o
+ .bss           0x008004d0        0x2 ./src/uCOSII_port/os_cpu_c.o
+ .bss           0x008004d2        0x0 ./src/uCOSII_port/os_cpu_i.o
+ .bss           0x008004d2        0x0 ./src/uCOSII_port/os_dbg.o
+ .bss           0x008004d2        0x0 ./src/uCOSII/os_core.o
+ .bss           0x008004d2        0x0 ./src/uCOSII/os_dbg_r.o
+ .bss           0x008004d2        0x0 ./src/uCOSII/os_flag.o
+ .bss           0x008004d2        0x0 ./src/uCOSII/os_mbox.o
+ .bss           0x008004d2        0x0 ./src/uCOSII/os_mem.o
+ .bss           0x008004d2        0x0 ./src/uCOSII/os_mutex.o
+ .bss           0x008004d2        0x0 ./src/uCOSII/os_q.o
+ .bss           0x008004d2        0x0 ./src/uCOSII/os_sem.o
+ .bss           0x008004d2        0x0 ./src/uCOSII/os_task.o
+ .bss           0x008004d2        0x0 ./src/uCOSII/os_time.o
+ .bss           0x008004d2        0x0 ./src/uCOSII/os_tmr.o
+ .bss           0x008004d2        0x0 ./src/uCOSII/ucos_ii.o
+ .bss           0x008004d2       0x19 ./src/app/lego_interface/lego_interface.o
+ .bss           0x008004eb        0x0 ./src/app/app.o
+ .bss           0x008004eb        0x0 ./src/app/app_isr.o
+ .bss           0x008004eb        0x0 ./src/app/BSP/bsp.o
+ .bss           0x008004eb        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_mulsi3.o)
+ .bss           0x008004eb        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_divmodhi4.o)
+ .bss           0x008004eb        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_udivmodsi4.o)
+ .bss           0x008004eb        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_exit.o)
+ .bss           0x008004eb        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_clear_bss.o)
+ .bss           0x008004eb        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_udivmodhi4.o)
+ *(.bss*)
+ *(COMMON)
+ COMMON         0x008004eb        0x2 ./src/uCOSII_port/os_cpu_c.o
+                0x008004eb                OSTaskStkSize
+ COMMON         0x008004ed      0x719 ./src/uCOSII/os_core.o
+                0x008004ed                OSTmrFreeList
+                0x008004ef                OSTmrWheelTbl
+                0x0080050f                OSLockNesting
+                0x00800510                OSTmrSemSignal
+                0x00800512                OSRunning
+                0x00800513                OSIdleCtr
+                0x00800517                OSTmrUsed
+                0x00800519                OSPrioHighRdy
+                0x0080051a                OSTmrTbl
+                0x0080078a                OSPrioCur
+                0x0080078b                OSTCBList
+                0x0080078d                OSCtxSwCtr
+                0x00800791                OSTmrFree
+                0x00800793                OSTCBFreeList
+                0x00800795                OSTaskCtr
+                0x00800796                OSTCBHighRdy
+                0x00800798                OSRdyGrp
+                0x00800799                OSRdyTbl
+                0x0080079b                OSTmrTaskStk
+                0x0080084a                OSEventFreeList
+                0x0080084c                OSIntNesting
+                0x0080084d                OSTCBCur
+                0x0080084f                OSTmrTime
+                0x00800853                OSTime
+                0x00800857                OSTmrSem
+                0x00800859                OSTaskIdleStk
+                0x00800908                OSEventTbl
+                0x008009f8                OSTCBTbl
+                0x00800bf0                OSTCBPrioTbl
+ COMMON         0x00800c06      0x2d2 ./src/app/app.o
+                0x00800c06                AppTask1Stk
+                0x00800cf6                AppTaskStartStk
+                0x00800de6                a_sem
+                0x00800de8                AppTask2Stk
+                0x00800ed8                PROVIDE (__bss_end, .)
+                0x00004a2a                __data_load_start = LOADADDR (.data)
+                0x00004cfa                __data_load_end = (__data_load_start + SIZEOF (.data))
+
+.noinit         0x00800ed8        0x0
+                0x00800ed8                PROVIDE (__noinit_start, .)
+ *(.noinit*)
+                0x00800ed8                PROVIDE (__noinit_end, .)
+                0x00800ed8                _end = .
+                0x00800ed8                PROVIDE (__heap_start, .)
+
+.eeprom         0x00810000        0x0
+ *(.eeprom*)
+                0x00810000                __eeprom_end = .
+
+.fuse
+ *(.fuse)
+ *(.lfuse)
+ *(.hfuse)
+ *(.efuse)
+
+.lock
+ *(.lock*)
+
+.signature
+ *(.signature*)
+
+.stab           0x00000000      0x768
+ *(.stab)
+ .stab          0x00000000      0x768 /usr/lib/gcc/avr/4.3.4/../../../avr/lib/avr6/crtm2560.o
+
+.stabstr        0x00000000       0x54
+ *(.stabstr)
+ .stabstr       0x00000000       0x54 /usr/lib/gcc/avr/4.3.4/../../../avr/lib/avr6/crtm2560.o
+
+.stab.excl
+ *(.stab.excl)
+
+.stab.exclstr
+ *(.stab.exclstr)
+
+.stab.index
+ *(.stab.index)
+
+.stab.indexstr
+ *(.stab.indexstr)
+
+.comment
+ *(.comment)
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges
+ *(.debug_aranges)
+
+.debug_pubnames
+ *(.debug_pubnames)
+
+.debug_info
+ *(.debug_info)
+ *(.gnu.linkonce.wi.*)
+
+.debug_abbrev
+ *(.debug_abbrev)
+
+.debug_line
+ *(.debug_line)
+
+.debug_frame
+ *(.debug_frame)
+
+.debug_str
+ *(.debug_str)
+
+.debug_loc
+ *(.debug_loc)
+
+.debug_macinfo
+ *(.debug_macinfo)
+OUTPUT(Micro_OSII_ATMEGA256x.elf elf32-avr)
+LOAD linker stubs

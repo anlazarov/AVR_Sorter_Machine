@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/myproject/!svn/ver/14/ATmega128_microc/ATmega128/gcc/BSP
+END
+bsp.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/myproject/!svn/ver/14/ATmega128_microc/ATmega128/gcc/BSP/bsp.c
+END
+bsp.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/myproject/!svn/ver/14/ATmega128_microc/ATmega128/gcc/BSP/bsp.h
+END

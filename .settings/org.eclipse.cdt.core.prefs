@@ -1,0 +1,4 @@
+#Tue Mar 23 19:58:28 CET 2010
+eclipse.preferences.version=1
+environment/project/de.innot.avreclipse.configuration.app.debug.689284133=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\r\n<environment append\="true" appendContributed\="false">\r\n<variable delimiter\=";" name\="BUILDARTIFACT" operation\="replace" value\="Micro_OSII_AVR_MEGA2560.elf"/>\r\n</environment>\r\n
+environment/project/de.innot.avreclipse.configuration.app.release.2061815800=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\r\n<environment append\="true" appendContributed\="false">\r\n<variable delimiter\=";" name\="BUILDARTIFACT" operation\="replace" value\="Micro_OSII_AVR_MEGA2560.elf"/>\r\n</environment>\r\n
