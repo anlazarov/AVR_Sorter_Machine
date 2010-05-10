@@ -51,13 +51,10 @@ int  main (void)
 #if (OS_TASK_NAME_SIZE > 14) && (OS_TASK_STAT_EN > 0)
     INT8U  err;
 #endif
-<<<<<<< HEAD
 
-    DDRB = 0x0F;  // TODO IHA Remove after test
-=======
 	//git test
   //  DDRB = 0x0F;  // TODO IHA Remove after test
->>>>>>> 1d2863ea878cee01fd5124785aaad7b784f0ea66
+
 
     /*---- Any initialization code prior to calling OSInit() goes HERE -------------------------------------*/
 
