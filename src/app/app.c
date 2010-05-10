@@ -32,7 +32,8 @@ OS_EVENT *a_sem; // Pointer to a semaphore
 
 static void  Task1(void *p_arg);
 static void  AppTaskCreate(void);
-
+static void  AppTask1(void *p_arg);
+static void  AppTask2(void *p_arg);
 
 
 /*
@@ -51,7 +52,7 @@ int  main (void)
     INT8U  err;
 #endif
 
-  //  DDRB = 0x0F;  // TODO IHA Remove after test
+    DDRB = 0x0F;  // TODO IHA Remove after test
 
     /*---- Any initialization code prior to calling OSInit() goes HERE -------------------------------------*/
 
@@ -122,6 +123,91 @@ static void  Task1 (void *p_arg)
     }
 }
 
+
+/*
+**************************************************************************************************************
+*                                        CREATE APPLICATION TASKS
+*
+* Description : This function creates the application tasks.
+*
+* Arguments   : p_arg   is the argument passed to 'AppStartTask()' by 'OSTaskCreate()'.
+*
+* Notes       : 1) The first line of code is used to prevent a compiler warning because 'p_arg' is not
+*                  used.  The compiler should not generate any code for this statement.
+**************************************************************************************************************
+*/
+
+static  void  AppTaskCreate (void)
+{
+#if (OS_TASK_NAME_SIZE > 14) && (OS_TASK_STAT_EN > 0)
+    INT8U  err;
+#endif
+
+
+    /*---- Task initialization code goes HERE! --------------------------------------------------------*/
+    OSTaskStkSize     = OS_TASK_1_STK_SIZE;        /* Setup the default stack size                     */
+//    OSTaskStkSizeHard = OS_TASK_STK_SIZE_HARD;     /* Setup the default hardware stack size            */
+    OSTaskCreateExt(AppTask1,
+                    (void *)0,
+                    (OS_STK *)&AppTask1Stk[OSTaskStkSize - 1],
+                    OS_TASK_1_PRIO,
+                    OS_TASK_1_PRIO,
+                    (OS_STK *)&AppTask1Stk[0],
+                    OSTaskStkSize,
+                    (void *)0,
+                    OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR);
+#if (OS_TASK_NAME_SIZE > 14) && (OS_TASK_STAT_EN > 0)
+    OSTaskNameSet(OS_TASK_1_PRIO, "Task 1", &err);
+#endif
+
+    /*---- Task initialization code goes HERE! --------------------------------------------------------*/
+    OSTaskStkSize     = OS_TASK_2_STK_SIZE;        /* Setup the default stack size                     */
+    //OSTaskStkSizeHard = OS_TASK_STK_SIZE_HARD;     /* Setup the default hardware stack size            */
+    OSTaskCreateExt(AppTask2,
+                    (void *)0,
+                    (OS_STK *)&AppTask2Stk[OSTaskStkSize - 1],
+                    OS_TASK_2_PRIO,
+                    OS_TASK_2_PRIO,
+                    (OS_STK *)&AppTask2Stk[0],
+                    OSTaskStkSize,
+                    (void *)0,
+                    OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR);
+#if (OS_TASK_NAME_SIZE > 14) && (OS_TASK_STAT_EN > 0)
+    OSTaskNameSet(OS_TASK_2_PRIO, "Task 2", &err);
+#endif
+}
+
+/*
+**************************************************************************************************************
+*                                                   TASK #1
+**************************************************************************************************************
+*/
+
+static void  AppTask1(void *p_arg)
+{
+    (void)p_arg;
+
+    while (1) {
+        LED_Toggle(7);
+        OSTimeDly(OS_TICKS_PER_SEC / 5);
+    }
+}
+
+/*
+**************************************************************************************************************
+*                                                  TASK #2
+**************************************************************************************************************
+*/
+
+static void  AppTask2(void *p_arg)
+{
+    (void)p_arg;
+
+    while (1) {
+        LED_Toggle(8);
+        OSTimeDly(OS_TICKS_PER_SEC / 5);
+    }
+}
 
 /*
 *********************************************************************************************************
