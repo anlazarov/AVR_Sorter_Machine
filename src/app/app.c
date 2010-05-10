@@ -195,8 +195,8 @@ static void  AppTask1(void *p_arg)
 
     int i = 0;
     while (1) {
-        LED_Toggle(7);
-    	//LED_show(++i);
+        //LED_Toggle(7);
+    	LED_show(++i);
         OSTimeDly(OS_TICKS_PER_SEC / 5);
         //i = (i > 254) ? 0 : i;
     }
@@ -252,12 +252,14 @@ void App_TimeTickHook(void){}
 void LED_show(unsigned char n){
 	/* Turn off all LEDs before switching them */
 	for(int i = 0; i < 8; i++){
-		printf("%s%d\n", "Switching off LED #", i);
+		LED_Off(i);
+		//printf("%s%d\n", "Switching off LED #", i);
 	}
 
 	/* For all bits in datatype */
 	for(int i = 0; i < sizeof(unsigned char)*8; i++){
 		if(n & (1 << i))						/* Test if i^th bit is set in "n" */
-			printf("%s%d\n", "Switching on LED #", i); /* if yes, turn on the i^th LED */
+			LED_On(i);
+			//printf("%s%d\n", "Switching on LED #", i); /* if yes, turn on the i^th LED */
 	}
 }

@@ -12,20 +12,6 @@ Archive member included because of file (symbol)
                               ./src/uCOSII_port/os_cpu_c.o (__do_clear_bss)
 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_udivmodhi4.o)
                               /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_divmodhi4.o) (__udivmodhi4)
-/usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(printf.o)
-                              ./src/app/app.o (printf)
-/usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(vfprintf_std.o)
-                              /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(printf.o) (vfprintf)
-/usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(strnlen_P.o)
-                              /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(vfprintf_std.o) (strnlen_P)
-/usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(strnlen.o)
-                              /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(vfprintf_std.o) (strnlen)
-/usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(fputc.o)
-                              /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(vfprintf_std.o) (fputc)
-/usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(iob.o)
-                              /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(printf.o) (__iob)
-/usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(ultoa_invert.o)
-                              /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(vfprintf_std.o) (__ultoa_invert)
 
 Allocating common symbols
 Common symbol       size              file
@@ -63,7 +49,6 @@ OSTmrSem            0x2               ./src/uCOSII/os_core.o
 OSTaskIdleStk       0xaf              ./src/uCOSII/os_core.o
 OSEventTbl          0xf0              ./src/uCOSII/os_core.o
 OSTCBTbl            0x1f8             ./src/uCOSII/os_core.o
-__iob               0x6               /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(iob.o)
 OSTCBPrioTbl        0x16              ./src/uCOSII/os_core.o
 
 Memory Configuration
@@ -192,7 +177,7 @@ LOAD /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x8740
+.text           0x00000000     0x817a
  *(.vectors)
  .vectors       0x00000000       0xe4 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/crtm2560.o
                 0x00000000                __vectors
@@ -438,78 +423,53 @@ LOAD /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a
                 0x00007470                brake_motor
                 0x0000755a                __vector_32
                 0x000075da                __vector_29
- .text          0x00007696      0x3b6 ./src/app/app.o
+ .text          0x00007696      0x354 ./src/app/app.o
                 0x00007696                main
-                0x000078ca                App_TaskSwHook
-                0x000078ee                App_TaskCreateHook
-                0x00007908                App_TaskDelHook
-                0x00007922                App_TaskIdleHook
-                0x00007930                App_TaskStatHook
-                0x0000793e                App_TCBInitHook
-                0x00007958                App_TimeTickHook
-                0x00007966                LED_show
- .text          0x00007a4c      0x198 ./src/app/app_isr.o
-                0x00007a4c                __vector_21
-                0x00007b18                __vector_1
- .text          0x00007be4      0x524 ./src/app/BSP/bsp.o
-                0x00007be4                BSP_Init
-                0x00007c98                BSP_Int0_Disable
-                0x00007cb8                BSP_Int0_Enable
-                0x00007cf6                SW_in
-                0x00007d3a                BSP_TickISR_Handler
-                0x00007d4c                BSP_Int0ISR_Handler
-                0x00007d84                LED_On
-                0x00007ea6                LED_Off
-                0x00007fca                LED_Toggle
- .text          0x00008108        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_mulsi3.o)
- .text          0x00008108        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_divmodhi4.o)
- .text          0x00008108        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_udivmodsi4.o)
- .text          0x00008108        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_exit.o)
- .text          0x00008108        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_clear_bss.o)
- .text          0x00008108        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_udivmodhi4.o)
- .text          0x00008108        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(printf.o)
- .text          0x00008108        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(vfprintf_std.o)
- .text          0x00008108        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(strnlen_P.o)
- .text          0x00008108        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(strnlen.o)
- .text          0x00008108        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(fputc.o)
- .text          0x00008108        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(iob.o)
- .text          0x00008108        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(ultoa_invert.o)
-                0x00008108                . = ALIGN (0x2)
+                0x000078d4                App_TaskSwHook
+                0x000078f8                App_TaskCreateHook
+                0x00007912                App_TaskDelHook
+                0x0000792c                App_TaskIdleHook
+                0x0000793a                App_TaskStatHook
+                0x00007948                App_TCBInitHook
+                0x00007962                App_TimeTickHook
+                0x00007970                LED_show
+ .text          0x000079ea      0x198 ./src/app/app_isr.o
+                0x000079ea                __vector_21
+                0x00007ab6                __vector_1
+ .text          0x00007b82      0x524 ./src/app/BSP/bsp.o
+                0x00007b82                BSP_Init
+                0x00007c36                BSP_Int0_Disable
+                0x00007c56                BSP_Int0_Enable
+                0x00007c94                SW_in
+                0x00007cd8                BSP_TickISR_Handler
+                0x00007cea                BSP_Int0ISR_Handler
+                0x00007d22                LED_On
+                0x00007e44                LED_Off
+                0x00007f68                LED_Toggle
+ .text          0x000080a6        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_mulsi3.o)
+ .text          0x000080a6        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_divmodhi4.o)
+ .text          0x000080a6        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_udivmodsi4.o)
+ .text          0x000080a6        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_exit.o)
+ .text          0x000080a6        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_clear_bss.o)
+ .text          0x000080a6        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_udivmodhi4.o)
+                0x000080a6                . = ALIGN (0x2)
  *(.text.*)
- .text.libgcc   0x00008108       0x3e /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_mulsi3.o)
-                0x00008108                __mulsi3
- .text.libgcc   0x00008146       0x26 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_divmodhi4.o)
-                0x00008146                __divmodhi4
-                0x00008146                _div
- .text.libgcc   0x0000816c       0x44 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_udivmodsi4.o)
-                0x0000816c                __udivmodsi4
- .text.libgcc   0x000081b0        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_exit.o)
- .text.libgcc   0x000081b0        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_clear_bss.o)
- .text.libgcc   0x000081b0       0x28 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_udivmodhi4.o)
-                0x000081b0                __udivmodhi4
- .text.avr-libc
-                0x000081d8       0x24 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(printf.o)
-                0x000081d8                printf
- .text.avr-libc
-                0x000081fc      0x400 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(vfprintf_std.o)
-                0x000081fc                vfprintf
- .text.avr-libc
-                0x000085fc       0x16 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(strnlen_P.o)
-                0x000085fc                strnlen_P
- .text.avr-libc
-                0x00008612       0x16 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(strnlen.o)
-                0x00008612                strnlen
- .text.avr-libc
-                0x00008628       0x58 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(fputc.o)
-                0x00008628                fputc
- .text.avr-libc
-                0x00008680       0xbc /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(ultoa_invert.o)
-                0x00008680                __ultoa_invert
-                0x0000873c                . = ALIGN (0x2)
+ .text.libgcc   0x000080a6       0x3e /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_mulsi3.o)
+                0x000080a6                __mulsi3
+ .text.libgcc   0x000080e4       0x26 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_divmodhi4.o)
+                0x000080e4                __divmodhi4
+                0x000080e4                _div
+ .text.libgcc   0x0000810a       0x44 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_udivmodsi4.o)
+                0x0000810a                __udivmodsi4
+ .text.libgcc   0x0000814e        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_exit.o)
+ .text.libgcc   0x0000814e        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_clear_bss.o)
+ .text.libgcc   0x0000814e       0x28 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_udivmodhi4.o)
+                0x0000814e                __udivmodhi4
+                0x00008176                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x0000873c        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_exit.o)
-                0x0000873c                exit
-                0x0000873c                _exit
+ .fini9         0x00008176        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_exit.o)
+                0x00008176                exit
+                0x00008176                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -528,11 +488,11 @@ LOAD /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x0000873c        0x4 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_exit.o)
+ .fini0         0x00008176        0x4 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_exit.o)
  *(.fini0)
-                0x00008740                _etext = .
+                0x0000817a                _etext = .
 
-.data           0x00800200      0x2fe load address 0x00008740
+.data           0x00800200      0x2d0 load address 0x0000817a
                 0x00800200                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800200        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/crtm2560.o
@@ -564,145 +524,114 @@ LOAD /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a
  .data          0x0080037e       0x22 ./src/uCOSII/os_tmr.o
  .data          0x008003a0      0x130 ./src/uCOSII/ucos_ii.o
  .data          0x008004d0        0x0 ./src/app/lego_interface/lego_interface.o
- .data          0x008004d0       0x2d ./src/app/app.o
- .data          0x008004fd        0x0 ./src/app/app_isr.o
- .data          0x008004fd        0x0 ./src/app/BSP/bsp.o
- .data          0x008004fd        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_mulsi3.o)
- .data          0x008004fd        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_divmodhi4.o)
- .data          0x008004fd        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_udivmodsi4.o)
- .data          0x008004fd        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_exit.o)
- .data          0x008004fd        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_clear_bss.o)
- .data          0x008004fd        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_udivmodhi4.o)
- .data          0x008004fd        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(printf.o)
- .data          0x008004fd        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(vfprintf_std.o)
- .data          0x008004fd        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(strnlen_P.o)
- .data          0x008004fd        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(strnlen.o)
- .data          0x008004fd        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(fputc.o)
- .data          0x008004fd        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(iob.o)
- .data          0x008004fd        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(ultoa_invert.o)
+ .data          0x008004d0        0x0 ./src/app/app.o
+ .data          0x008004d0        0x0 ./src/app/app_isr.o
+ .data          0x008004d0        0x0 ./src/app/BSP/bsp.o
+ .data          0x008004d0        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_mulsi3.o)
+ .data          0x008004d0        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_divmodhi4.o)
+ .data          0x008004d0        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_udivmodsi4.o)
+ .data          0x008004d0        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_exit.o)
+ .data          0x008004d0        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_clear_bss.o)
+ .data          0x008004d0        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_udivmodhi4.o)
  *(.data*)
  *(.rodata)
  *(.rodata*)
  *(.gnu.linkonce.d*)
-                0x008004fe                . = ALIGN (0x2)
- *fill*         0x008004fd        0x1 00
-                0x008004fe                _edata = .
-                0x008004fe                PROVIDE (__data_end, .)
+                0x008004d0                . = ALIGN (0x2)
+                0x008004d0                _edata = .
+                0x008004d0                PROVIDE (__data_end, .)
 
-.bss            0x008004fe      0xa0e
-                0x008004fe                PROVIDE (__bss_start, .)
+.bss            0x008004d0      0xa08
+                0x008004d0                PROVIDE (__bss_start, .)
  *(.bss)
- .bss           0x008004fe        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/crtm2560.o
- .bss           0x008004fe        0x0 ./src/uCOSII_port/os_cpu_a.o
- .bss           0x008004fe        0x2 ./src/uCOSII_port/os_cpu_c.o
- .bss           0x00800500        0x0 ./src/uCOSII_port/os_cpu_i.o
- .bss           0x00800500        0x0 ./src/uCOSII_port/os_dbg.o
- .bss           0x00800500        0x0 ./src/uCOSII/os_core.o
- .bss           0x00800500        0x0 ./src/uCOSII/os_dbg_r.o
- .bss           0x00800500        0x0 ./src/uCOSII/os_flag.o
- .bss           0x00800500        0x0 ./src/uCOSII/os_mbox.o
- .bss           0x00800500        0x0 ./src/uCOSII/os_mem.o
- .bss           0x00800500        0x0 ./src/uCOSII/os_mutex.o
- .bss           0x00800500        0x0 ./src/uCOSII/os_q.o
- .bss           0x00800500        0x0 ./src/uCOSII/os_sem.o
- .bss           0x00800500        0x0 ./src/uCOSII/os_task.o
- .bss           0x00800500        0x0 ./src/uCOSII/os_time.o
- .bss           0x00800500        0x0 ./src/uCOSII/os_tmr.o
- .bss           0x00800500        0x0 ./src/uCOSII/ucos_ii.o
- .bss           0x00800500       0x19 ./src/app/lego_interface/lego_interface.o
- .bss           0x00800519        0x0 ./src/app/app.o
- .bss           0x00800519        0x0 ./src/app/app_isr.o
- .bss           0x00800519        0x0 ./src/app/BSP/bsp.o
- .bss           0x00800519        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_mulsi3.o)
- .bss           0x00800519        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_divmodhi4.o)
- .bss           0x00800519        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_udivmodsi4.o)
- .bss           0x00800519        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_exit.o)
- .bss           0x00800519        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_clear_bss.o)
- .bss           0x00800519        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_udivmodhi4.o)
- .bss           0x00800519        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(printf.o)
- .bss           0x00800519        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(vfprintf_std.o)
- .bss           0x00800519        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(strnlen_P.o)
- .bss           0x00800519        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(strnlen.o)
- .bss           0x00800519        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(fputc.o)
- .bss           0x00800519        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(iob.o)
- .bss           0x00800519        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(ultoa_invert.o)
+ .bss           0x008004d0        0x0 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/crtm2560.o
+ .bss           0x008004d0        0x0 ./src/uCOSII_port/os_cpu_a.o
+ .bss           0x008004d0        0x2 ./src/uCOSII_port/os_cpu_c.o
+ .bss           0x008004d2        0x0 ./src/uCOSII_port/os_cpu_i.o
+ .bss           0x008004d2        0x0 ./src/uCOSII_port/os_dbg.o
+ .bss           0x008004d2        0x0 ./src/uCOSII/os_core.o
+ .bss           0x008004d2        0x0 ./src/uCOSII/os_dbg_r.o
+ .bss           0x008004d2        0x0 ./src/uCOSII/os_flag.o
+ .bss           0x008004d2        0x0 ./src/uCOSII/os_mbox.o
+ .bss           0x008004d2        0x0 ./src/uCOSII/os_mem.o
+ .bss           0x008004d2        0x0 ./src/uCOSII/os_mutex.o
+ .bss           0x008004d2        0x0 ./src/uCOSII/os_q.o
+ .bss           0x008004d2        0x0 ./src/uCOSII/os_sem.o
+ .bss           0x008004d2        0x0 ./src/uCOSII/os_task.o
+ .bss           0x008004d2        0x0 ./src/uCOSII/os_time.o
+ .bss           0x008004d2        0x0 ./src/uCOSII/os_tmr.o
+ .bss           0x008004d2        0x0 ./src/uCOSII/ucos_ii.o
+ .bss           0x008004d2       0x19 ./src/app/lego_interface/lego_interface.o
+ .bss           0x008004eb        0x0 ./src/app/app.o
+ .bss           0x008004eb        0x0 ./src/app/app_isr.o
+ .bss           0x008004eb        0x0 ./src/app/BSP/bsp.o
+ .bss           0x008004eb        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_mulsi3.o)
+ .bss           0x008004eb        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_divmodhi4.o)
+ .bss           0x008004eb        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_udivmodsi4.o)
+ .bss           0x008004eb        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_exit.o)
+ .bss           0x008004eb        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_clear_bss.o)
+ .bss           0x008004eb        0x0 /usr/lib/gcc/avr/4.4.3/avr6/libgcc.a(_udivmodhi4.o)
  *(.bss*)
  *(COMMON)
- COMMON         0x00800519        0x2 ./src/uCOSII_port/os_cpu_c.o
-                0x00800519                OSTaskStkSize
- COMMON         0x0080051b      0x719 ./src/uCOSII/os_core.o
-                0x0080051b                OSTmrFreeList
-                0x0080051d                OSTmrWheelTbl
-                0x0080053d                OSLockNesting
-                0x0080053e                OSTmrSemSignal
-                0x00800540                OSRunning
-                0x00800541                OSIdleCtr
-                0x00800545                OSTmrUsed
-                0x00800547                OSPrioHighRdy
-                0x00800548                OSTmrTbl
-                0x008007b8                OSPrioCur
-                0x008007b9                OSTCBList
-                0x008007bb                OSCtxSwCtr
-                0x008007bf                OSTmrFree
-                0x008007c1                OSTCBFreeList
-                0x008007c3                OSTaskCtr
-                0x008007c4                OSTCBHighRdy
-                0x008007c6                OSRdyGrp
-                0x008007c7                OSRdyTbl
-                0x008007c9                OSTmrTaskStk
-                0x00800878                OSEventFreeList
-                0x0080087a                OSIntNesting
-                0x0080087b                OSTCBCur
-                0x0080087d                OSTmrTime
-                0x00800881                OSTime
-                0x00800885                OSTmrSem
-                0x00800887                OSTaskIdleStk
-                0x00800936                OSEventTbl
-                0x00800a26                OSTCBTbl
-                0x00800c1e                OSTCBPrioTbl
- COMMON         0x00800c34      0x2d2 ./src/app/app.o
-                0x00800c34                AppTask1Stk
-                0x00800d24                AppTaskStartStk
-                0x00800e14                a_sem
-                0x00800e16                AppTask2Stk
- COMMON         0x00800f06        0x6 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(iob.o)
-                0x00800f06                __iob
-                0x00800f0c                PROVIDE (__bss_end, .)
-                0x00008740                __data_load_start = LOADADDR (.data)
-                0x00008a3e                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x008004eb        0x2 ./src/uCOSII_port/os_cpu_c.o
+                0x008004eb                OSTaskStkSize
+ COMMON         0x008004ed      0x719 ./src/uCOSII/os_core.o
+                0x008004ed                OSTmrFreeList
+                0x008004ef                OSTmrWheelTbl
+                0x0080050f                OSLockNesting
+                0x00800510                OSTmrSemSignal
+                0x00800512                OSRunning
+                0x00800513                OSIdleCtr
+                0x00800517                OSTmrUsed
+                0x00800519                OSPrioHighRdy
+                0x0080051a                OSTmrTbl
+                0x0080078a                OSPrioCur
+                0x0080078b                OSTCBList
+                0x0080078d                OSCtxSwCtr
+                0x00800791                OSTmrFree
+                0x00800793                OSTCBFreeList
+                0x00800795                OSTaskCtr
+                0x00800796                OSTCBHighRdy
+                0x00800798                OSRdyGrp
+                0x00800799                OSRdyTbl
+                0x0080079b                OSTmrTaskStk
+                0x0080084a                OSEventFreeList
+                0x0080084c                OSIntNesting
+                0x0080084d                OSTCBCur
+                0x0080084f                OSTmrTime
+                0x00800853                OSTime
+                0x00800857                OSTmrSem
+                0x00800859                OSTaskIdleStk
+                0x00800908                OSEventTbl
+                0x008009f8                OSTCBTbl
+                0x00800bf0                OSTCBPrioTbl
+ COMMON         0x00800c06      0x2d2 ./src/app/app.o
+                0x00800c06                AppTask1Stk
+                0x00800cf6                AppTaskStartStk
+                0x00800de6                a_sem
+                0x00800de8                AppTask2Stk
+                0x00800ed8                PROVIDE (__bss_end, .)
+                0x0000817a                __data_load_start = LOADADDR (.data)
+                0x0000844a                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800f0c        0x0
-                0x00800f0c                PROVIDE (__noinit_start, .)
+.noinit         0x00800ed8        0x0
+                0x00800ed8                PROVIDE (__noinit_start, .)
  *(.noinit*)
-                0x00800f0c                PROVIDE (__noinit_end, .)
-                0x00800f0c                _end = .
-                0x00800f0c                PROVIDE (__heap_start, .)
+                0x00800ed8                PROVIDE (__noinit_end, .)
+                0x00800ed8                _end = .
+                0x00800ed8                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
  *(.eeprom*)
                 0x00810000                __eeprom_end = .
 
-.stab           0x00000000     0x1d94
+.stab           0x00000000      0x768
  *(.stab)
  .stab          0x00000000      0x768 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/crtm2560.o
- .stab          0x00000768      0x360 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(printf.o)
-                                0x36c (size before relaxing)
- .stab          0x00000ac8      0xa14 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(vfprintf_std.o)
-                                0xbf4 (size before relaxing)
- .stab          0x000014dc       0x9c /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(strnlen_P.o)
-                                 0xa8 (size before relaxing)
- .stab          0x00001578       0x9c /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(strnlen.o)
-                                 0xa8 (size before relaxing)
- .stab          0x00001614      0x1d4 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(fputc.o)
-                                0x3b4 (size before relaxing)
- .stab          0x000017e8      0x12c /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(iob.o)
-                                0x30c (size before relaxing)
- .stab          0x00001914      0x480 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/libc.a(ultoa_invert.o)
-                                0x48c (size before relaxing)
 
-.stabstr        0x00000000      0xceb
+.stabstr        0x00000000       0x54
  *(.stabstr)
- .stabstr       0x00000000      0xceb /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/crtm2560.o
+ .stabstr       0x00000000       0x54 /usr/lib/gcc/avr/4.4.3/../../../../avr/lib/avr6/crtm2560.o
 
 .stab.excl
  *(.stab.excl)
