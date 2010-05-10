@@ -180,7 +180,7 @@ LOAD /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x4a2a
+.text           0x00000000     0x4a32
  *(.vectors)
  .vectors       0x00000000       0xe4 /usr/lib/gcc/avr/4.3.4/../../../avr/lib/avr6/crtm2560.o
                 0x00000000                __vectors
@@ -426,7 +426,7 @@ LOAD /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a
                 0x000041b2                __vector_29
                 0x0000422c                brake_motor
                 0x00004298                motor_speed
- .text          0x00004492      0x18a ./src/app/app.o
+ .text          0x00004492      0x192 ./src/app/app.o
                 0x00004492                App_TaskSwHook
                 0x000044a2                App_TaskCreateHook
                 0x000044a4                App_TaskDelHook
@@ -435,43 +435,43 @@ LOAD /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a
                 0x000044aa                App_TCBInitHook
                 0x000044ac                App_TimeTickHook
                 0x000044ae                main
- .text          0x0000461c      0x198 ./src/app/app_isr.o
-                0x0000461c                __vector_21
-                0x000046e8                __vector_1
- .text          0x000047b4      0x1a2 ./src/app/BSP/bsp.o
-                0x000047b4                BSP_Int0_Disable
-                0x000047b8                BSP_Int0_Enable
-                0x000047c0                SW_in
-                0x000047d8                LED_Toggle
-                0x0000484a                LED_Off
-                0x000048ae                BSP_Init
-                0x000048e4                LED_On
-                0x00004942                BSP_Int0ISR_Handler
-                0x00004950                BSP_TickISR_Handler
- .text          0x00004956        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_mulsi3.o)
- .text          0x00004956        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_divmodhi4.o)
- .text          0x00004956        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_udivmodsi4.o)
- .text          0x00004956        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_exit.o)
- .text          0x00004956        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_clear_bss.o)
- .text          0x00004956        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_udivmodhi4.o)
-                0x00004956                . = ALIGN (0x2)
+ .text          0x00004624      0x198 ./src/app/app_isr.o
+                0x00004624                __vector_21
+                0x000046f0                __vector_1
+ .text          0x000047bc      0x1a2 ./src/app/BSP/bsp.o
+                0x000047bc                BSP_Int0_Disable
+                0x000047c0                BSP_Int0_Enable
+                0x000047c8                SW_in
+                0x000047e0                LED_Toggle
+                0x00004852                LED_Off
+                0x000048b6                BSP_Init
+                0x000048ec                LED_On
+                0x0000494a                BSP_Int0ISR_Handler
+                0x00004958                BSP_TickISR_Handler
+ .text          0x0000495e        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_mulsi3.o)
+ .text          0x0000495e        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_divmodhi4.o)
+ .text          0x0000495e        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_udivmodsi4.o)
+ .text          0x0000495e        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_exit.o)
+ .text          0x0000495e        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_clear_bss.o)
+ .text          0x0000495e        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_udivmodhi4.o)
+                0x0000495e                . = ALIGN (0x2)
  *(.text.*)
- .text.libgcc   0x00004956       0x3e /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_mulsi3.o)
-                0x00004956                __mulsi3
- .text.libgcc   0x00004994       0x26 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_divmodhi4.o)
-                0x00004994                __divmodhi4
-                0x00004994                _div
- .text.libgcc   0x000049ba       0x44 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_udivmodsi4.o)
-                0x000049ba                __udivmodsi4
- .text.libgcc   0x000049fe        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_exit.o)
- .text.libgcc   0x000049fe        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_clear_bss.o)
- .text.libgcc   0x000049fe       0x28 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_udivmodhi4.o)
-                0x000049fe                __udivmodhi4
-                0x00004a26                . = ALIGN (0x2)
+ .text.libgcc   0x0000495e       0x3e /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_mulsi3.o)
+                0x0000495e                __mulsi3
+ .text.libgcc   0x0000499c       0x26 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_divmodhi4.o)
+                0x0000499c                __divmodhi4
+                0x0000499c                _div
+ .text.libgcc   0x000049c2       0x44 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_udivmodsi4.o)
+                0x000049c2                __udivmodsi4
+ .text.libgcc   0x00004a06        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_exit.o)
+ .text.libgcc   0x00004a06        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_clear_bss.o)
+ .text.libgcc   0x00004a06       0x28 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_udivmodhi4.o)
+                0x00004a06                __udivmodhi4
+                0x00004a2e                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00004a26        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_exit.o)
-                0x00004a26                exit
-                0x00004a26                _exit
+ .fini9         0x00004a2e        0x0 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_exit.o)
+                0x00004a2e                exit
+                0x00004a2e                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -490,11 +490,11 @@ LOAD /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00004a26        0x4 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_exit.o)
+ .fini0         0x00004a2e        0x4 /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a(_exit.o)
  *(.fini0)
-                0x00004a2a                _etext = .
+                0x00004a32                _etext = .
 
-.data           0x00800200      0x2d0 load address 0x00004a2a
+.data           0x00800200      0x2d0 load address 0x00004a32
                 0x00800200                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800200        0x0 /usr/lib/gcc/avr/4.3.4/../../../avr/lib/avr6/crtm2560.o
@@ -613,8 +613,8 @@ LOAD /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a
                 0x00800de6                a_sem
                 0x00800de8                AppTask2Stk
                 0x00800ed8                PROVIDE (__bss_end, .)
-                0x00004a2a                __data_load_start = LOADADDR (.data)
-                0x00004cfa                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00004a32                __data_load_start = LOADADDR (.data)
+                0x00004d02                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x00800ed8        0x0
                 0x00800ed8                PROVIDE (__noinit_start, .)

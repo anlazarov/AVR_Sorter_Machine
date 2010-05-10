@@ -105,23 +105,27 @@ int  main (void)
 
 static void  Task1 (void *p_arg)
 {
-    INT8U  i;
-    INT8U err;
 
     (void)p_arg;                                 /* Prevent compiler warnings                          */
 
     BSP_Init();                                  /* Initialize the BSP                                 */
+    init_lego_interface();						 /* Initalize LEGO_interface						   */
 
     AppTaskCreate();
 
     while (1) {                                  /* Task body, always written as an infinite loop.     */
 
-    	INT8U motor_no = 1;
+    	/* INT8U motor_no = 1;
     	INT8S speed = 100;
 
-    	init_lego_interface();
 
-    	motor_speed(motor_no, speed);
+
+    	motor_speed(motor_no, speed); */
+
+    	INT16S light;
+    	light = light_sensor(0);
+    	 LED_Toggle(5);
+    	        OSTimeDly(OS_TICKS_PER_SEC / 5);
     }
 }
 

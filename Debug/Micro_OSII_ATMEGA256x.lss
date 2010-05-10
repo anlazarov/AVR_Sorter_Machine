@@ -17,15 +17,15 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   6 .debug_pubnames 0000143d  00000000  00000000  00008968  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_info   000062f5  00000000  00000000  00009da5  2**0
+  7 .debug_info   000062cd  00000000  00000000  00009da5  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_abbrev 000011ad  00000000  00000000  0001009a  2**0
+  8 .debug_abbrev 0000119e  00000000  00000000  00010072  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_line   00005ba8  00000000  00000000  00011247  2**0
+  9 .debug_line   00005ba0  00000000  00000000  00011210  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_frame  00000b80  00000000  00000000  00016df0  2**2
+ 10 .debug_frame  00000b80  00000000  00000000  00016db0  2**2
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_str    00001033  00000000  00000000  00017970  2**0
+ 11 .debug_str    0000102c  00000000  00000000  00017930  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -18917,150 +18917,142 @@ int  main (void)
     7286:	cf 93       	push	r28
     7288:	cd b7       	in	r28, 0x3d	; 61
     728a:	de b7       	in	r29, 0x3e	; 62
-#if (OS_TASK_NAME_SIZE > 14) && (OS_TASK_STAT_EN > 0)
-    INT8U  err;
-#endif
 
-    DDRB = 0x0F;  // TODO IHA Remove after test
-    728c:	e4 e2       	ldi	r30, 0x24	; 36
-    728e:	f0 e0       	ldi	r31, 0x00	; 0
-    7290:	8f e0       	ldi	r24, 0x0F	; 15
-    7292:	80 83       	st	Z, r24
 
     /*---- Any initialization code prior to calling OSInit() goes HERE -------------------------------------*/
 
                                                      /* IMPORTANT: MUST be setup before calling 'OSInit()'  */
     OSTaskStkSize     = OS_TASK_IDLE_STK_SIZE;       /* Setup the default stack size                        */
-    7294:	8f ea       	ldi	r24, 0xAF	; 175
-    7296:	90 e0       	ldi	r25, 0x00	; 0
-    7298:	90 93 ec 04 	sts	0x04EC, r25
-    729c:	80 93 eb 04 	sts	0x04EB, r24
+    728c:	8f ea       	ldi	r24, 0xAF	; 175
+    728e:	90 e0       	ldi	r25, 0x00	; 0
+    7290:	90 93 ec 04 	sts	0x04EC, r25
+    7294:	80 93 eb 04 	sts	0x04EB, r24
 //    OSTaskStkSizeHard = OS_TASK_STK_SIZE_HARD;       /* Setup the default hardware stack size               */
 
     OSInit();                                        /* Initialize "uC/OS-II, The Real-Time Kernel"         */
-    72a0:	0e 94 22 05 	call	0xa44	; 0xa44 <OSInit>
+    7298:	0e 94 22 05 	call	0xa44	; 0xa44 <OSInit>
 
     /*---- Any initialization code before starting multitasking --------------------------------------------*/
     OSTaskStkSize     = OS_TASK_START_STK_SIZE;
-    72a4:	80 ef       	ldi	r24, 0xF0	; 240
-    72a6:	90 e0       	ldi	r25, 0x00	; 0
-    72a8:	90 93 ec 04 	sts	0x04EC, r25
-    72ac:	80 93 eb 04 	sts	0x04EB, r24
+    729c:	80 ef       	ldi	r24, 0xF0	; 240
+    729e:	90 e0       	ldi	r25, 0x00	; 0
+    72a0:	90 93 ec 04 	sts	0x04EC, r25
+    72a4:	80 93 eb 04 	sts	0x04EB, r24
 
-    OSTaskCreateExt(AppTaskStart,
-    72b0:	80 91 eb 04 	lds	r24, 0x04EB
-    72b4:	90 91 ec 04 	lds	r25, 0x04EC
-    72b8:	01 97       	sbiw	r24, 0x01	; 1
-    72ba:	ac 01       	movw	r20, r24
-    72bc:	4a 50       	subi	r20, 0x0A	; 10
-    72be:	53 4f       	sbci	r21, 0xF3	; 243
-    72c0:	80 91 eb 04 	lds	r24, 0x04EB
-    72c4:	90 91 ec 04 	lds	r25, 0x04EC
-    72c8:	5c 01       	movw	r10, r24
-    72ca:	cc 24       	eor	r12, r12
-    72cc:	dd 24       	eor	r13, r13
-    72ce:	0f 92       	push	r0
-    72d0:	0f 92       	push	r0
-    72d2:	ed b7       	in	r30, 0x3d	; 61
-    72d4:	fe b7       	in	r31, 0x3e	; 62
-    72d6:	31 96       	adiw	r30, 0x01	; 1
-    72d8:	2a e9       	ldi	r18, 0x9A	; 154
-    72da:	39 e3       	ldi	r19, 0x39	; 57
-    72dc:	a6 ef       	ldi	r26, 0xF6	; 246
-    72de:	bc e0       	ldi	r27, 0x0C	; 12
-    72e0:	83 e0       	ldi	r24, 0x03	; 3
-    72e2:	90 e0       	ldi	r25, 0x00	; 0
-    72e4:	91 83       	std	Z+1, r25	; 0x01
-    72e6:	80 83       	st	Z, r24
-    72e8:	c9 01       	movw	r24, r18
-    72ea:	60 e0       	ldi	r22, 0x00	; 0
-    72ec:	70 e0       	ldi	r23, 0x00	; 0
-    72ee:	20 e0       	ldi	r18, 0x00	; 0
-    72f0:	00 e0       	ldi	r16, 0x00	; 0
-    72f2:	10 e0       	ldi	r17, 0x00	; 0
-    72f4:	7d 01       	movw	r14, r26
-    72f6:	88 24       	eor	r8, r8
-    72f8:	99 24       	eor	r9, r9
-    72fa:	0e 94 f1 10 	call	0x21e2	; 0x21e2 <OSTaskCreateExt>
-    72fe:	0f 90       	pop	r0
-    7300:	0f 90       	pop	r0
+    OSTaskCreateExt(Task1,
+    72a8:	80 91 eb 04 	lds	r24, 0x04EB
+    72ac:	90 91 ec 04 	lds	r25, 0x04EC
+    72b0:	01 97       	sbiw	r24, 0x01	; 1
+    72b2:	ac 01       	movw	r20, r24
+    72b4:	4a 50       	subi	r20, 0x0A	; 10
+    72b6:	53 4f       	sbci	r21, 0xF3	; 243
+    72b8:	80 91 eb 04 	lds	r24, 0x04EB
+    72bc:	90 91 ec 04 	lds	r25, 0x04EC
+    72c0:	5c 01       	movw	r10, r24
+    72c2:	cc 24       	eor	r12, r12
+    72c4:	dd 24       	eor	r13, r13
+    72c6:	0f 92       	push	r0
+    72c8:	0f 92       	push	r0
+    72ca:	ed b7       	in	r30, 0x3d	; 61
+    72cc:	fe b7       	in	r31, 0x3e	; 62
+    72ce:	31 96       	adiw	r30, 0x01	; 1
+    72d0:	26 e9       	ldi	r18, 0x96	; 150
+    72d2:	39 e3       	ldi	r19, 0x39	; 57
+    72d4:	a6 ef       	ldi	r26, 0xF6	; 246
+    72d6:	bc e0       	ldi	r27, 0x0C	; 12
+    72d8:	83 e0       	ldi	r24, 0x03	; 3
+    72da:	90 e0       	ldi	r25, 0x00	; 0
+    72dc:	91 83       	std	Z+1, r25	; 0x01
+    72de:	80 83       	st	Z, r24
+    72e0:	c9 01       	movw	r24, r18
+    72e2:	60 e0       	ldi	r22, 0x00	; 0
+    72e4:	70 e0       	ldi	r23, 0x00	; 0
+    72e6:	20 e0       	ldi	r18, 0x00	; 0
+    72e8:	00 e0       	ldi	r16, 0x00	; 0
+    72ea:	10 e0       	ldi	r17, 0x00	; 0
+    72ec:	7d 01       	movw	r14, r26
+    72ee:	88 24       	eor	r8, r8
+    72f0:	99 24       	eor	r9, r9
+    72f2:	0e 94 f1 10 	call	0x21e2	; 0x21e2 <OSTaskCreateExt>
+    72f6:	0f 90       	pop	r0
+    72f8:	0f 90       	pop	r0
 
 #if (OS_TASK_NAME_SIZE > 14) && (OS_TASK_STAT_EN > 0)
     OSTaskNameSet(OS_TASK_START_PRIO, "Start Task", &err);
 #endif
 
     a_sem = OSSemCreate(0);   // create a semaphore
-    7302:	80 e0       	ldi	r24, 0x00	; 0
-    7304:	90 e0       	ldi	r25, 0x00	; 0
-    7306:	0e 94 33 0d 	call	0x1a66	; 0x1a66 <OSSemCreate>
-    730a:	90 93 e7 0d 	sts	0x0DE7, r25
-    730e:	80 93 e6 0d 	sts	0x0DE6, r24
+    72fa:	80 e0       	ldi	r24, 0x00	; 0
+    72fc:	90 e0       	ldi	r25, 0x00	; 0
+    72fe:	0e 94 33 0d 	call	0x1a66	; 0x1a66 <OSSemCreate>
+    7302:	90 93 e7 0d 	sts	0x0DE7, r25
+    7306:	80 93 e6 0d 	sts	0x0DE6, r24
 
     /*---- Create any other task you want before we start multitasking -------------------------------------*/
 
     OSStart();                                       /* Start multitasking (i.e. give control to uC/OS-II)  */
-    7312:	0e 94 05 06 	call	0xc0a	; 0xc0a <OSStart>
+    730a:	0e 94 05 06 	call	0xc0a	; 0xc0a <OSStart>
     return 0;
-    7316:	80 e0       	ldi	r24, 0x00	; 0
-    7318:	90 e0       	ldi	r25, 0x00	; 0
+    730e:	80 e0       	ldi	r24, 0x00	; 0
+    7310:	90 e0       	ldi	r25, 0x00	; 0
 }
-    731a:	cf 91       	pop	r28
-    731c:	df 91       	pop	r29
-    731e:	1f 91       	pop	r17
-    7320:	0f 91       	pop	r16
-    7322:	ff 90       	pop	r15
-    7324:	ef 90       	pop	r14
-    7326:	df 90       	pop	r13
-    7328:	cf 90       	pop	r12
-    732a:	bf 90       	pop	r11
-    732c:	af 90       	pop	r10
-    732e:	9f 90       	pop	r9
-    7330:	8f 90       	pop	r8
-    7332:	08 95       	ret
+    7312:	cf 91       	pop	r28
+    7314:	df 91       	pop	r29
+    7316:	1f 91       	pop	r17
+    7318:	0f 91       	pop	r16
+    731a:	ff 90       	pop	r15
+    731c:	ef 90       	pop	r14
+    731e:	df 90       	pop	r13
+    7320:	cf 90       	pop	r12
+    7322:	bf 90       	pop	r11
+    7324:	af 90       	pop	r10
+    7326:	9f 90       	pop	r9
+    7328:	8f 90       	pop	r8
+    732a:	08 95       	ret
 
-00007334 <AppTaskStart>:
+0000732c <Task1>:
 *                  used.  The compiler should not generate any code for this statement.
 **************************************************************************************************************
 */
 
-static void  AppTaskStart (void *p_arg)
+static void  Task1 (void *p_arg)
 {
-    7334:	df 93       	push	r29
-    7336:	cf 93       	push	r28
-    7338:	00 d0       	rcall	.+0      	; 0x733a <AppTaskStart+0x6>
-    733a:	00 d0       	rcall	.+0      	; 0x733c <AppTaskStart+0x8>
-    733c:	cd b7       	in	r28, 0x3d	; 61
-    733e:	de b7       	in	r29, 0x3e	; 62
-    7340:	9e 83       	std	Y+6, r25	; 0x06
-    7342:	8d 83       	std	Y+5, r24	; 0x05
-    INT8U  i;
-    INT8U err;
+    732c:	df 93       	push	r29
+    732e:	cf 93       	push	r28
+    7330:	00 d0       	rcall	.+0      	; 0x7332 <Task1+0x6>
+    7332:	0f 92       	push	r0
+    7334:	cd b7       	in	r28, 0x3d	; 61
+    7336:	de b7       	in	r29, 0x3e	; 62
+    7338:	9c 83       	std	Y+4, r25	; 0x04
+    733a:	8b 83       	std	Y+3, r24	; 0x03
 
     (void)p_arg;                                 /* Prevent compiler warnings                          */
 
     BSP_Init();                                  /* Initialize the BSP                                 */
-    7344:	0e 94 62 3b 	call	0x76c4	; 0x76c4 <BSP_Init>
+    733c:	0e 94 62 3b 	call	0x76c4	; 0x76c4 <BSP_Init>
+    init_lego_interface();						 /* Initalize LEGO_interface						   */
+    7340:	0e 94 16 35 	call	0x6a2c	; 0x6a2c <init_lego_interface>
 
     AppTaskCreate();
-    7348:	0e 94 b1 39 	call	0x7362	; 0x7362 <AppTaskCreate>
+    7344:	0e 94 b1 39 	call	0x7362	; 0x7362 <AppTaskCreate>
 
-    while (1) {                                  /* Task body, always written as an infinite loop.     */
 
-    	INT8U motor_no = 1;
-    734c:	81 e0       	ldi	r24, 0x01	; 1
-    734e:	8a 83       	std	Y+2, r24	; 0x02
-    	INT8S speed = 100;
-    7350:	84 e6       	ldi	r24, 0x64	; 100
-    7352:	89 83       	std	Y+1, r24	; 0x01
+    	motor_speed(motor_no, speed); */
 
-    	init_lego_interface();
-    7354:	0e 94 16 35 	call	0x6a2c	; 0x6a2c <init_lego_interface>
-
-    	motor_speed(motor_no, speed);
-    7358:	8a 81       	ldd	r24, Y+2	; 0x02
-    735a:	69 81       	ldd	r22, Y+1	; 0x01
-    735c:	0e 94 75 36 	call	0x6cea	; 0x6cea <motor_speed>
-    7360:	f5 cf       	rjmp	.-22     	; 0x734c <AppTaskStart+0x18>
+    	INT16S light;
+    	light = light_sensor(0);
+    7348:	80 e0       	ldi	r24, 0x00	; 0
+    734a:	0e 94 53 36 	call	0x6ca6	; 0x6ca6 <light_sensor>
+    734e:	9a 83       	std	Y+2, r25	; 0x02
+    7350:	89 83       	std	Y+1, r24	; 0x01
+    	 LED_Toggle(5);
+    7352:	85 e0       	ldi	r24, 0x05	; 5
+    7354:	0e 94 53 3d 	call	0x7aa6	; 0x7aa6 <LED_Toggle>
+    	        OSTimeDly(OS_TICKS_PER_SEC / 5);
+    7358:	84 e1       	ldi	r24, 0x14	; 20
+    735a:	90 e0       	ldi	r25, 0x00	; 0
+    735c:	0e 94 db 13 	call	0x27b6	; 0x27b6 <OSTimeDly>
+    7360:	f3 cf       	rjmp	.-26     	; 0x7348 <Task1+0x1c>
 
 00007362 <AppTaskCreate>:
 *                  used.  The compiler should not generate any code for this statement.

@@ -729,7 +729,7 @@ LOAD /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a
  .debug_pubnames
                 0x00001395       0xa8 ./src/app/BSP/bsp.o
 
-.debug_info     0x00000000     0x62f5
+.debug_info     0x00000000     0x62cd
  *(.debug_info)
  .debug_info    0x00000000      0x452 ./src/uCOSII_port/os_cpu_c.o
  .debug_info    0x00000452      0x77b ./src/uCOSII_port/os_dbg.o
@@ -746,11 +746,11 @@ LOAD /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a
  .debug_info    0x000035e9      0x982 ./src/uCOSII/os_tmr.o
  .debug_info    0x00003f6b     0x19b5 ./src/uCOSII/ucos_ii.o
  .debug_info    0x00005920      0x244 ./src/app/lego_interface/lego_interface.o
- .debug_info    0x00005b64      0x4d5 ./src/app/app.o
- .debug_info    0x00006039      0x2bc ./src/app/BSP/bsp.o
+ .debug_info    0x00005b64      0x4ad ./src/app/app.o
+ .debug_info    0x00006011      0x2bc ./src/app/BSP/bsp.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev   0x00000000     0x11ad
+.debug_abbrev   0x00000000     0x119e
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x16a ./src/uCOSII_port/os_cpu_c.o
  .debug_abbrev  0x0000016a       0xe3 ./src/uCOSII_port/os_dbg.o
@@ -767,10 +767,10 @@ LOAD /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a
  .debug_abbrev  0x00000a2e      0x1ae ./src/uCOSII/os_tmr.o
  .debug_abbrev  0x00000bdc      0x210 ./src/uCOSII/ucos_ii.o
  .debug_abbrev  0x00000dec      0x108 ./src/app/lego_interface/lego_interface.o
- .debug_abbrev  0x00000ef4      0x161 ./src/app/app.o
- .debug_abbrev  0x00001055      0x158 ./src/app/BSP/bsp.o
+ .debug_abbrev  0x00000ef4      0x152 ./src/app/app.o
+ .debug_abbrev  0x00001046      0x158 ./src/app/BSP/bsp.o
 
-.debug_line     0x00000000     0x5ba8
+.debug_line     0x00000000     0x5ba0
  *(.debug_line)
  .debug_line    0x00000000      0x378 ./src/uCOSII_port/os_cpu_c.o
  .debug_line    0x00000378      0x296 ./src/uCOSII_port/os_dbg.o
@@ -787,8 +787,8 @@ LOAD /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a
  .debug_line    0x0000247d      0xaab ./src/uCOSII/os_tmr.o
  .debug_line    0x00002f28     0x20b4 ./src/uCOSII/ucos_ii.o
  .debug_line    0x00004fdc      0x518 ./src/app/lego_interface/lego_interface.o
- .debug_line    0x000054f4      0x273 ./src/app/app.o
- .debug_line    0x00005767      0x441 ./src/app/BSP/bsp.o
+ .debug_line    0x000054f4      0x26b ./src/app/app.o
+ .debug_line    0x0000575f      0x441 ./src/app/BSP/bsp.o
 
 .debug_frame    0x00000000      0xb80
  *(.debug_frame)
@@ -805,7 +805,7 @@ LOAD /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a
  .debug_frame   0x000009e0       0xd0 ./src/app/app.o
  .debug_frame   0x00000ab0       0xd0 ./src/app/BSP/bsp.o
 
-.debug_str      0x00000000     0x1033
+.debug_str      0x00000000     0x102c
  *(.debug_str)
  .debug_str     0x00000000      0x2f6 ./src/uCOSII_port/os_cpu_c.o
                                 0x32a (size before relaxing)
@@ -837,9 +837,9 @@ LOAD /usr/lib/gcc/avr/4.3.4/avr6/libgcc.a
                                 0x91c (size before relaxing)
  .debug_str     0x00000d9e       0xee ./src/app/lego_interface/lego_interface.o
                                 0x1d6 (size before relaxing)
- .debug_str     0x00000e8c       0xe1 ./src/app/app.o
-                                0x36e (size before relaxing)
- .debug_str     0x00000f6d       0xc6 ./src/app/BSP/bsp.o
+ .debug_str     0x00000e8c       0xda ./src/app/app.o
+                                0x35f (size before relaxing)
+ .debug_str     0x00000f66       0xc6 ./src/app/BSP/bsp.o
                                 0x204 (size before relaxing)
 
 .debug_loc
