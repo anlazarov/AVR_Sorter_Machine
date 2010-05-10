@@ -52,7 +52,7 @@ int  main (void)
     INT8U  err;
 #endif
 
-	//git test
+	//git test 2 it is me: alex :D
   //  DDRB = 0x0F;  // TODO IHA Remove after test
 
 
