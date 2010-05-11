@@ -124,7 +124,7 @@ static void  Task1 (void *p_arg)
     	light_value = light_sensor(0);
     	light_value = light_value >> 2;
     	LED_Show(light_value);
-    	OSTimeDly(OS_TICKS_PER_SEC / 10);
+    	OSTimeDly(OS_TICKS_PER_SEC / 5);
     }
 }
 
