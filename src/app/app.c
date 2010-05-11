@@ -34,7 +34,7 @@ static void  Task1(void *p_arg);
 static void  AppTaskCreate(void);
 static void  AppTask1(void *p_arg);
 static void  AppTask2(void *p_arg);
-void LED_show(unsigned char n);
+void LED_show(INT16U n);
 
 /*
 **************************************************************************************************************
@@ -120,10 +120,11 @@ static void  Task1 (void *p_arg)
 
     	motor_speed(motor_no, speed); */
 
-    	INT16S light;
-    	light = light_sensor(0);
-    	LED_Toggle(5);
-    	OSTimeDly(OS_TICKS_PER_SEC / 5);
+    	INT16U light_value;
+    	light_value = light_sensor(0);
+    	light_value = light_value >> 2;
+    	LED_Show(light_value);
+    	OSTimeDly(OS_TICKS_PER_SEC / 10);
     }
 }
 
@@ -191,11 +192,11 @@ static void  AppTask1(void *p_arg)
 {
     (void)p_arg;
 
-    int i = 0;
+   // int i = 0;
     while (1) {
         //LED_Toggle(7);
-    	LED_show(++i);
-        OSTimeDly(OS_TICKS_PER_SEC / 5);
+    	//LED_show(++i);
+       // OSTimeDly(OS_TICKS_PER_SEC / 5);
         //i = (i > 254) ? 0 : i;
     }
 }
@@ -211,8 +212,8 @@ static void  AppTask2(void *p_arg)
     (void)p_arg;
 
     while (1) {
-        LED_Toggle(8);
-        OSTimeDly(OS_TICKS_PER_SEC / 5);
+      //  LED_Toggle(8);
+      //  OSTimeDly(OS_TICKS_PER_SEC / 5);
     }
 }
 
@@ -247,15 +248,16 @@ void App_TimeTickHook(void){}
  * Custom functions
 */
 
-void LED_Show(unsigned char n){
+void LED_Show(INT16U n){
 	/* Turn off all LEDs before switching them */
-	for(int i = 0; i < 8; i++){
+	int i;
+	for(i = 0; i < 8; i++){
 		LED_Off(i);
 		//printf("%s%d\n", "Switching off LED #", i);
 	}
 
 	/* For all bits in datatype */
-	for(int i = 0; i < sizeof(unsigned char)*8; i++){
+	for(i = 0; i < 8; i++){
 		if(n & (1 << i))						/* Test if i^th bit is set in "n" */
 			LED_On(i);
 			//printf("%s%d\n", "Switching on LED #", i); /* if yes, turn on the i^th LED */
