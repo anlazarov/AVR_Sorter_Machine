@@ -30,11 +30,10 @@ OS_EVENT *a_sem; // Pointer to a semaphore
  **************************************************************************************************************
  */
 
-static void Task1(void *p_arg);
+static void InitTask(void *p_arg);
 static void AppTaskCreate(void);
 static void AppTask1(void *p_arg);
 static void AppTask2(void *p_arg);
-static void MotorTask(INT8U motor_no, INT8S motor_speed_value, void *p_arg);
 void LED_show(INT16U n);
 
 /*
@@ -65,7 +64,7 @@ int main(void) {
 	/*---- Any initialization code before starting multitasking --------------------------------------------*/
 	OSTaskStkSize = OS_TASK_START_STK_SIZE;
 
-	OSTaskCreateExt(Task1, (void *) 0,
+	OSTaskCreateExt(InitTask, (void *) 0,
 			(OS_STK *) &AppTaskStartStk[OSTaskStkSize - 1], OS_TASK_START_PRIO,
 			OS_TASK_START_PRIO, (OS_STK *) &AppTaskStartStk[0], OSTaskStkSize,
 			(void *) 0, OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR);
@@ -74,7 +73,7 @@ int main(void) {
 	OSTaskNameSet(OS_TASK_START_PRIO, "Start Task", &err);
 #endif
 
-	a_sem = OSSemCreate(0); // create a semaphore
+	a_sem = OSSemCreate(4); // create a semaphore
 
 	/*---- Create any other task you want before we start multitasking -------------------------------------*/
 
@@ -96,7 +95,7 @@ int main(void) {
  **************************************************************************************************************
  */
 
-static void Task1(void *p_arg) {
+static void InitTask(void *p_arg) {
 
 	(void) p_arg; 								/* Prevent compiler warnings                          */
 	BSP_Init(); 								/* Initialize the BSP                                 */
@@ -106,15 +105,22 @@ static void Task1(void *p_arg) {
 
 	while (1) { 								/* Task body, always written as an infinite loop.     */
 
-		/* INT8U motor_no = 1;
-		 INT8S speed = 100;
-		 motor_speed(motor_no, speed); */
+		INT16S light_value;
+				light_value = light_sensor(0);		//inialize light sensor 0
+				light_value = light_value >> 2;		//convert 10 bit to 8 bit
+				LED_Show(light_value);
+				OSTimeDly(OS_TICKS_PER_SEC / 10);
+				if (light_value < 200) {
+					motor_speed(0, -40);
+					OSTimeDly(OS_TICKS_PER_SEC / 2);
+				}
+				else
+				{
+					motor_speed(0,0);
+					OSTimeDly(OS_TICKS_PER_SEC / 2);
+				}
 
-		INT16U light_value;
-		light_value = light_sensor(0);
-		light_value = light_value >> 2;
-		LED_Show(170);
-		OSTimeDly(OS_TICKS_PER_SEC / 5);
+
 	}
 }
 
@@ -131,51 +137,53 @@ static void Task1(void *p_arg) {
  **************************************************************************************************************
  */
 
-//static void AppTaskCreate(void) {
-//#if (OS_TASK_NAME_SIZE > 14) && (OS_TASK_STAT_EN > 0)
-//	INT8U err;
-//#endif
+static void AppTaskCreate(void) {
+#if (OS_TASK_NAME_SIZE > 14) && (OS_TASK_STAT_EN > 0)
+	INT8U err;
+#endif
 
 	/*---- Task initialization code goes HERE! --------------------------------------------------------*/
-	//OSTaskStkSize = OS_TASK_1_STK_SIZE; /* Setup the default stack size                     */
+	OSTaskStkSize = OS_TASK_1_STK_SIZE; /* Setup the default stack size                     */
 	//**stays    OSTaskStkSizeHard = OS_TASK_STK_SIZE_HARD;     /* Setup the default hardware stack size            */
-	//OSTaskCreateExt(AppTask1, (void *) 0, (OS_STK *) &AppTask1Stk[OSTaskStkSize
-	//		- 1], OS_TASK_1_PRIO, OS_TASK_1_PRIO, (OS_STK *) &AppTask1Stk[0],
-	//		OSTaskStkSize, (void *) 0, OS_TASK_OPT_STK_CHK
-	//				| OS_TASK_OPT_STK_CLR);
-//#if (OS_TASK_NAME_SIZE > 14) && (OS_TASK_STAT_EN > 0)
-//	OSTaskNameSet(OS_TASK_1_PRIO, "Task 1", &err);
-//#endif
-
-	/*---- Task initialization code goes HERE! --------------------------------------------------------*/
-	//OSTaskStkSize = OS_TASK_2_STK_SIZE; /* Setup the default stack size                     */
-	//OSTaskStkSizeHard = OS_TASK_STK_SIZE_HARD;     /* Setup the default hardware stack size            */
-	//OSTaskCreateExt(AppTask2, (void *) 0, (OS_STK *) &AppTask2Stk[OSTaskStkSize
-//			- 1], OS_TASK_2_PRIO, OS_TASK_2_PRIO, (OS_STK *) &AppTask2Stk[0],
-	//		OSTaskStkSize, (void *) 0, OS_TASK_OPT_STK_CHK
-	//				| OS_TASK_OPT_STK_CLR);
-//#if (OS_TASK_NAME_SIZE > 14) && (OS_TASK_STAT_EN > 0)
-//	OSTaskNameSet(OS_TASK_2_PRIO, "Task 2", &err);
-//#endif
-//}
+	OSTaskCreateExt(AppTask1, (void *) 0, (OS_STK *) &AppTask1Stk[OSTaskStkSize
+			- 1], OS_TASK_1_PRIO, OS_TASK_1_PRIO, (OS_STK *) &AppTask1Stk[0],
+			OSTaskStkSize, (void *) 0, OS_TASK_OPT_STK_CHK
+					| OS_TASK_OPT_STK_CLR);
+#if (OS_TASK_NAME_SIZE > 14) && (OS_TASK_STAT_EN > 0)
+	OSTaskNameSet(OS_TASK_1_PRIO, "Task 1", &err);
+#endif
+}
 
 /*
  **************************************************************************************************************
  *                                                   TASK #1
+ *
+ *     start engine 0
+ *     start counting bricks
  **************************************************************************************************************
  */
-/*
+
 static void AppTask1(void *p_arg) {
 	(void) p_arg;
 
-	// int i = 0;
+	INT8U perr;
+
 	while (1) {
-		//LED_Toggle(7);
-		//LED_show(++i);
-		// OSTimeDly(OS_TICKS_PER_SEC / 5);
-		//i = (i > 254) ? 0 : i;
+		OSSemPend(a_sem, 0, &perr);
+
+		INT16U light_value;
+		light_value = light_sensor(0);		//inialize light sensor 0
+		light_value = light_value >> 2;		//convert 10 bit to 8 bit
+		LED_Show(170);
+		OSTimeDly(OS_TICKS_PER_SEC / 10);
+		if (light_value < 210) {
+			motor_speed(0, 100);
+		}
+
+		perr = OSSemPost(a_sem);
+//OSTaskSuspend(TASK_1_PRIO);
 	}
-} */
+}
 
 /*
  **************************************************************************************************************
@@ -191,19 +199,6 @@ static void AppTask2(void *p_arg) {
 		//  OSTimeDly(OS_TICKS_PER_SEC / 5);
 	}
 } */
-
-/*
- **************************************************************************************************************
- *                                                  MOTOR TASK
- **************************************************************************************************************
- */
-static void MotorTask(INT8U motor_no, INT8S motor_speed_value, void *p_arg) {
-	(void) p_arg;
-
-	while (1) {
-		motor_speed(motor_no, motor_speed_value);
-	}
-}
 
 /*
  * Custom functions
@@ -257,5 +252,4 @@ void App_TCBInitHook(OS_TCB *ptcb) {
 }
 void App_TimeTickHook(void) {
 }
-
 
