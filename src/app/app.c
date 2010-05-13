@@ -34,6 +34,7 @@ static void  Task1(void *p_arg);
 static void  AppTaskCreate(void);
 static void  AppTask1(void *p_arg);
 static void  AppTask2(void *p_arg);
+static void  MotorTask(INT8U motor_no, INT8S motor_speed, void *p_arg);
 void LED_show(INT16U n);
 
 /*
@@ -214,6 +215,20 @@ static void  AppTask2(void *p_arg)
     while (1) {
       //  LED_Toggle(8);
       //  OSTimeDly(OS_TICKS_PER_SEC / 5);
+    }
+}
+
+/*
+**************************************************************************************************************
+*                                                  MOTOR TASK
+**************************************************************************************************************
+*/
+static void  MotorTask(INT8U motor_no, INT8S motor_speed, void *p_arg)
+{
+    (void)p_arg;
+
+    while (1) {
+    	motor_speed(motor_no, motor_speed);
     }
 }
 
