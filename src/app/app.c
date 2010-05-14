@@ -22,7 +22,11 @@ OS_STK AppTaskStartStk[OS_TASK_START_STK_SIZE];
 OS_STK AppTask1Stk[OS_TASK_1_STK_SIZE];
 OS_STK AppTask2Stk[OS_TASK_2_STK_SIZE];
 
-OS_EVENT *a_sem; // Pointer to a semaphore
+OS_EVENT *count_sem; // Pointer to a semaphore
+OS_EVENT *a_sem;
+
+INT16U count = 0;
+INT8U brick_found = 0;
 
 /*
  **************************************************************************************************************
@@ -33,9 +37,22 @@ OS_EVENT *a_sem; // Pointer to a semaphore
 static void InitTask(void *p_arg);
 static void AppTaskCreate(void);
 static void AppTask1(void *p_arg);
-static void AppTask2(void *p_arg);
-void LED_show(INT16U n);
+//static void AppTask2(void *p_arg);
+void LED_Show(INT8U n);
+INT8U checkRange(INT8U number, INT8U number2, INT8U threshold);
 
+/*
+ **************************************************************************************************************
+ *                                           		CONSTANTS
+ **************************************************************************************************************
+ */
+#define SENSOR_1_THRESHOLD 		5
+#define SENSOR_1_DEFAULT 		211
+
+#define TASK_1_PRIO				5
+#define TASK_2_PRIO 			4
+#define BLACK_BRICK				204
+#define YELLOW_BRICK			196
 /*
  **************************************************************************************************************
  *                                                MAIN
@@ -52,28 +69,49 @@ int main(void) {
 #endif
 	//DDRB = 0x0F;  // TODO IHA Remove after test
 
-
+#if 0
+    BSP_IntDisAll();                       /* For an embedded target, disable all interrupts until we are ready to accept them */
+#endif
 	/*---- Any initialization code prior to calling OSInit() goes HERE -------------------------------------*/
 
 	/* IMPORTANT: MUST be setup before calling 'OSInit()'  */
 	OSTaskStkSize = OS_TASK_IDLE_STK_SIZE; /* Setup the default stack size                        */
-	//    OSTaskStkSizeHard = OS_TASK_STK_SIZE_HARD;       /* Setup the default hardware stack size               */
 
 	OSInit(); /* Initialize "uC/OS-II, The Real-Time Kernel"         */
 
 	/*---- Any initialization code before starting multitasking --------------------------------------------*/
 	OSTaskStkSize = OS_TASK_START_STK_SIZE;
+	OSTaskCreateExt(InitTask,
+					(void *) 0,
+					(OS_STK *) &AppTaskStartStk[OSTaskStkSize - 1],
+					TASK_1_PRIO,
+					TASK_1_PRIO,
+					(OS_STK *) &AppTaskStartStk[0],
+					OSTaskStkSize,
+					(void *) 0,
+					OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR);
 
-	OSTaskCreateExt(InitTask, (void *) 0,
-			(OS_STK *) &AppTaskStartStk[OSTaskStkSize - 1], OS_TASK_START_PRIO,
-			OS_TASK_START_PRIO, (OS_STK *) &AppTaskStartStk[0], OSTaskStkSize,
-			(void *) 0, OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR);
-
-#if (OS_TASK_NAME_SIZE > 14) && (OS_TASK_STAT_EN > 0)
-	OSTaskNameSet(OS_TASK_START_PRIO, "Start Task", &err);
+#if (OS_TASK_NAME_SIZE > 10) && (OS_TASK_STAT_EN > 0)
+	OSTaskNameSet(TASK_1_PRIO, "Start Task", &err);
 #endif
 
-	a_sem = OSSemCreate(4); // create a semaphore
+	/*---- Task initialization code goes HERE! --------------------------------------------------------*/
+	OSTaskStkSize = OS_TASK_1_STK_SIZE; /* Setup the default stack size                     */
+	OSTaskCreateExt(AppTask1,
+					(void *) 0,
+					(OS_STK *) &AppTask1Stk[OSTaskStkSize- 1],
+					TASK_2_PRIO,
+					TASK_2_PRIO,
+					(OS_STK *) &AppTask1Stk[0],
+					OSTaskStkSize,
+					(void *) 0,
+					OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR);
+
+#if (OS_TASK_NAME_SIZE > 14) && (OS_TASK_STAT_EN > 0)
+	OSTaskNameSet(TASK_2_PRIO, "Task 1", &err);
+#endif
+
+	count_sem = OSSemCreate(1); // create a semaphore
 
 	/*---- Create any other task you want before we start multitasking -------------------------------------*/
 
@@ -97,30 +135,39 @@ int main(void) {
 
 static void InitTask(void *p_arg) {
 
-	(void) p_arg; 								/* Prevent compiler warnings                          */
-	BSP_Init(); 								/* Initialize the BSP                                 */
-	init_lego_interface();						/* Initalize LEGO_interface						   */
+	(void) p_arg; 					/* Prevent compiler warnings                          */
+#if OS_TASK_STAT_EN > 0
+    OSStatInit();                                /* Determine CPU capacity                                                     */
+#endif
+	INT8U err;
+	INT8U light_value;
+
+	BSP_Init(); 					/* Initialize the BSP                                 */
+	init_lego_interface(); 			/* Initalize LEGO_interface						   */
 
 	//AppTaskCreate();
+	light_sensor(0);
+	//OSTimeDlyHMSM(0,0,1,0);
+	while (1) { 						/* Task body, always written as an infinite loop.     */
 
-	while (1) { 								/* Task body, always written as an infinite loop.     */
+		if (count < 5)
+		{
+			//light_value = light_value >> 2;		//convert 10 bit to 8 bit
+			//LED_Show(light_value);
+			motor_speed(0, -40);				// start motor 0
+			OSTimeDly(OS_TICKS_PER_SEC / 2);
+			light_value = light_sensor(0) >> 2; 		//initialize light sensor 0
 
-		INT16S light_value;
-				light_value = light_sensor(0);		//inialize light sensor 0
-				light_value = light_value >> 2;		//convert 10 bit to 8 bit
-				LED_Show(light_value);
-				OSTimeDly(OS_TICKS_PER_SEC / 10);
-				if (light_value < 200) {
-					motor_speed(0, -40);
-					OSTimeDly(OS_TICKS_PER_SEC / 2);
-				}
-				else
-				{
-					motor_speed(0,0);
-					OSTimeDly(OS_TICKS_PER_SEC / 2);
-				}
-
-
+			if(light_value < 205)
+			{
+				OSSemPend(count_sem, 0, &err);
+				count++;
+				OSSemPost(count_sem);
+				//motor_speed(2, 5);
+				LED_Show(count);
+				OSTimeDly(OS_TICKS_PER_SEC / 2);
+			}
+		}
 	}
 }
 
@@ -137,22 +184,9 @@ static void InitTask(void *p_arg) {
  **************************************************************************************************************
  */
 
-static void AppTaskCreate(void) {
-#if (OS_TASK_NAME_SIZE > 14) && (OS_TASK_STAT_EN > 0)
-	INT8U err;
-#endif
+//static void AppTaskCreate(void) {
 
-	/*---- Task initialization code goes HERE! --------------------------------------------------------*/
-	OSTaskStkSize = OS_TASK_1_STK_SIZE; /* Setup the default stack size                     */
-	//**stays    OSTaskStkSizeHard = OS_TASK_STK_SIZE_HARD;     /* Setup the default hardware stack size            */
-	OSTaskCreateExt(AppTask1, (void *) 0, (OS_STK *) &AppTask1Stk[OSTaskStkSize
-			- 1], OS_TASK_1_PRIO, OS_TASK_1_PRIO, (OS_STK *) &AppTask1Stk[0],
-			OSTaskStkSize, (void *) 0, OS_TASK_OPT_STK_CHK
-					| OS_TASK_OPT_STK_CLR);
-#if (OS_TASK_NAME_SIZE > 14) && (OS_TASK_STAT_EN > 0)
-	OSTaskNameSet(OS_TASK_1_PRIO, "Task 1", &err);
-#endif
-}
+//}
 
 /*
  **************************************************************************************************************
@@ -164,24 +198,21 @@ static void AppTaskCreate(void) {
  */
 
 static void AppTask1(void *p_arg) {
-	(void) p_arg;
+	(void) p_arg; 					/* Prevent compiler warnings                          */
 
-	INT8U perr;
-
+	INT8U err;
 	while (1) {
-		OSSemPend(a_sem, 0, &perr);
 
-		INT16U light_value;
-		light_value = light_sensor(0);		//inialize light sensor 0
-		light_value = light_value >> 2;		//convert 10 bit to 8 bit
-		LED_Show(170);
-		OSTimeDly(OS_TICKS_PER_SEC / 10);
-		if (light_value < 210) {
-			motor_speed(0, 100);
+		if (count == 5)
+		{
+			OSTimeDly(OS_TICKS_PER_SEC );
+			OSSemPend(count_sem, 0, &err);
+			count--;
+			OSSemPost(count_sem);
+			motor_speed(0, 0);
+			LED_Show(count);
+
 		}
-
-		perr = OSSemPost(a_sem);
-//OSTaskSuspend(TASK_1_PRIO);
 	}
 }
 
@@ -191,20 +222,20 @@ static void AppTask1(void *p_arg) {
  **************************************************************************************************************
  */
 /*
-static void AppTask2(void *p_arg) {
-	(void) p_arg;
+ static void AppTask2(void *p_arg) {
+ (void) p_arg;
 
-	while (1) {
-		//  LED_Toggle(8);
-		//  OSTimeDly(OS_TICKS_PER_SEC / 5);
-	}
-} */
+ while (1) {
+ //  LED_Toggle(8);
+ //  OSTimeDly(OS_TICKS_PER_SEC / 5);
+ }
+ } */
 
 /*
  * Custom functions
  */
 
-void LED_Show(INT16S n) {
+void LED_Show(INT8U n) {
 	/* Turn off all LEDs before switching them */
 	int i;
 	for (i = 0; i < 8; i++) {
@@ -213,13 +244,20 @@ void LED_Show(INT16S n) {
 	}
 
 	/* For all bits in datatype */
-	for (i = 0; i < 8; i++) {
-		if (n & (1 << i)) /* Test if i^th bit is set in "n" */
+	for (i = 1; i <= 8; i++) {
+
+		if (n & (1 << (i - 1))) /* Test if i^th bit is set in "n" */
 			LED_On(i);
 		//printf("%s%d\n", "Switching on LED #", i); /* if yes, turn on the i^th LED */
 	}
 }
 
+INT8U checkRange(INT8U number, INT8U number2, INT8U threshold){
+	if((number2 + threshold) )
+	if((number > (number2 - threshold)) && (number < (number2 + threshold)))
+		return 1;
+	return 0;
+}
 /*
  *********************************************************************************************************
  *                                           TASK SWITCH HOOK
