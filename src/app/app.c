@@ -174,6 +174,8 @@ static  void  AppTaskCreate (void)
     OSTaskNameSet(OS_TASK_2_PRIO, "Task 2", &err);
 #endif
 }
+
+
 /*
 **************************************************************************************************************
 *                                              STARTUP TASK
