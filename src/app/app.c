@@ -45,13 +45,15 @@
 OS_STK  AppTaskStartStk[OS_TASK_START_STK_SIZE];
 OS_STK  AppTask1Stk[OS_TASK_1_STK_SIZE];
 OS_STK  AppTask2Stk[OS_TASK_2_STK_SIZE];
+OS_STK  AppTask3Stk[OS_TASK_3_STK_SIZE];
+
 
 OS_EVENT *count_sem;
 OS_EVENT *a_sem; // Pointer to a semaphore
 
 INT16U count = 0;
 INT8U brick_found = 0;
-
+INT8U dispatched = 0;
 /*
 **************************************************************************************************************
 *                                           FUNCTION PROTOTYPES
@@ -62,6 +64,7 @@ static void  AppTaskStart(void *p_arg);
 static void  AppTaskCreate(void);
 static void  AppTask1(void *p_arg);
 static void  AppTask2(void *p_arg);
+static void  AppTask3(void *p_arg);
 void LED_Show(INT8U n);
 INT8U checkRange(INT8U number, INT8U number2, INT8U threshold);
 
@@ -168,6 +171,22 @@ static  void  AppTaskCreate (void)
 #if (OS_TASK_NAME_SIZE > 14) && (OS_TASK_STAT_EN > 0)
     OSTaskNameSet(OS_TASK_2_PRIO, "Task 2", &err);
 #endif
+
+    /*--- TASK 3 --- */
+    OSTaskStkSize     = OS_TASK_3_STK_SIZE;        /* Setup the default stack size                     */
+    //OSTaskStkSizeHard = OS_TASK_STK_SIZE_HARD;     /* Setup the default hardware stack size            */
+    OSTaskCreateExt(AppTask3,
+                    (void *)0,
+                    (OS_STK *)&AppTask3Stk[OSTaskStkSize - 1],
+                    OS_TASK_3_PRIO,
+                    OS_TASK_3_PRIO,
+                    (OS_STK *)&AppTask3Stk[0],
+                    OSTaskStkSize,
+                    (void *)0,
+                    OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR);
+ #if (OS_TASK_NAME_SIZE > 14) && (OS_TASK_STAT_EN > 0)
+   OSTaskNameSet(OS_TASK_3_PRIO, "Task 3", &err);
+ #endif
 }
 /*
 **************************************************************************************************************
@@ -263,7 +282,22 @@ static void  AppTask2(void *p_arg)
     }
 }
 
+/*
+**************************************************************************************************************
+*                                                  TASK #2
+**************************************************************************************************************
+*/
 
+static void  AppTask3(void *p_arg)
+{
+    (void)p_arg;
+    while (1){
+    	if(dispatched == 1){
+    		motor_speed(MOTOR_BELT_2, -40);					// start MOTOR_BELT_2
+    		OSTimeDly(OS_TICKS_PER_SEC / 5);				// wait for a while
+    	}
+    }
+}
 /*
 *********************************************************************************************************
 * 											Additional methods
