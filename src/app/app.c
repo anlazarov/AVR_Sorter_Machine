@@ -33,6 +33,8 @@
 #define MOTOR_BUF				1
 #define MOTOR_SORT				2
 #define MOTOR_BELT_2			3
+/* BUFFER  */
+#define BUFFER_SIZE				3
 
 /*
 **************************************************************************************************************
@@ -108,46 +110,13 @@ int  main (void)
 	/* CREATING THE SEMAPHORES */
 
     a_sem = OSSemCreate(0);
-	count_sem = OSSemCreate(5);
+	count_sem = OSSemCreate(BUFFER_SIZE);
 
     /*---- Create any other task you want before we start multitasking -------------------------------------*/
 
     OSStart();                                       /* Start multitasking (i.e. give control to uC/OS-II)  */
     return 0;
 }
-
-/*
-**************************************************************************************************************
-*                                              STARTUP TASK
-*
-* Description : This is an example of a startup task.  As mentioned in the book's text, you MUST
-*               initialize the ticker only once multitasking has started.
-*
-* Arguments   : p_arg   is the argument passed to 'AppStartTask()' by 'OSTaskCreate()'.
-*
-* Notes       : 1) The first line of code is used to prevent a compiler warning because 'p_arg' is not
-*                  used.  The compiler should not generate any code for this statement.
-**************************************************************************************************************
-*/
-
-static void  AppTaskStart (void *p_arg)
-{
-	(void)p_arg;								// Prevent compiler warnings
-
-    INT8U err;
-
-    BSP_Init();									// Initialize the BSP
-	init_lego_interface(); 						// Initalize LEGO_interface
-    AppTaskCreate();
-
-	while (1) 									// Task body, always written as an infinite loop.
-	{
-		// from ib's code
-        OSSemPend(a_sem, 0, &err);  // Wait for the semaphore to be signaled
-    }
-}
-
-
 /*
 **************************************************************************************************************
 *                                        CREATE APPLICATION TASKS
@@ -200,6 +169,39 @@ static  void  AppTaskCreate (void)
     OSTaskNameSet(OS_TASK_2_PRIO, "Task 2", &err);
 #endif
 }
+/*
+**************************************************************************************************************
+*                                              STARTUP TASK
+*
+* Description : This is an example of a startup task.  As mentioned in the book's text, you MUST
+*               initialize the ticker only once multitasking has started.
+*
+* Arguments   : p_arg   is the argument passed to 'AppStartTask()' by 'OSTaskCreate()'.
+*
+* Notes       : 1) The first line of code is used to prevent a compiler warning because 'p_arg' is not
+*                  used.  The compiler should not generate any code for this statement.
+**************************************************************************************************************
+*/
+
+static void  AppTaskStart (void *p_arg)
+{
+	(void)p_arg;								// Prevent compiler warnings
+
+    INT8U err;
+
+    BSP_Init();									// Initialize the BSP
+	init_lego_interface(); 						// Initalize LEGO_interface
+    AppTaskCreate();
+
+	while (1) 									// Task body, always written as an infinite loop.
+	{
+		// from ib's code
+        OSSemPend(a_sem, 0, &err);  // Wait for the semaphore to be signaled
+    }
+}
+
+
+
 
 /*
 **************************************************************************************************************
@@ -213,19 +215,19 @@ static void  AppTask1(void *p_arg)
 	INT8U err;
 	INT8U light_value;
 
+	OSTimeDly(OS_TICKS_PER_SEC / 2); // delay that will prevent give the sensor time to read correct values
+
 	while (1)
 	{
+		motor_speed(MOTOR_BELT_1, -40);						//  start MOTOR_BELT_1
+		light_value = light_sensor(SENSOR_COUNT) >> 2; 		//  SENSOR_COUNT reads value in 8 bits
 
-			motor_speed(MOTOR_BELT_1, -40);						//  start MOTOR_BELT_1
-			light_value = light_sensor(SENSOR_COUNT) >> 2; 		//initialize SENSOR_COUNT & read value
-		//LED_Show(light_value);
-		//OSTimeDly(OS_TICKS_PER_SEC / 2);
 		if(light_value < SENSOR_COUNT_DEF_VAL)
 		{
-			OSSemPend(count_sem, 0, &err);
-			count++;
-			LED_Show(count);
-			OSTimeDly(OS_TICKS_PER_SEC / 2);
+			OSSemPend(count_sem, 0, &err); 					// pend semaphore
+			count++; 										// increase the count of the bricks
+			LED_Show(count);								// show the count of brick on the LEDs
+			OSTimeDly(OS_TICKS_PER_SEC);					//
 		}
 	}
 }
@@ -239,19 +241,24 @@ static void  AppTask1(void *p_arg)
 static void  AppTask2(void *p_arg)
 {
     (void)p_arg;
-    INT8U err;
+   // INT8U err;
     while (1)
     {
-
-    	if (count)
 		OSTimeDly(OS_TICKS_PER_SEC );
-		count--;
-		LED_Show(count);
-		OSSemPost(count_sem);
-		motor_speed(MOTOR_BUF, 10);
+		if (count > 0)
+		{
+			OSSemPost(count_sem);
+			count--;
+			LED_Show(count);
+
+			motor_speed(MOTOR_BELT_2, -40);					// start MOTOR_BELT_2
+			OSTimeDly(OS_TICKS_PER_SEC / 5);				// wait for a while
+			motor_speed(MOTOR_BUF, 10);						// release a brick
+			OSTimeDly(OS_TICKS_PER_SEC / 2);
+		}
+		motor_speed(MOTOR_BUF, 0);
 		OSTimeDly(OS_TICKS_PER_SEC / 10);
-		brake_motor(MOTOR_BUF);
-		OSTimeDly(OS_TICKS_PER_SEC * 2);
+
 
     }
 }
