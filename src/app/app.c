@@ -307,6 +307,8 @@ static void  AppTask3(void *p_arg)
     (void)p_arg;
     INT8U brick_color;
     INT8U speed = 0;
+    INT8U delay = OS_TICKS_PER_SEC / 5;
+
     INT8U sort_type = 0; //1 - cw; 2 - ccw; 3 - pass
     while (1){
     	if(dispatched == 1){
@@ -327,11 +329,16 @@ static void  AppTask3(void *p_arg)
 
 			switch(sort_type){
 			case 1 :
-				speed = -40;
+				motor_run_ext(MOTOR_SORT, 100, delay, 1);
 				break;
-			case 2 : break;
-			case 3 : break;
-			default : break;
+			case 2 :
+				motor_run_ext(MOTOR_SORT, -100, delay, 1);
+				break;
+			case 3 :
+				motor_run_ext(MOTOR_SORT, 100, delay, 1);
+				break;
+			default :
+				break;
 			}
     		motor_speed(MOTOR_SORT, speed);
     		OSTimeDly(OS_TICKS_PER_SEC / 5);				// wait for a while
