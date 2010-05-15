@@ -29,8 +29,8 @@
 
 #define  OS_TASK_START_PRIO                0
 
-#define  OS_TASK_1_PRIO                    1
-#define  OS_TASK_2_PRIO                    2
+#define  OS_TASK_1_PRIO                    2
+#define  OS_TASK_2_PRIO                    1
 
 #define  OS_TASK_TMR_PRIO                  4
 
