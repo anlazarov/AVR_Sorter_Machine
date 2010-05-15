@@ -259,7 +259,7 @@ static void  AppTask2(void *p_arg)
 
 /*
 *********************************************************************************************************
-* 									Additional methods needed in the task
+* 											Additional methods
 *********************************************************************************************************
 */
 void LED_Show(INT8U n) {
@@ -280,11 +280,11 @@ void LED_Show(INT8U n) {
 }
 
 INT8U checkRange(INT8U number, INT8U number2, INT8U threshold){
-	if((number2 + threshold) )
-	if((number > (number2 - threshold)) && (number < (number2 + threshold)))
+	if((number > abs(number2 - threshold)) && (number < abs(number2 + threshold)))
 		return 1;
 	return 0;
 }
+
 
 /*
 *********************************************************************************************************
@@ -303,7 +303,7 @@ INT8U checkRange(INT8U number, INT8U number2, INT8U threshold){
 */
 void App_TaskSwHook(void)  // TODO IHA Remove after test
 {
-	PORTB = ~(OSTCBHighRdy->OSTCBPrio);
+	//PORTB = ~(OSTCBHighRdy->OSTCBPrio);
 }
 
 void App_TaskCreateHook(OS_TCB *ptcb){}
