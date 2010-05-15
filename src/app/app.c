@@ -368,14 +368,12 @@ void LED_Show(INT8U n) {
 	}
 }
 
-<<<<<<< HEAD
-=======
+
 INT8U checkRange(INT8U number, INT8U number2, INT8U threshold){
 	if((number > abs(number2 - threshold)) && (number < abs(number2 + threshold)))
 		return 1;
 	return 0;
 }
->>>>>>> 2e41d43ecae230eb72741839d7ca3bc896d6aa81
 
 /*	Runs motor for specified time
  *  \param motor_no specifies the motor output on the interface board [0..3]
@@ -389,7 +387,7 @@ void motor_run_ext(INT8U motor_no, INT8U speed, INT8U time, INT8U restore){
 	motor_speed(motor_no, speed);
 	OSTimeDly(time);
 	//stop motor
-	motor_brake(motor_no);
+	brake_motor(motor_no);
 }
 /*
 *********************************************************************************************************
