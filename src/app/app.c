@@ -39,6 +39,7 @@
 #define MOTOR_BUF				1
 #define MOTOR_SORT				2
 #define MOTOR_BELT_2			3
+
 /* BUFFER  */
 #define BUFFER_SIZE				3
 
@@ -51,13 +52,15 @@
 OS_STK  AppTaskStartStk[OS_TASK_START_STK_SIZE];
 OS_STK  AppTask1Stk[OS_TASK_1_STK_SIZE];
 OS_STK  AppTask2Stk[OS_TASK_2_STK_SIZE];
+OS_STK  AppTask3Stk[OS_TASK_3_STK_SIZE];
+
 
 OS_EVENT *count_sem;
 OS_EVENT *a_sem; // Pointer to a semaphore
 
 INT16U count = 0;
 INT8U brick_found = 0;
-
+INT8U dispatched = 0;
 /*
 **************************************************************************************************************
 *                                           FUNCTION PROTOTYPES
@@ -68,6 +71,7 @@ static void  AppTaskStart(void *p_arg);
 static void  AppTaskCreate(void);
 static void  AppTask1(void *p_arg);
 static void  AppTask2(void *p_arg);
+static void  AppTask3(void *p_arg);
 void LED_Show(INT8U n);
 
 /*
@@ -173,6 +177,22 @@ static  void  AppTaskCreate (void)
 #if (OS_TASK_NAME_SIZE > 14) && (OS_TASK_STAT_EN > 0)
     OSTaskNameSet(OS_TASK_2_PRIO, "Task 2", &err);
 #endif
+
+    /*--- TASK 3 --- */
+    OSTaskStkSize     = OS_TASK_3_STK_SIZE;        /* Setup the default stack size                     */
+    //OSTaskStkSizeHard = OS_TASK_STK_SIZE_HARD;     /* Setup the default hardware stack size            */
+    OSTaskCreateExt(AppTask3,
+                    (void *)0,
+                    (OS_STK *)&AppTask3Stk[OSTaskStkSize - 1],
+                    OS_TASK_3_PRIO,
+                    OS_TASK_3_PRIO,
+                    (OS_STK *)&AppTask3Stk[0],
+                    OSTaskStkSize,
+                    (void *)0,
+                    OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR);
+ #if (OS_TASK_NAME_SIZE > 14) && (OS_TASK_STAT_EN > 0)
+   OSTaskNameSet(OS_TASK_3_PRIO, "Task 3", &err);
+ #endif
 }
 
 
@@ -276,10 +296,59 @@ static void  AppTask2(void *p_arg)
     }
 }
 
+/*
+**************************************************************************************************************
+*                                                  TASK #2
+**************************************************************************************************************
+*/
 
+static void  AppTask3(void *p_arg)
+{
+    (void)p_arg;
+    INT8U brick_color;
+    INT8U speed = 0;
+    INT8U sort_type = 0; //1 - cw; 2 - ccw; 3 - pass
+    while (1){
+    	if(dispatched == 1){
+    		motor_speed(MOTOR_BELT_2, -40);					// start MOTOR_BELT_2
+    		OSTimeDly(OS_TICKS_PER_SEC / 5);				// wait for a while
+    		motor_speed(MOTOR_BELT_2, 0);					// start MOTOR_BELT_2
+
+    		//if color = SOME_COLOR move cw
+    		if(brick_color > 100 && brick_color < 150){
+				sort_type = 1;
+			//or ANOTHER_COLOR move ccw
+    		}else if(brick_color < 100 && brick_color > 0){
+    			sort_type = 2;
+    		//or OTHER_COLOR - let it pass through
+    		}else{
+				sort_type = 3;
+    		}
+
+			switch(sort_type){
+			case 1 :
+				speed = -40;
+				break;
+			case 2 : break;
+			case 3 : break;
+			default : break;
+			}
+    		motor_speed(MOTOR_SORT, speed);
+    		OSTimeDly(OS_TICKS_PER_SEC / 5);				// wait for a while
+
+    		//return motor to the previous position, we assume constant motor speed
+    		motor_speed(MOTOR_SORT, -speed);
+    		OSTimeDly(OS_TICKS_PER_SEC / 5);				// wait for a while
+
+    		dispatched = 0;									// signal task 2 we have finished sorting
+    	}else{
+
+    	}
+    }
+}
 /*
 *********************************************************************************************************
-* 									Additional methods needed in the task
+* 											Additional methods
 *********************************************************************************************************
 */
 void LED_Show(INT8U n) {
@@ -299,7 +368,29 @@ void LED_Show(INT8U n) {
 	}
 }
 
+<<<<<<< HEAD
+=======
+INT8U checkRange(INT8U number, INT8U number2, INT8U threshold){
+	if((number > abs(number2 - threshold)) && (number < abs(number2 + threshold)))
+		return 1;
+	return 0;
+}
+>>>>>>> 2e41d43ecae230eb72741839d7ca3bc896d6aa81
 
+/*	Runs motor for specified time
+ *  \param motor_no specifies the motor output on the interface board [0..3]
+ *  \param speed in percent specifies speed and way of rotation: negative CCW; positive CW
+ *  \param time specifies time to run motor in system ticks using OSTimeDly
+ *  \param restore if we want to restore previous position of the motor set to 1, else 0
+ *	@returns : void
+ *	\see motor_speed OSTimeDly
+ */
+void motor_run_ext(INT8U motor_no, INT8U speed, INT8U time, INT8U restore){
+	motor_speed(motor_no, speed);
+	OSTimeDly(time);
+	//stop motor
+	motor_brake(motor_no);
+}
 /*
 *********************************************************************************************************
 *                                           TASK SWITCH HOOK
@@ -317,7 +408,7 @@ void LED_Show(INT8U n) {
 */
 void App_TaskSwHook(void)  // TODO IHA Remove after test
 {
-	PORTB = ~(OSTCBHighRdy->OSTCBPrio);
+	//PORTB = ~(OSTCBHighRdy->OSTCBPrio);
 }
 
 void App_TaskCreateHook(OS_TCB *ptcb){}

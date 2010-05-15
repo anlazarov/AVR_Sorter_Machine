@@ -20,7 +20,7 @@
 #define  OS_TASK_START_STK_SIZE          240
 #define  OS_TASK_1_STK_SIZE              240
 #define  OS_TASK_2_STK_SIZE              240
-
+#define  OS_TASK_3_STK_SIZE              240
 /*
 **************************************************************************************************************
 *                                             TASK PRIORITIES
@@ -31,6 +31,7 @@
 
 #define  OS_TASK_1_PRIO                    2
 #define  OS_TASK_2_PRIO                    1
+#define  OS_TASK_3_PRIO                    3
 
 #define  OS_TASK_TMR_PRIO                  4
 
