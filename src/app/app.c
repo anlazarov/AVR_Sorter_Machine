@@ -17,17 +17,23 @@
 *												CONSTANTS
 **************************************************************************************************************
 */
-#define SENSOR_COUNT_DEF_VAL	209
+/*
+ * yellow : 174, 172, 169
+ * black : 187-8, 194-3,
+ *
+ */
 
 #define TASK_1_PRIO				5
 #define TASK_2_PRIO 			4
-#define BRICK_BLACK				204
-#define BRICK_YELLOW			196
+
 /* SENSORS */
 #define SENSOR_COUNT			0
 #define SENSOR_COLOR			1
 #define SENSOR_RT				2
 #define SENSOR_TOUCH			3
+
+#define SENSOR_COUNT_DEF_VAL	209
+#define SENSOR_COLOR_DEF_VAL	203
 /* MOTORS */
 #define MOTOR_BELT_1			0
 #define MOTOR_BUF				1
@@ -63,7 +69,6 @@ static void  AppTaskCreate(void);
 static void  AppTask1(void *p_arg);
 static void  AppTask2(void *p_arg);
 void LED_Show(INT8U n);
-INT8U checkRange(INT8U number, INT8U number2, INT8U threshold);
 
 /*
 **************************************************************************************************************
@@ -187,21 +192,26 @@ static void  AppTaskStart (void *p_arg)
 {
 	(void)p_arg;								// Prevent compiler warnings
 
-    INT8U err;
+    INT8U err;									// needed for the semaphore
 
     BSP_Init();									// Initialize the BSP
 	init_lego_interface(); 						// Initalize LEGO_interface
-    AppTaskCreate();
-
+    AppTaskCreate();							// create the other tasks
 	while (1) 									// Task body, always written as an infinite loop.
 	{
+		/*
+		 * If you want to check the values of the sensors
+		 * comment the pending of the semaphore a_sem ( OSSemPend(a_sem, 0, &err); )
+		 * and use the following code only in AppTaskStart
+		 *
+		 *		INT8U sens_value = light_sensor(SENSOR_RT) >> 2;
+		 *		LED_Show(sens_value);
+		 *		OSTimeDly(OS_TICKS_PER_SEC / 2);
+		 */
 		// from ib's code
         OSSemPend(a_sem, 0, &err);  // Wait for the semaphore to be signaled
     }
 }
-
-
-
 
 /*
 **************************************************************************************************************
@@ -219,8 +229,11 @@ static void  AppTask1(void *p_arg)
 
 	while (1)
 	{
+
 		motor_speed(MOTOR_BELT_1, -40);						//  start MOTOR_BELT_1
 		light_value = light_sensor(SENSOR_COUNT) >> 2; 		//  SENSOR_COUNT reads value in 8 bits
+		LED_Show(light_value);
+		OSTimeDly(OS_TICKS_PER_SEC / 2);
 
 		if(light_value < SENSOR_COUNT_DEF_VAL)
 		{
@@ -244,7 +257,7 @@ static void  AppTask2(void *p_arg)
    // INT8U err;
     while (1)
     {
-		OSTimeDly(OS_TICKS_PER_SEC );
+    	OSTimeDly(OS_TICKS_PER_SEC );
 		if (count > 0)
 		{
 			OSSemPost(count_sem);
@@ -258,8 +271,6 @@ static void  AppTask2(void *p_arg)
 		}
 		motor_speed(MOTOR_BUF, 0);
 		OSTimeDly(OS_TICKS_PER_SEC / 10);
-
-
     }
 }
 
@@ -286,12 +297,6 @@ void LED_Show(INT8U n) {
 	}
 }
 
-INT8U checkRange(INT8U number, INT8U number2, INT8U threshold){
-	if((number2 + threshold) )
-	if((number > (number2 - threshold)) && (number < (number2 + threshold)))
-		return 1;
-	return 0;
-}
 
 /*
 *********************************************************************************************************
