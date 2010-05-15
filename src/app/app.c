@@ -302,50 +302,30 @@ static void  AppTask2(void *p_arg)
 **************************************************************************************************************
 */
 
-static void  AppTask3(void *p_arg)
+static void AppTask3(void *p_arg)
 {
     (void)p_arg;
     INT8U brick_color;
-    INT8U speed = 0;
+    INT8U speed = 100;
     INT8U delay = OS_TICKS_PER_SEC / 5;
 
-    INT8U sort_type = 0; //1 - cw; 2 - ccw; 3 - pass
     while (1){
     	if(dispatched == 1){
     		motor_speed(MOTOR_BELT_2, -40);					// start MOTOR_BELT_2
     		OSTimeDly(OS_TICKS_PER_SEC / 5);				// wait for a while
-    		motor_speed(MOTOR_BELT_2, 0);					// start MOTOR_BELT_2
+    		brake_motor(MOTOR_BELT_2);						// start MOTOR_BELT_2
 
+    		//detect colors
     		//if color = SOME_COLOR move cw
     		if(brick_color > 100 && brick_color < 150){
-				sort_type = 1;
+    			motor_run_ext(MOTOR_SORT, speed, delay, 1);
 			//or ANOTHER_COLOR move ccw
     		}else if(brick_color < 100 && brick_color > 0){
-    			sort_type = 2;
+    			motor_run_ext(MOTOR_SORT, -speed, delay, 1);
     		//or OTHER_COLOR - let it pass through
     		}else{
-				sort_type = 3;
+    			motor_run_ext(MOTOR_SORT, speed, OS_TICKS_PER_SEC / 3, 1);
     		}
-
-			switch(sort_type){
-			case 1 :
-				motor_run_ext(MOTOR_SORT, 100, delay, 1);
-				break;
-			case 2 :
-				motor_run_ext(MOTOR_SORT, -100, delay, 1);
-				break;
-			case 3 :
-				motor_run_ext(MOTOR_SORT, 100, delay, 1);
-				break;
-			default :
-				break;
-			}
-    		motor_speed(MOTOR_SORT, speed);
-    		OSTimeDly(OS_TICKS_PER_SEC / 5);				// wait for a while
-
-    		//return motor to the previous position, we assume constant motor speed
-    		motor_speed(MOTOR_SORT, -speed);
-    		OSTimeDly(OS_TICKS_PER_SEC / 5);				// wait for a while
 
     		dispatched = 0;									// signal task 2 we have finished sorting
     	}else{
