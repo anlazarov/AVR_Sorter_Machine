@@ -374,7 +374,7 @@ INT8U checkRange(INT8U number, INT8U number2, INT8U threshold){
 	return 0;
 }
 
-/*	Runs motor for specified time
+/*	Runs motor for the specified time
  *  \param motor_no specifies the motor output on the interface board [0..3]
  *  \param speed in percent specifies speed and way of rotation: negative CCW; positive CW
  *  \param time specifies time to run motor in system ticks using OSTimeDly
