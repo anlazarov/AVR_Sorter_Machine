@@ -33,6 +33,7 @@
 #define MOTOR_BUF				1
 #define MOTOR_SORT				2
 #define MOTOR_BELT_2			3
+
 /* BUFFER  */
 #define BUFFER_SIZE				3
 
@@ -291,10 +292,44 @@ static void  AppTask2(void *p_arg)
 static void  AppTask3(void *p_arg)
 {
     (void)p_arg;
+    INT8U brick_color;
+    INT8U speed = 0;
+    INT8U sort_type = 0; //1 - cw; 2 - ccw; 3 - pass
     while (1){
     	if(dispatched == 1){
     		motor_speed(MOTOR_BELT_2, -40);					// start MOTOR_BELT_2
     		OSTimeDly(OS_TICKS_PER_SEC / 5);				// wait for a while
+    		motor_speed(MOTOR_BELT_2, 0);					// start MOTOR_BELT_2
+
+    		//if color = SOME_COLOR move cw
+    		if(brick_color > 100 && brick_color < 150){
+				sort_type = 1;
+			//or ANOTHER_COLOR move ccw
+    		}else if(brick_color < 100 && brick_color > 0){
+    			sort_type = 2;
+    		//or OTHER_COLOR - let it pass through
+    		}else{
+				sort_type = 3;
+    		}
+
+			switch(sort_type){
+			case 1 :
+				speed = -40;
+				break;
+			case 2 : break;
+			case 3 : break;
+			default : break;
+			}
+    		motor_speed(MOTOR_SORT, speed);
+    		OSTimeDly(OS_TICKS_PER_SEC / 5);				// wait for a while
+
+    		//return motor to the previous position, we assume constant motor speed
+    		motor_speed(MOTOR_SORT, -speed);
+    		OSTimeDly(OS_TICKS_PER_SEC / 5);				// wait for a while
+
+    		dispatched = 0;									// signal task 2 we have finished sorting
+    	}else{
+
     	}
     }
 }
@@ -326,7 +361,20 @@ INT8U checkRange(INT8U number, INT8U number2, INT8U threshold){
 	return 0;
 }
 
-
+/*	Runs motor for specified time
+ *  \param motor_no specifies the motor output on the interface board [0..3]
+ *  \param speed in percent specifies speed and way of rotation: negative CCW; positive CW
+ *  \param time specifies time to run motor in system ticks using OSTimeDly
+ *  \param restore if we want to restore previous position of the motor set to 1, else 0
+ *	@returns : void
+ *	\see motor_speed OSTimeDly
+ */
+void motor_run_ext(INT8U motor_no, INT8U speed, INT8U time, INT8U restore){
+	motor_speed(motor_no, speed);
+	OSTimeDly(time);
+	//stop motor
+	motor_brake(motor_no);
+}
 /*
 *********************************************************************************************************
 *                                           TASK SWITCH HOOK
