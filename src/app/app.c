@@ -372,8 +372,12 @@ INT8U checkRange(INT8U number, INT8U number2, INT8U threshold){
 void motor_run_ext(INT8U motor_no, INT8U speed, INT8U time, INT8U restore){
 	motor_speed(motor_no, speed);
 	OSTimeDly(time);
-	//stop motor
-	motor_brake(motor_no);
+	brake_motor(motor_no);
+
+	//if we want to restore motor position, we can run with the same values, but backwards
+	if(restore == 1){
+		motor_run_ext(motor_no, -speed, time, 0);
+	}
 }
 /*
 *********************************************************************************************************
