@@ -257,7 +257,12 @@ static void  AppTask1(void *p_arg)
 
 	while (1)
 	{
-		motor_speed(MOTOR_BELT_1, -40);						//  start MOTOR_BELT_1
+		if(count < BUFFER_SIZE ){
+			motor_speed(MOTOR_BELT_1, -40);					//  start MOTOR_BELT_1
+		}else{
+			brake_motor(MOTOR_BELT_1);
+		}
+
 		light_value = light_sensor(SENSOR_COUNT) >> 2; 		//  SENSOR_COUNT reads value in 8 bits
 		OSTimeDly(OS_TICKS_PER_SEC / 2);
 
@@ -303,7 +308,7 @@ static void  AppTask2(void *p_arg)
 
 			//decrease the count
 			count--;
-		    OSSemPost(count_sem);
+			OSSemPost(count_sem);
 		}
     }
 }
@@ -324,7 +329,6 @@ static void AppTask3(void *p_arg)
     while (1){
     	//if we have dispatched brick
     	if(dispatched == 1){
-
     		//if color = SOME_COLOR move cw
     		if(inRange(brick_color, COLOR_YELLOW, 10)){
     			motor_run_ext(MOTOR_SORT, speed, delay, 0, 1);		//sort brick on one side
