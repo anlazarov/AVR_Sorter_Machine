@@ -252,6 +252,7 @@ static void  AppTask1(void *p_arg)
 	while (1)
 	{
 
+
 		motor_speed(MOTOR_BELT_1, -40);						//  start MOTOR_BELT_1
 		light_value = light_sensor(SENSOR_COUNT) >> 2; 		//  SENSOR_COUNT reads value in 8 bits
 		LED_Show(light_value);
@@ -368,10 +369,6 @@ void LED_Show(INT8U n) {
 	}
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> e3380702e2e0a7506aa7566a403215a611a676b4
 INT8U checkRange(INT8U number, INT8U number2, INT8U threshold){
 	if((number > abs(number2 - threshold)) && (number < abs(number2 + threshold)))
 		return 1;
@@ -389,17 +386,17 @@ INT8U checkRange(INT8U number, INT8U number2, INT8U threshold){
 void motor_run_ext(INT8U motor_no, INT8U speed, INT8U time, INT8U restore){
 	motor_speed(motor_no, speed);
 	OSTimeDly(time);
-<<<<<<< HEAD
+
 	//stop motor
 	brake_motor(motor_no);
-=======
+
 	brake_motor(motor_no);
 
 	//if we want to restore motor position, we can run with the same values, but backwards
 	if(restore == 1){
 		motor_run_ext(motor_no, -speed, time, 0);
 	}
->>>>>>> e3380702e2e0a7506aa7566a403215a611a676b4
+
 }
 /*
 *********************************************************************************************************
