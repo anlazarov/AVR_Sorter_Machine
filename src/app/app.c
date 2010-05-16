@@ -18,19 +18,17 @@
 **************************************************************************************************************
 */
 /*
+ * COLOR READINGS:
  * yellow : 174, 172, 168-169
- * black : 187-8, 194-3,
+ * black : 187-8, 194-3
  *
  */
-
-#define TASK_1_PRIO				5
-#define TASK_2_PRIO 			4
 
 /* SENSORS */
 #define SENSOR_COUNT			0
 #define SENSOR_COLOR			1
-#define SENSOR_RT				2
-#define SENSOR_TOUCH			3
+#define SENSOR_RT				2 	// DOESN'T WORK
+#define SENSOR_TOUCH			3	// DOESN'T WORK
 
 #define SENSOR_COUNT_DEF_VAL	209
 #define SENSOR_COLOR_DEF_VAL	203
@@ -44,8 +42,10 @@
 #define BUFFER_SIZE				3
 
 /* COLORS */
-#define COLOR_YELLOW			168
-#define COLOR_BLACK				190
+#define COLOR_YELLOW_LOW		168
+#define COLOR_YELLOW_HIGH		180
+#define COLOR_BLACK_LOW			185
+#define COLOR_BLACK_HIGH		195
 /*
 **************************************************************************************************************
 *                                               VARIABLES
@@ -57,10 +57,10 @@ OS_STK  AppTask1Stk[OS_TASK_1_STK_SIZE];
 OS_STK  AppTask2Stk[OS_TASK_2_STK_SIZE];
 OS_STK  AppTask3Stk[OS_TASK_3_STK_SIZE];
 
-
+/* Pointers to semaphores */
 OS_EVENT *count_sem;
-OS_EVENT *a_sem; // Pointer to a semaphore
-OS_EVENT *dispatch_sem; //
+OS_EVENT *a_sem;
+OS_EVENT *dispatch_sem;
 
 INT16U count = 0;
 INT8U brick_color = 0;
@@ -78,6 +78,7 @@ static void  AppTask2(void *p_arg);
 static void  AppTask3(void *p_arg);
 void motor_run_ext(INT8U motor_no, INT8U speed, INT16U ticks, INT8U postmode, INT8U restore);
 INT8U inRange(INT8U number, INT8U number2, INT8U threshold);
+INT8U is_in_range(INT8U color_current, INT8U color_low, INT8U color_high);
 void LED_Show(INT8U n);
 
 /*
@@ -151,10 +152,9 @@ static  void  AppTaskCreate (void)
     INT8U  err;
 #endif
 
-
-    /*---- Task initialization code goes HERE! --------------------------------------------------------*/
+    /*--- TASK 1 --- INITIALIZATION ---*/
     OSTaskStkSize     = OS_TASK_1_STK_SIZE;        /* Setup the default stack size                     */
-//    OSTaskStkSizeHard = OS_TASK_STK_SIZE_HARD;     /* Setup the default hardware stack size            */
+//    OSTaskStkSizeHard = OS_TASK_STK_SIZE_HARD;     /* Setup the default hardware stack size          */
     OSTaskCreateExt(AppTask1,
                     (void *)0,
                     (OS_STK *)&AppTask1Stk[OSTaskStkSize - 1],
@@ -168,9 +168,9 @@ static  void  AppTaskCreate (void)
     OSTaskNameSet(OS_TASK_1_PRIO, "Task 1", &err);
 #endif
 
-    /*---- Task initialization code goes HERE! --------------------------------------------------------*/
+    /*--- TASK 2 --- INITIALIZATION ---*/
     OSTaskStkSize     = OS_TASK_2_STK_SIZE;        /* Setup the default stack size                     */
-    //OSTaskStkSizeHard = OS_TASK_STK_SIZE_HARD;     /* Setup the default hardware stack size            */
+    //OSTaskStkSizeHard = OS_TASK_STK_SIZE_HARD;     /* Setup the default hardware stack size          */
     OSTaskCreateExt(AppTask2,
                     (void *)0,
                     (OS_STK *)&AppTask2Stk[OSTaskStkSize - 1],
@@ -184,9 +184,9 @@ static  void  AppTaskCreate (void)
     OSTaskNameSet(OS_TASK_2_PRIO, "Task 2", &err);
 #endif
 
-    /*--- TASK 3 --- */
+    /*--- TASK 3 --- INITIALIZATION ---*/
     OSTaskStkSize     = OS_TASK_3_STK_SIZE;        /* Setup the default stack size                     */
-    //OSTaskStkSizeHard = OS_TASK_STK_SIZE_HARD;     /* Setup the default hardware stack size            */
+    //OSTaskStkSizeHard = OS_TASK_STK_SIZE_HARD;     /* Setup the default hardware stack size          */
     OSTaskCreateExt(AppTask3,
                     (void *)0,
                     (OS_STK *)&AppTask3Stk[OSTaskStkSize - 1],
@@ -263,11 +263,6 @@ static void  AppTask1(void *p_arg)
 			brake_motor(MOTOR_BELT_1);
 		}
 
-<<<<<<< HEAD
-
-		motor_speed(MOTOR_BELT_1, -40);						//  start MOTOR_BELT_1
-=======
->>>>>>> 84804e02077c03fe237c45bf733668e5576abaad
 		light_value = light_sensor(SENSOR_COUNT) >> 2; 		//  SENSOR_COUNT reads value in 8 bits
 		OSTimeDly(OS_TICKS_PER_SEC / 2);
 
@@ -300,7 +295,7 @@ static void  AppTask2(void *p_arg)
 		{
 			brick_color = light_sensor(SENSOR_COLOR) >> 2;	 					//get brick color
 			OSTimeDly(OS_TICKS_PER_SEC / 5);
-			LED_Show(brick_color);
+			LED_Show(brick_color);												// show the brick color on the LEDs
 
 			if(brick_color < SENSOR_COLOR_DEF_VAL){
 				motor_run_ext(MOTOR_BUF, 10, OS_TICKS_PER_SEC/2, 2, 0);			// release a brick
@@ -336,15 +331,26 @@ static void AppTask3(void *p_arg)
     	//if we have dispatched brick
     	if(dispatched == 1){
     		//if color = SOME_COLOR move cw
-    		if(inRange(brick_color, COLOR_YELLOW, 10) == 1){
+    		if(inRange(brick_color, COLOR_YELLOW_LOW+5, 10) == 1){
     			motor_run_ext(MOTOR_SORT, speed, delay, 0, 1);		//sort brick on one side
 			//or ANOTHER_COLOR move ccw
-    		}else if(inRange(brick_color, COLOR_BLACK, 10) == 1){
+    		}else if(inRange(brick_color, COLOR_BLACK_LOW+5, 10) == 1){
     			motor_run_ext(MOTOR_SORT, -speed, delay, 0, 1);		//sort brick on the other side
     		//or ANY_OTHER_COLOR
     		}else{
     			//motor_run_ext(MOTOR_SORT, speed, OS_TICKS_PER_SEC / 5.2, 0, 1); //let it pass through
     		}
+
+    		// SECOND WAY
+    		//if(is_in_range(brick_color, COLOR_YELLOW_LOW, COLOR_YELLOW_HIGH) == 1){
+    		//   			motor_run_ext(MOTOR_SORT, speed, delay, 0, 1);		//sort brick on one side
+    		//			//or ANOTHER_COLOR move ccw
+    		//   		}else if(is_in_range(brick_color, COLOR_BLACK_LOW, COLOR_BLACK_HIGH) == 1){
+    		//  			motor_run_ext(MOTOR_SORT, -speed, delay, 0, 1);		//sort brick on the other side
+    		//    		//or ANY_OTHER_COLOR
+    		//  		}else{
+    		//    			//motor_run_ext(MOTOR_SORT, speed, OS_TICKS_PER_SEC / 5.2, 0, 1); //let it pass through
+    		//   		}
 
     		OSSemPend(dispatch_sem, 0, &err);
     		dispatched = 0;									// signal task 2 we have finished sorting
@@ -384,6 +390,13 @@ INT8U inRange(INT8U number, INT8U number2, INT8U threshold){
 	return 0;
 }
 
+INT8U is_in_range(INT8U color_current, INT8U color_low, INT8U color_high)
+{
+	if ((color_current >= color_low) && (color_current <= color_high))
+		return 1;
+	return 0;
+}
+
 /*	Runs motor for the specified time
  *  \param motor_no specifies the motor output on the interface board [0..3]
  *  \param speed in percent specifies speed and way of rotation: negative CCW; positive CW
@@ -396,15 +409,6 @@ INT8U inRange(INT8U number, INT8U number2, INT8U threshold){
  */
 void motor_run_ext(INT8U motor_no, INT8U speed, INT16U ticks, INT8U postmode, INT8U restore){
 	motor_speed(motor_no, speed);
-<<<<<<< HEAD
-	OSTimeDly(time);
-
-	//stop motor
-	brake_motor(motor_no);
-
-	brake_motor(motor_no);
-
-=======
 	OSTimeDly(ticks);
 
 	switch(postmode){
@@ -417,12 +421,10 @@ void motor_run_ext(INT8U motor_no, INT8U speed, INT16U ticks, INT8U postmode, IN
 		default : brake_motor(motor_no);
 			break;
 	}
->>>>>>> 84804e02077c03fe237c45bf733668e5576abaad
 	//if we want to restore motor position, we can run with the same values, but backwards
 	if(restore == 1 && postmode < 2){
 		motor_run_ext(motor_no, -speed, ticks, postmode, 0);
 	}
-
 }
 /*
 *********************************************************************************************************
