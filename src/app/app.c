@@ -18,7 +18,7 @@
 **************************************************************************************************************
 */
 /*
- * yellow : 174, 172, 169
+ * yellow : 174, 172, 168-169
  * black : 187-8, 194-3,
  *
  */
@@ -43,6 +43,9 @@
 /* BUFFER  */
 #define BUFFER_SIZE				3
 
+/* COLORS */
+#define COLOR_YELLOW			168
+#define COLOR_BLACK				190
 /*
 **************************************************************************************************************
 *                                               VARIABLES
@@ -57,9 +60,10 @@ OS_STK  AppTask3Stk[OS_TASK_3_STK_SIZE];
 
 OS_EVENT *count_sem;
 OS_EVENT *a_sem; // Pointer to a semaphore
+OS_EVENT *dispatch_sem; //
 
 INT16U count = 0;
-INT8U brick_found = 0;
+INT8U brick_color = 0;
 INT8U dispatched = 0;
 /*
 **************************************************************************************************************
@@ -72,6 +76,8 @@ static void  AppTaskCreate(void);
 static void  AppTask1(void *p_arg);
 static void  AppTask2(void *p_arg);
 static void  AppTask3(void *p_arg);
+void motor_run_ext(INT8U motor_no, INT8U speed, INT16U ticks, INT8U postmode, INT8U restore);
+INT8U inRange(INT8U number, INT8U number2, INT8U threshold);
 void LED_Show(INT8U n);
 
 /*
@@ -120,7 +126,7 @@ int  main (void)
 
     a_sem = OSSemCreate(0);
 	count_sem = OSSemCreate(BUFFER_SIZE);
-
+	dispatch_sem = OSSemCreate(1);
     /*---- Create any other task you want before we start multitasking -------------------------------------*/
 
     OSStart();                                       /* Start multitasking (i.e. give control to uC/OS-II)  */
@@ -251,19 +257,26 @@ static void  AppTask1(void *p_arg)
 
 	while (1)
 	{
+		if(count < BUFFER_SIZE ){
+			motor_speed(MOTOR_BELT_1, -40);					//  start MOTOR_BELT_1
+		}else{
+			brake_motor(MOTOR_BELT_1);
+		}
 
+<<<<<<< HEAD
 
 		motor_speed(MOTOR_BELT_1, -40);						//  start MOTOR_BELT_1
+=======
+>>>>>>> 84804e02077c03fe237c45bf733668e5576abaad
 		light_value = light_sensor(SENSOR_COUNT) >> 2; 		//  SENSOR_COUNT reads value in 8 bits
-		LED_Show(light_value);
 		OSTimeDly(OS_TICKS_PER_SEC / 2);
 
+		//if there's no default value
 		if(light_value < SENSOR_COUNT_DEF_VAL)
 		{
 			OSSemPend(count_sem, 0, &err); 					// pend semaphore
 			count++; 										// increase the count of the bricks
-			LED_Show(count);								// show the count of brick on the LEDs
-			OSTimeDly(OS_TICKS_PER_SEC);					//
+			//LED_Show(count);								// show the count of brick on the LEDs
 		}
 	}
 }
@@ -277,23 +290,32 @@ static void  AppTask1(void *p_arg)
 static void  AppTask2(void *p_arg)
 {
     (void)p_arg;
-   // INT8U err;
+    INT8U err;
     while (1)
     {
-    	OSTimeDly(OS_TICKS_PER_SEC );
+    	OSTimeDly(OS_TICKS_PER_SEC);
+
+    	//if we got a brick
 		if (count > 0)
 		{
-			OSSemPost(count_sem);
-			count--;
-			LED_Show(count);
+			brick_color = light_sensor(SENSOR_COLOR) >> 2;	 					//get brick color
+			OSTimeDly(OS_TICKS_PER_SEC / 5);
+			LED_Show(brick_color);
 
-			motor_speed(MOTOR_BELT_2, -40);					// start MOTOR_BELT_2
-			OSTimeDly(OS_TICKS_PER_SEC / 5);				// wait for a while
-			motor_speed(MOTOR_BUF, 10);						// release a brick
-			OSTimeDly(OS_TICKS_PER_SEC / 2);
+			if(brick_color < SENSOR_COLOR_DEF_VAL){
+				motor_run_ext(MOTOR_BUF, 10, OS_TICKS_PER_SEC/2, 2, 0);			// release a brick
+				motor_run_ext(MOTOR_BELT_2,-100, OS_TICKS_PER_SEC*0.8, 0, 0);	// start MOTOR_BELT_2
+				brake_motor(MOTOR_BUF);											// stop release
+
+				OSSemPend(dispatch_sem, 0, &err);
+				dispatched = 1;													//finish dispatch
+				OSSemPost(dispatch_sem);
+
+				//decrease the count
+				count--;
+				OSSemPost(count_sem);
+			}
 		}
-		motor_speed(MOTOR_BUF, 0);
-		OSTimeDly(OS_TICKS_PER_SEC / 10);
     }
 }
 
@@ -303,47 +325,30 @@ static void  AppTask2(void *p_arg)
 **************************************************************************************************************
 */
 
-static void  AppTask3(void *p_arg)
+static void AppTask3(void *p_arg)
 {
     (void)p_arg;
-    INT8U brick_color;
-    INT8U speed = 0;
-    INT8U sort_type = 0; //1 - cw; 2 - ccw; 3 - pass
-    while (1){
-    	if(dispatched == 1){
-    		motor_speed(MOTOR_BELT_2, -40);					// start MOTOR_BELT_2
-    		OSTimeDly(OS_TICKS_PER_SEC / 5);				// wait for a while
-    		motor_speed(MOTOR_BELT_2, 0);					// start MOTOR_BELT_2
+    INT8U err;
+    INT8U speed = 100;
+    INT8U delay = OS_TICKS_PER_SEC / 5;
 
+    while (1){
+    	//if we have dispatched brick
+    	if(dispatched == 1){
     		//if color = SOME_COLOR move cw
-    		if(brick_color > 100 && brick_color < 150){
-				sort_type = 1;
+    		if(inRange(brick_color, COLOR_YELLOW, 10) == 1){
+    			motor_run_ext(MOTOR_SORT, speed, delay, 0, 1);		//sort brick on one side
 			//or ANOTHER_COLOR move ccw
-    		}else if(brick_color < 100 && brick_color > 0){
-    			sort_type = 2;
-    		//or OTHER_COLOR - let it pass through
+    		}else if(inRange(brick_color, COLOR_BLACK, 10) == 1){
+    			motor_run_ext(MOTOR_SORT, -speed, delay, 0, 1);		//sort brick on the other side
+    		//or ANY_OTHER_COLOR
     		}else{
-				sort_type = 3;
+    			//motor_run_ext(MOTOR_SORT, speed, OS_TICKS_PER_SEC / 5.2, 0, 1); //let it pass through
     		}
 
-			switch(sort_type){
-			case 1 :
-				speed = -40;
-				break;
-			case 2 : break;
-			case 3 : break;
-			default : break;
-			}
-    		motor_speed(MOTOR_SORT, speed);
-    		OSTimeDly(OS_TICKS_PER_SEC / 5);				// wait for a while
-
-    		//return motor to the previous position, we assume constant motor speed
-    		motor_speed(MOTOR_SORT, -speed);
-    		OSTimeDly(OS_TICKS_PER_SEC / 5);				// wait for a while
-
+    		OSSemPend(dispatch_sem, 0, &err);
     		dispatched = 0;									// signal task 2 we have finished sorting
-    	}else{
-
+    		OSSemPost(dispatch_sem);
     	}
     }
 }
@@ -353,24 +358,28 @@ static void  AppTask3(void *p_arg)
 *********************************************************************************************************
 */
 void LED_Show(INT8U n) {
+	int i = 0;
+
 	/* Turn off all LEDs before switching them */
-	int i;
 	for (i = 0; i < 8; i++) {
 		LED_Off(i);
-		//printf("%s%d\n", "Switching off LED #", i);
 	}
 
 	/* For all bits in datatype */
 	for (i = 1; i <= 8; i++) {
-
 		if (n & (1 << (i - 1))) /* Test if i^th bit is set in "n" */
 			LED_On(i);
-		//printf("%s%d\n", "Switching on LED #", i); /* if yes, turn on the i^th LED */
 	}
 }
 
-INT8U checkRange(INT8U number, INT8U number2, INT8U threshold){
-	if((number > abs(number2 - threshold)) && (number < abs(number2 + threshold)))
+/* Checks if 'number' is in range of 'number2' including 'threshold'
+ * \param number specifies value to check
+ * \param number2 specifies reference value
+ * \param threshold specifies threshold of reference value
+ * \returns 1 if the number is in range, 0 otherwise
+ */
+INT8U inRange(INT8U number, INT8U number2, INT8U threshold){
+	if((number >= abs(number2 - threshold)) && (number <= abs(number2 + threshold)))
 		return 1;
 	return 0;
 }
@@ -378,13 +387,16 @@ INT8U checkRange(INT8U number, INT8U number2, INT8U threshold){
 /*	Runs motor for the specified time
  *  \param motor_no specifies the motor output on the interface board [0..3]
  *  \param speed in percent specifies speed and way of rotation: negative CCW; positive CW
- *  \param time specifies time to run motor in system ticks using OSTimeDly
+ *  \param ticks specifies number of CPU ticks motor should run (OSTimeDly)
+ *  \param postmode specifies mode to set after delay [0 : brake, 1 : free run,  2 : keep running]
  *  \param restore if we want to restore previous position of the motor set to 1, else 0
  *	@returns : void
  *	\see motor_speed OSTimeDly
+ *	TODO : should initiate a parallel task to don't block program flow with OSTimeDly()
  */
-void motor_run_ext(INT8U motor_no, INT8U speed, INT8U time, INT8U restore){
+void motor_run_ext(INT8U motor_no, INT8U speed, INT16U ticks, INT8U postmode, INT8U restore){
 	motor_speed(motor_no, speed);
+<<<<<<< HEAD
 	OSTimeDly(time);
 
 	//stop motor
@@ -392,9 +404,23 @@ void motor_run_ext(INT8U motor_no, INT8U speed, INT8U time, INT8U restore){
 
 	brake_motor(motor_no);
 
+=======
+	OSTimeDly(ticks);
+
+	switch(postmode){
+		case 0 : brake_motor(motor_no);
+			break;
+		case 1 : motor_speed(motor_no, 0);
+			break;
+		case 2 : //do nothing
+			break;
+		default : brake_motor(motor_no);
+			break;
+	}
+>>>>>>> 84804e02077c03fe237c45bf733668e5576abaad
 	//if we want to restore motor position, we can run with the same values, but backwards
-	if(restore == 1){
-		motor_run_ext(motor_no, -speed, time, 0);
+	if(restore == 1 && postmode < 2){
+		motor_run_ext(motor_no, -speed, ticks, postmode, 0);
 	}
 
 }
