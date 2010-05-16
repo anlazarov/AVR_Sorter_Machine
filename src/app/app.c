@@ -294,7 +294,7 @@ static void  AppTask2(void *p_arg)
 		if (count > 0)
 		{
 			brick_color = light_sensor(SENSOR_COLOR) >> 2;	 					//get brick color
-			OSTimeDly(OS_TICKS_PER_SEC / 2);
+			OSTimeDly(OS_TICKS_PER_SEC / 5);
 			LED_Show(brick_color);
 
 			if(brick_color < SENSOR_COLOR_DEF_VAL){
