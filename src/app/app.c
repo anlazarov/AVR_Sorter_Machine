@@ -387,6 +387,7 @@ INT8U inRange(INT8U number, INT8U number2, INT8U threshold){
  *  \param restore if we want to restore previous position of the motor set to 1, else 0
  *	@returns : void
  *	\see motor_speed OSTimeDly
+ *	TODO : should initiate a parallel task to don't block program flow with OSTimeDly()
  */
 void motor_run_ext(INT8U motor_no, INT8U speed, INT16U ticks, INT8U postmode, INT8U restore){
 	motor_speed(motor_no, speed);
