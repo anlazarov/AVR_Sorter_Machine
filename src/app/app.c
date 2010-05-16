@@ -338,7 +338,7 @@ static void AppTask3(void *p_arg)
     			motor_run_ext(MOTOR_SORT, -speed, delay, 0, 1);		//sort brick on the other side
     		//or ANY_OTHER_COLOR
     		}else{
-    			motor_run_ext(MOTOR_SORT, speed, OS_TICKS_PER_SEC / 5.2, 2, 1); //let it pass through
+    			//motor_run_ext(MOTOR_SORT, speed, OS_TICKS_PER_SEC / 5.2, 0, 1); //let it pass through
     		}
 
     		OSSemPend(dispatch_sem, 0, &err);
@@ -374,7 +374,7 @@ void LED_Show(INT8U n) {
  * \returns 1 if the number is in range, 0 otherwise
  */
 INT8U inRange(INT8U number, INT8U number2, INT8U threshold){
-	if((number > abs(number2 - threshold)) && (number < abs(number2 + threshold)))
+	if((number >= abs(number2 - threshold)) && (number <= abs(number2 + threshold)))
 		return 1;
 	return 0;
 }
