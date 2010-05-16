@@ -294,7 +294,8 @@ static void  AppTask2(void *p_arg)
 		if (count > 0)
 		{
 			brick_color = light_sensor(SENSOR_COLOR) >> 2;	 					//get brick color
-		    //LED_Show(brick_color);
+			OSTimeDly(OS_TICKS_PER_SEC / 2);
+			LED_Show(brick_color);
 
 			if(brick_color < SENSOR_COLOR_DEF_VAL){
 				motor_run_ext(MOTOR_BUF, 10, OS_TICKS_PER_SEC/2, 2, 0);			// release a brick
@@ -304,11 +305,11 @@ static void  AppTask2(void *p_arg)
 				OSSemPend(dispatch_sem, 0, &err);
 				dispatched = 1;													//finish dispatch
 				OSSemPost(dispatch_sem);
-			}
 
-			//decrease the count
-			count--;
-			OSSemPost(count_sem);
+				//decrease the count
+				count--;
+				OSSemPost(count_sem);
+			}
 		}
     }
 }
@@ -330,14 +331,14 @@ static void AppTask3(void *p_arg)
     	//if we have dispatched brick
     	if(dispatched == 1){
     		//if color = SOME_COLOR move cw
-    		if(inRange(brick_color, COLOR_YELLOW, 10)){
+    		if(inRange(brick_color, COLOR_YELLOW, 10) == 1){
     			motor_run_ext(MOTOR_SORT, speed, delay, 0, 1);		//sort brick on one side
 			//or ANOTHER_COLOR move ccw
-    		}else if(inRange(brick_color, COLOR_BLACK, 10)){
+    		}else if(inRange(brick_color, COLOR_BLACK, 10) == 1){
     			motor_run_ext(MOTOR_SORT, -speed, delay, 0, 1);		//sort brick on the other side
     		//or ANY_OTHER_COLOR
     		}else{
-    			motor_run_ext(MOTOR_SORT, -speed, OS_TICKS_PER_SEC / 5.2, 0, 1); //let it pass through
+    			motor_run_ext(MOTOR_SORT, speed, OS_TICKS_PER_SEC / 5.2, 2, 1); //let it pass through
     		}
 
     		OSSemPend(dispatch_sem, 0, &err);
