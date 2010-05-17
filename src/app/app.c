@@ -42,10 +42,10 @@
 #define BUFFER_SIZE				3
 
 /* COLORS */
-#define COLOR_YELLOW_LOW		168
-#define COLOR_YELLOW_HIGH		180
-#define COLOR_BLACK_LOW			185
-#define COLOR_BLACK_HIGH		195
+#define COLOR_YELLOW_LOW		172
+#define COLOR_YELLOW_HIGH		186
+#define COLOR_BLACK_LOW			188
+#define COLOR_BLACK_HIGH		198
 /*
 **************************************************************************************************************
 *                                               VARIABLES
@@ -225,17 +225,18 @@ static void  AppTaskStart (void *p_arg)
     BSP_Init();									// Initialize the BSP
 	init_lego_interface(); 						// Initalize LEGO_interface
     AppTaskCreate();							// create the other tasks
+	//INT8U sens_value;
 	while (1) 									// Task body, always written as an infinite loop.
 	{
-		/*
-		 * If you want to check the values of the sensors
-		 * comment the pending of the semaphore a_sem ( OSSemPend(a_sem, 0, &err); )
-		 * and use the following code only in AppTaskStart
-		 *
-		 *		INT8U sens_value = light_sensor(SENSOR_RT) >> 2;
-		 *		LED_Show(sens_value);
-		 *		OSTimeDly(OS_TICKS_PER_SEC / 2);
-		 */
+
+		  //If you want to check the values of the sensors
+		  //comment the pending of the semaphore a_sem ( OSSemPend(a_sem, 0, &err); )
+		  //and use the following code only in AppTaskStart
+
+		 		//sens_value = light_sensor(SENSOR_COLOR) >> 2;
+		 		//LED_Show(sens_value);
+		 		//OSTimeDly(OS_TICKS_PER_SEC / 2);
+
 		// from ib's code
         OSSemPend(a_sem, 0, &err);  // Wait for the semaphore to be signaled
     }
@@ -272,7 +273,9 @@ static void  AppTask1(void *p_arg)
 			OSSemPend(count_sem, 0, &err); 					// pend semaphore
 			count++; 										// increase the count of the bricks
 			//LED_Show(count);								// show the count of brick on the LEDs
+
 		}
+		OSTimeDly(OS_TICKS_PER_SEC / 5);				// delay after the read
 	}
 }
 
@@ -288,27 +291,29 @@ static void  AppTask2(void *p_arg)
     INT8U err;
     while (1)
     {
-    	OSTimeDly(OS_TICKS_PER_SEC);
 
+    	OSTimeDly(OS_TICKS_PER_SEC);
+    	LED_Show(count);
     	//if we got a brick
 		if (count > 0)
 		{
+
 			brick_color = light_sensor(SENSOR_COLOR) >> 2;	 					//get brick color
-			OSTimeDly(OS_TICKS_PER_SEC / 5);
-			LED_Show(brick_color);												// show the brick color on the LEDs
+			OSTimeDly(OS_TICKS_PER_SEC);
+															// show the brick color on the LEDs
 
 			if(brick_color < SENSOR_COLOR_DEF_VAL){
 				motor_run_ext(MOTOR_BUF, 10, OS_TICKS_PER_SEC/2, 2, 0);			// release a brick
-				motor_run_ext(MOTOR_BELT_2,-100, OS_TICKS_PER_SEC*0.8, 0, 0);	// start MOTOR_BELT_2
+				motor_run_ext(MOTOR_BELT_2,-100, OS_TICKS_PER_SEC*1.6, 0, 0);	// start MOTOR_BELT_2
 				brake_motor(MOTOR_BUF);											// stop release
 
 				OSSemPend(dispatch_sem, 0, &err);
 				dispatched = 1;													//finish dispatch
 				OSSemPost(dispatch_sem);
-
 				//decrease the count
 				count--;
 				OSSemPost(count_sem);
+				OSTimeDly(OS_TICKS_PER_SEC/5); 									//delay between reading bricks
 			}
 		}
     }
@@ -331,26 +336,26 @@ static void AppTask3(void *p_arg)
     	//if we have dispatched brick
     	if(dispatched == 1){
     		//if color = SOME_COLOR move cw
-    		if(inRange(brick_color, COLOR_YELLOW_LOW+5, 10) == 1){
-    			motor_run_ext(MOTOR_SORT, speed, delay, 0, 1);		//sort brick on one side
+    		//if(inRange(brick_color, COLOR_YELLOW_LOW+5, 10) == 1){
+    		//	motor_run_ext(MOTOR_SORT, speed, delay, 0, 1);		//sort brick on one side
 			//or ANOTHER_COLOR move ccw
-    		}else if(inRange(brick_color, COLOR_BLACK_LOW+5, 10) == 1){
-    			motor_run_ext(MOTOR_SORT, -speed, delay, 0, 1);		//sort brick on the other side
+    		//}else if(inRange(brick_color, COLOR_BLACK_LOW+5, 10) == 1){
+    		//	motor_run_ext(MOTOR_SORT, -speed, delay, 0, 1);		//sort brick on the other side
     		//or ANY_OTHER_COLOR
-    		}else{
+    		//}else{
     			//motor_run_ext(MOTOR_SORT, speed, OS_TICKS_PER_SEC / 5.2, 0, 1); //let it pass through
-    		}
+    		//}
 
-    		// SECOND WAY
-    		//if(is_in_range(brick_color, COLOR_YELLOW_LOW, COLOR_YELLOW_HIGH) == 1){
-    		//   			motor_run_ext(MOTOR_SORT, speed, delay, 0, 1);		//sort brick on one side
-    		//			//or ANOTHER_COLOR move ccw
-    		//   		}else if(is_in_range(brick_color, COLOR_BLACK_LOW, COLOR_BLACK_HIGH) == 1){
-    		//  			motor_run_ext(MOTOR_SORT, -speed, delay, 0, 1);		//sort brick on the other side
-    		//    		//or ANY_OTHER_COLOR
-    		//  		}else{
-    		//    			//motor_run_ext(MOTOR_SORT, speed, OS_TICKS_PER_SEC / 5.2, 0, 1); //let it pass through
-    		//   		}
+
+    		if(is_in_range(brick_color, COLOR_YELLOW_LOW, COLOR_YELLOW_HIGH) == 1){
+    		  			motor_run_ext(MOTOR_SORT, speed, delay, 0, 1);		//sort brick on one side - RIGHT
+    					//or ANOTHER_COLOR move ccw
+    		  		}else if(is_in_range(brick_color, COLOR_BLACK_LOW, COLOR_BLACK_HIGH) == 1){
+    		  			motor_run_ext(MOTOR_SORT, -speed, delay, 0, 1);		//sort brick on the other side - LEFT
+    		   		//or ANY_OTHER_COLOR
+    		  		}else{
+    		    		motor_run_ext(MOTOR_SORT, speed, OS_TICKS_PER_SEC / 5.2, 0, 1); //let it pass through
+    		  		}
 
     		OSSemPend(dispatch_sem, 0, &err);
     		dispatched = 0;									// signal task 2 we have finished sorting
@@ -429,6 +434,7 @@ void motor_run_ext(INT8U motor_no, INT8U speed, INT16U ticks, INT8U postmode, IN
 /*
 *********************************************************************************************************
 *                                           TASK SWITCH HOOK
+*
 *
 * Description: This function is called when a task switch is performed.  This allows you to perform other
 *              operations during a context switch.
