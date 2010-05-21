@@ -19,8 +19,8 @@
 */
 /*
  * COLOR READINGS:
- * yellow : 174, 172, 168-169
- * black : 187-8, 194-3
+ * yellow : 172 - 185
+ * black : 189 - 197
  *
  */
 
@@ -126,8 +126,8 @@ int  main (void)
 	/* CREATING THE SEMAPHORES */
 
     a_sem = OSSemCreate(0);
-	count_sem = OSSemCreate(BUFFER_SIZE);
-	dispatch_sem = OSSemCreate(1);
+	count_sem = OSSemCreate(BUFFER_SIZE); 						// counting semaphore
+	dispatch_sem = OSSemCreate(1);								// semaphore responsible for the dispatch
     /*---- Create any other task you want before we start multitasking -------------------------------------*/
 
     OSStart();                                       /* Start multitasking (i.e. give control to uC/OS-II)  */
@@ -258,24 +258,22 @@ static void  AppTask1(void *p_arg)
 
 	while (1)
 	{
-		if(count < BUFFER_SIZE ){
-			motor_speed(MOTOR_BELT_1, -40);					//  start MOTOR_BELT_1
+		if(count < BUFFER_SIZE ){							//  while the buffer is not full
+			motor_speed(MOTOR_BELT_1, -40);					//  run MOTOR_BELT_1
 		}else{
-			brake_motor(MOTOR_BELT_1);
+			brake_motor(MOTOR_BELT_1);						//  else stop the motor
 		}
 
 		light_value = light_sensor(SENSOR_COUNT) >> 2; 		//  SENSOR_COUNT reads value in 8 bits
-		OSTimeDly(OS_TICKS_PER_SEC / 2);
+		OSTimeDly(OS_TICKS_PER_SEC / 2);					//  small dealy after the reading
 
-		//if there's no default value
+		//if the sensor changed its value (a brick is found)
 		if(light_value < SENSOR_COUNT_DEF_VAL)
 		{
 			OSSemPend(count_sem, 0, &err); 					// pend semaphore
 			count++; 										// increase the count of the bricks
-			//LED_Show(count);								// show the count of brick on the LEDs
-
 		}
-		OSTimeDly(OS_TICKS_PER_SEC / 5);				// delay after the read
+		OSTimeDly(OS_TICKS_PER_SEC / 5);					// one more delay, just in case that we don't read one brick as two 
 	}
 }
 
@@ -297,15 +295,13 @@ static void  AppTask2(void *p_arg)
     	//if we got a brick
 		if (count > 0)
 		{
-
 			brick_color = light_sensor(SENSOR_COLOR) >> 2;	 					//get brick color
 			OSTimeDly(OS_TICKS_PER_SEC);
-															// show the brick color on the LEDs
 
 			if(brick_color < SENSOR_COLOR_DEF_VAL){
 				motor_run_ext(MOTOR_BUF, 10, OS_TICKS_PER_SEC/2, 2, 0);			// release a brick
 				motor_run_ext(MOTOR_BELT_2,-100, OS_TICKS_PER_SEC*1.6, 0, 0);	// start MOTOR_BELT_2
-				brake_motor(MOTOR_BUF);											// stop release
+				brake_motor(MOTOR_BUF);											// stop the release
 
 				OSSemPend(dispatch_sem, 0, &err);
 				dispatched = 1;													//finish dispatch
@@ -335,28 +331,15 @@ static void AppTask3(void *p_arg)
     while (1){
     	//if we have dispatched brick
     	if(dispatched == 1){
-    		//if color = SOME_COLOR move cw
-    		//if(inRange(brick_color, COLOR_YELLOW_LOW+5, 10) == 1){
-    		//	motor_run_ext(MOTOR_SORT, speed, delay, 0, 1);		//sort brick on one side
-			//or ANOTHER_COLOR move ccw
-    		//}else if(inRange(brick_color, COLOR_BLACK_LOW+5, 10) == 1){
-    		//	motor_run_ext(MOTOR_SORT, -speed, delay, 0, 1);		//sort brick on the other side
-    		//or ANY_OTHER_COLOR
-    		//}else{
-    			//motor_run_ext(MOTOR_SORT, speed, OS_TICKS_PER_SEC / 5.2, 0, 1); //let it pass through
-    		//}
-
 
     		if(is_in_range(brick_color, COLOR_YELLOW_LOW, COLOR_YELLOW_HIGH) == 1){
     		  			motor_run_ext(MOTOR_SORT, speed, delay, 0, 1);		//sort brick on one side - RIGHT
-    					//or ANOTHER_COLOR move ccw
     		  		}else if(is_in_range(brick_color, COLOR_BLACK_LOW, COLOR_BLACK_HIGH) == 1){
     		  			motor_run_ext(MOTOR_SORT, -speed, delay, 0, 1);		//sort brick on the other side - LEFT
     		   		//or ANY_OTHER_COLOR
     		  		}else{
-    		    		motor_run_ext(MOTOR_SORT, speed, OS_TICKS_PER_SEC / 5.2, 0, 1); //let it pass through
+    		    		motor_run_ext(MOTOR_SORT, speed, OS_TICKS_PER_SEC / 5.2, 0, 1); //let it pass through the belt
     		  		}
-
     		OSSemPend(dispatch_sem, 0, &err);
     		dispatched = 0;									// signal task 2 we have finished sorting
     		OSSemPost(dispatch_sem);
@@ -368,6 +351,13 @@ static void AppTask3(void *p_arg)
 * 											Additional methods
 *********************************************************************************************************
 */
+
+/* LED_Show shows a certain number (8 bits) on the Leds
+ * The method stops all the leds first, and then converts the number
+ * in binary and displays it as lights. 1 - led_on, 0 - led_off
+ * \param n - number to display ( 8 bit)
+ * @return - void
+ */
 void LED_Show(INT8U n) {
 	int i = 0;
 
@@ -383,17 +373,12 @@ void LED_Show(INT8U n) {
 	}
 }
 
-/* Checks if 'number' is in range of 'number2' including 'threshold'
- * \param number specifies value to check
- * \param number2 specifies reference value
- * \param threshold specifies threshold of reference value
- * \returns 1 if the number is in range, 0 otherwise
+/* Check if a brick is detected
+ * \param color_current - actual read value from the sensor
+ * \param color_low - the lowest value for a certain brick (based on previous tests)
+ * \param color_high - the highes value for a certain brick (based on previous tests)
+ * @return: 1 if the a certain brick is in the range, 0 if it is not
  */
-INT8U inRange(INT8U number, INT8U number2, INT8U threshold){
-	if((number >= abs(number2 - threshold)) && (number <= abs(number2 + threshold)))
-		return 1;
-	return 0;
-}
 
 INT8U is_in_range(INT8U color_current, INT8U color_low, INT8U color_high)
 {
@@ -402,7 +387,7 @@ INT8U is_in_range(INT8U color_current, INT8U color_low, INT8U color_high)
 	return 0;
 }
 
-/*	Runs motor for the specified time
+/*	Extended version of motor_speed: Runs motor for the specified time
  *  \param motor_no specifies the motor output on the interface board [0..3]
  *  \param speed in percent specifies speed and way of rotation: negative CCW; positive CW
  *  \param ticks specifies number of CPU ticks motor should run (OSTimeDly)
